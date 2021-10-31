@@ -17,7 +17,8 @@ export const Menu = styled.ul`
     flex-direction: row;
     float: right;
     padding: 5px;
-    right: 100px;
+    position: absolute;
+    right: 150px;
 `;
 
 export const MenuItem = styled.li`
@@ -47,7 +48,7 @@ export const Box = styled.div`
 `;
 
 export const BoxTitle = styled.h2`
-    font-weight: 600;
+    font-weight: 400;
     z-index: 1;
 `;
 

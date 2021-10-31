@@ -3,15 +3,23 @@ import styled from 'styled-components';
 
 import '../App.css';
 
-import { Title, Link } from "../App";
+import { Link } from "../App";
 
 export const Box = styled.form`
     background: #fff;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
     max-width: 400px;
     border-radius: 10px;
-    padding: 30px 20px;
-    font-size: calc(8px + 1vmin);
+    padding: 40px 30px;
+    font-size: calc(10px + 1vmin);
+`;
+
+export const Title = styled.h2`
+  color: #1E5128;
+  font-weight: 400;
+  margin: 0.4em 0;
+  z-index: 1;
+  text-align: left;
 `;
 
 export const SmallText = styled.p`

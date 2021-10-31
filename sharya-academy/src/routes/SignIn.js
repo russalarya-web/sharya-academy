@@ -2,9 +2,9 @@ import React from "react";
 
 import '../App.css';
 
-import { Title, Link } from "../App";
+import { Link } from "../App";
 
-import { Box, TextBox, SmallText, Submit } from "./SignUp";
+import { Title, Box, TextBox, SmallText, Submit } from "./SignUp";
 
 // Sign In Page
 function SignIn() {

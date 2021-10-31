@@ -13,7 +13,7 @@ import SignIn from "./routes/SignIn";
 
 export const Title = styled.h1`
   color: #1E5128;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0.2em 0 0.2em 0;
   z-index: 1;
 `;
