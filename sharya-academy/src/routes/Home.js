@@ -54,6 +54,7 @@ export const BoxTitle = styled.h2`
 
 export const Text = styled.p`
     text-align: justify;
+    margin: 15px 0;
 `;
 
 export const SmallText = styled.p`
@@ -79,6 +80,26 @@ export const Footer = styled.footer`
     bottom: 0;
     padding: 10px;
 `;
+
+const Pricing = [
+    {planName: 'Free', price: 'Always ₹0', classColor: 'white',
+    point1: 'Chapter Notes', point2: 'NCERT Solutions', point3: 'Exemplar Questions'},
+    {planName: 'Basic', price: 'From ₹299 a year', classColor: 'green white-text',
+    point1: 'Everything in Free, plus:', point2: 'Practice Tests', point3: 'Worksheets'},
+    {planName: 'Premium', price: 'From ₹499 a year', classColor: 'dark-green white-text',
+    point1: 'Everything in Basic, plus:', point2: 'Auto-Graded Tests', point3: 'Detailed Feedback'}
+];
+
+const listPricing = Pricing.map((planItem) =>
+    <Box className={planItem.classColor}>
+        <BoxTitle>{planItem.planName}</BoxTitle>
+        <Text>{planItem.point1}</Text>
+        <Text>{planItem.point2}</Text>
+        <Text>{planItem.point3}</Text>
+        <BoxTitle>{planItem.price}</BoxTitle>
+        <BoxButton>Sign Up</BoxButton>
+    </Box>
+);
 
 // Landing Page
 function Home() {
@@ -120,32 +141,7 @@ function Home() {
             <Screen>
                 <Title>Introductory Pricing</Title>
                 <div className="pricing">
-                    <Box className="white">
-                        <BoxTitle>Free</BoxTitle>
-                        <Text>Chapter Notes</Text>
-                        <Text>NCERT Solutions</Text>
-                        <Text>Exemplar Questions</Text>
-                        <BoxTitle>Always ₹0</BoxTitle>
-                        <BoxButton>Sign Up</BoxButton>
-                    </Box>
-
-                    <Box className="green white-text">
-                        <BoxTitle>Basic</BoxTitle>
-                        <Text>Everything in Free, plus:</Text>
-                        <Text>Practice Tests</Text>
-                        <Text>Worksheets</Text>
-                        <BoxTitle>From ₹299 a year</BoxTitle>
-                        <BoxButton>Sign Up</BoxButton>
-                    </Box>
-
-                    <Box className="dark-green white-text">
-                        <BoxTitle>Premium</BoxTitle>
-                        <Text>Everything in Basic, plus:</Text>
-                        <Text>Auto-Graded Tests</Text>
-                        <Text>Detailed Feedback</Text>
-                        <BoxTitle>From ₹499 a year</BoxTitle>
-                        <BoxButton>Sign Up</BoxButton>
-                    </Box>
+                    {listPricing}
                 </div>
             </Screen>
 
