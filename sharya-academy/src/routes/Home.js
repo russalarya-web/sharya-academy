@@ -81,6 +81,19 @@ export const Footer = styled.footer`
     padding: 10px;
 `;
 
+const About = [
+    "Sharya Academy is built around students to help them learn any time, anywhere. It serves you relevant content based on your preferences and uses your progress to serve you better content. It helps you attack your weaknesses by giving detailed feedback around your mistakes and suggests relevant topics to clear your concepts.",
+    "This website offers a unique process of learning and enriching to develop new areas of interest in a more interesting manner. It is further developed into multiple sections of materials for students to regularly test themselves by solving problems related to their subjects.",
+    "The website contains various Tests and Worksheets, and their solutions are in an easy format so that students get a clear and better understanding.",
+    "We have also incorporated NCERT Solutions for which students may need for exam preparation and completing their schoolwork. We have provided explanations of English and Hindi Literature.",
+    "We have Online Tests with which students can get to know where they are lacking.",
+    "Sharya Academy is available on Facebook and Instagram."
+];
+
+const displayAbout = About.map((aboutText) =>
+    <Text>{aboutText}</Text>
+);
+
 const Pricing = [
     {planName: 'Free', price: 'Always ₹0', classColor: 'white',
     point1: 'Chapter Notes', point2: 'NCERT Solutions', point3: 'Exemplar Questions'},
@@ -129,12 +142,7 @@ function Home() {
             {/* About Screen */}
             <Screen>
                 <Title>About</Title>
-                <Text>Sharya Academy is built around students to help them learn any time, anywhere. It serves you relevant content based on your preferences and uses your progress to serve you better content. It helps you attack your weaknesses by giving detailed feedback around your mistakes and suggests relevant topics to clear your concepts.</Text>
-                <Text>This website offers a unique process of learning and enriching to develop new areas of interest in a more interesting manner. It is further developed into multiple sections of materials for students to regularly test themselves by solving problems related to their subjects.</Text>
-                <Text>The website contains various Tests and Worksheets, and their solutions are in an easy format so that students get a clear and better understanding.</Text>
-                <Text>We have also incorporated NCERT Solutions for which students may need for exam preparation and completing their schoolwork. We have provided explanations of English and Hindi Literature.</Text>
-                <Text>We have Online Tests with which students can get to know where they are lacking.</Text>
-                <Text>Sharya Academy is available on Facebook and Instagram.</Text>
+                {displayAbout}
             </Screen>
             
             {/* Pricing Screen */}

@@ -33,12 +33,12 @@ export const TextBox = styled.input`
     color: rgba(30, 81, 40, 0.8);
     border: none;
     border-radius: 10px;
-    margin: 10px 0;
-    height: 50px;
+    margin: 0.5em 0;
+    height: 2em;
     font-size: calc(10px + 1.2vmin);
-    padding: 5px 2.5%;
+    padding: 0.25em 2.5%;
     font-family: 'Open Sans' !important;
-    text-align: center;
+    // text-align: center;
 `;
 
 export const Submit = styled.input`
@@ -47,10 +47,10 @@ export const Submit = styled.input`
     color: #fff;
     border: none;
     border-radius: 10px;
-    margin: 10px 0;
-    height: 60px;
+    margin: 0.5em 0;
+    height: 2.5em;
     font-size: calc(10px + 1.2vmin);
-    padding: 5px 2%;
+    padding: 0.25em 2%;
     font-family: 'Open Sans' !important;
 
 `;
@@ -61,11 +61,11 @@ export const Dropdown = styled.select`
     border: none;
     border-radius: 10px;
     font-size: calc(10px + 1.2vmin);
-    margin: 10px 0;
-    height: 60px;
+    margin: 0.5em 0;
+    height: 2.5em;
     padding: 0 2.5%;
     font-family: 'Open Sans' !important;
-    text-align: center;
+    // text-align: center;
 
 `;
 

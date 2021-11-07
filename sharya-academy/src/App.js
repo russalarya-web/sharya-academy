@@ -26,10 +26,10 @@ export const Logo = styled.img`
 `;
 
 export const Triangle = styled.img`
-  height: 95%;
+  height: 125%;
   width: 100%;
   position: fixed;
-  bottom: -10px;
+  bottom: -330px;
   z-index: 0;
   pointer-events: none;
 `;
