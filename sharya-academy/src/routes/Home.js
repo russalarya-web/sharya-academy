@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import textLogo from '../resources/text-logo.png';
 
-import { Title, Screen, TextLogo } from "../App";
+import { Title, Element, TextLogo } from "../App";
 
 export const Header = styled.header`
     background: transparent;
@@ -16,13 +16,14 @@ export const Menu = styled.ul`
     display: flex;
     flex-direction: row;
     float: right;
-    padding: 5px;
     position: absolute;
     right: 150px;
+    vertical-align: middle;
 `;
 
 export const MenuItem = styled.li`
-    padding: 5px 15px;
+    padding: 15px;
+    font-size: calc(10px + 1.2vmin);
 `;
 
 export const SignIn = styled.button`
@@ -31,7 +32,7 @@ export const SignIn = styled.button`
     top: 30px;
     padding: 10px 15px;
     border: solid 1px;
-    font-size: calc(10px + 1.5vmin);
+    font-size: calc(10px + 1.2vmin);
     font-family: 'Noto Sans', sans-serif;
     border-radius: 5px;
     z-index: 1;
@@ -66,7 +67,7 @@ export const BoxButton = styled.button`
     padding: 10px;
     background: transparent;
     border: solid 1px;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(10px + 1vmin);
     font-family: 'Noto Sans', sans-serif;
     z-index: 1;
     border-radius: 5px;
@@ -96,21 +97,27 @@ const displayAbout = About.map((aboutText) =>
 
 const Pricing = [
     {planName: 'Free', price: 'Always ₹0', classColor: 'white',
-    point1: 'Chapter Notes', point2: 'NCERT Solutions', point3: 'Exemplar Questions'},
+    points: ['Chapter Notes', 'NCERT Solutions', 'Exemplar Questions'], button: 'Sign Up'},
     {planName: 'Basic', price: 'From ₹299 a year', classColor: 'green white-text',
-    point1: 'Everything in Free, plus:', point2: 'Practice Tests', point3: 'Worksheets'},
+    points: ['Everything in Free, plus:', 'Practice Tests', 'Worksheets'], button: 'Sign Up'},
     {planName: 'Premium', price: 'From ₹499 a year', classColor: 'dark-green white-text',
-    point1: 'Everything in Basic, plus:', point2: 'Auto-Graded Tests', point3: 'Detailed Feedback'}
+    points: ['Everything in Basic, plus:', 'Auto-Graded Tests', 'Detailed Feedback'], button: 'Sign Up'}
 ];
 
 const listPricing = Pricing.map((planItem) =>
     <Box className={planItem.classColor}>
         <BoxTitle>{planItem.planName}</BoxTitle>
-        <Text>{planItem.point1}</Text>
-        <Text>{planItem.point2}</Text>
-        <Text>{planItem.point3}</Text>
+        <Text>{planItem.points[0]}</Text>
+        <Text>{planItem.points[1]}</Text>
+        <Text>{planItem.points[2]}</Text>
         <BoxTitle>{planItem.price}</BoxTitle>
-        <BoxButton>Sign Up</BoxButton>
+        <BoxButton
+        onClick={(e) => {
+            e.preventDefault();
+            window.location.href='/signup';
+        }}>
+            {planItem.button}
+        </BoxButton>
     </Box>
 );
 
@@ -135,23 +142,23 @@ function Home() {
             </Header>
 
             {/* Start Screen */}
-            <Screen>
+            <Element>
                 <TextLogo src={textLogo} />
-            </Screen>
+            </Element>
 
             {/* About Screen */}
-            <Screen>
+            <Element>
                 <Title>About</Title>
                 {displayAbout}
-            </Screen>
+            </Element>
             
             {/* Pricing Screen */}
-            <Screen>
+            <Element>
                 <Title>Introductory Pricing</Title>
                 <div className="pricing">
                     {listPricing}
                 </div>
-            </Screen>
+            </Element>
 
             <Footer>
                 <SmallText>&copy; Sharya Academy.</SmallText>

@@ -10,6 +10,7 @@ import React from "react";
 import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
+import Dashboard from "./routes/Dashboard";
 
 export const Title = styled.h1`
   color: #1E5128;
@@ -27,16 +28,16 @@ export const Logo = styled.img`
 
 export const Triangle = styled.img`
   height: 125%;
-  width: 100%;
+  width: 110%;
   position: fixed;
   bottom: -330px;
   z-index: 0;
   pointer-events: none;
 `;
 
-export const Screen = styled.div`
-  min-height: 95vh;
-  padding: 2.5vh 10%;
+export const Element = styled.div`
+  min-height: 70vh;
+  padding: 10vh 10%;
   width: 80%;
 `;
 
@@ -74,6 +75,7 @@ function App() {
             <Route path="/" component={Home} exact />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={SignIn} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
 
