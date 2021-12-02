@@ -3,68 +3,68 @@ import styled from 'styled-components';
 
 import {Box} from "./Home";
 import {Title} from "../App";
-import {Page, Section, Container, Header, HeaderContainer, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
+import {Page, Header, HeaderContainer, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
 
-export const Search = styled.input`
-    background: rgba(242, 242, 242, 0.9);
-    color: rgba(30, 81, 40, 0.8);
-    border: none;
-    border-radius: 10px;
-    margin: 1.25em 0;
-    height: 2em;
-    font-size: calc(10px + 1.2vmin);
-    position: absolute;
-    right: 30px;
-    padding: 0.25em 20px;
+export const Section = styled.div`
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
 `;
 
-export const Sort = styled.select`
-    background: rgba(78, 159, 61, 0.8);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    margin: 1.25em 10px;
-    height: 2.5em;
-    font-size: calc(10px + 1.2vmin);
-    position: absolute;
-    right: 290px;
-    padding: 0.5em 20px;
+export const Container = styled.div`
+    display: flex;
+    height: 85vh;
+    margin-top: 50px;
+    flex-direction: column;
+    min-width: 380px;
+    overflow-y: scroll;
 `;
 
-const sortOptions = [
-    "disabled",
-    "No Sort",
-    "Most to Least",
-    "Least to Most",
-    "A to Z",
-    "Z to A"
+const notesList = [
+    "Topic 1",
+    "Topic 2",
+    "Topic 3"
 ];
 
-const listSortOptions = sortOptions.map((option) =>
-    { if (option === "disabled") { 
-        return(<option selected="true" disabled value="default">Sort</option>)
-    } else {
-        return(<option value={option}>{option}</option>)
-    }}
-);
-
-const recentChapters = [
-    "Metals and Non Metals",
-    "Life Processes"
+const worksheetList = [
+    "Worksheet 1",
+    "Worksheet 2",
+    "Worksheet 3"
 ];
 
-const displayRecent = recentChapters.map((chapter) =>
-    <Box className="dark-green white-text">{chapter}</Box>
-);
-
-const recommendedChapters = [
-    "Acids, Bases, and Salts",
-    "Control and Coordination"
+const testList = [
+    "Test 1",
+    "Test 2",
+    "Test 3"
 ];
 
-const displayRecommended = recommendedChapters.map((chapter) =>
-    <Box className="dark-green white-text">{chapter}</Box>
-);
+const onlineTestList = [
+    "Test 1",
+    "Test 2",
+    "Test 3",
+    "Test 4",
+    "Test 5",
+    "Test 6"
+];
+
+const solutionsList = [
+    "Exercise 1",
+    "Exercise 2",
+    "Exercise 3"
+];
+
+const exemplarList = [
+    "Set 1",
+    "Set 2",
+    "Set 3"
+];
+
+function returnList(sampleList) {
+    return (sampleList.map((topic) =>
+        <Box className="dark-green white-text">{topic}</Box>
+    ));
+}
 
 // ChapterView Page
 function ChapterView() {
@@ -93,6 +93,38 @@ function ChapterView() {
 
             {/* Page */}
             <Page>
+                {/* Recently Viewed Section */}
+                <Section>
+                    <Container>
+                        <Title>Chapter Notes</Title>
+                        {returnList(notesList)}
+                    </Container>
+
+                    <Container>
+                        <Title>Worksheets</Title>
+                        {returnList(worksheetList)}
+                    </Container>
+
+                    <Container>
+                        <Title>Practice Tests</Title>
+                        {returnList(testList)}
+                    </Container>
+
+                    <Container>
+                        <Title>Online Tests</Title>
+                        {returnList(onlineTestList)}
+                    </Container>
+
+                    <Container>
+                        <Title>NCERT Solutions</Title>
+                        {returnList(solutionsList)}
+                    </Container>
+
+                    <Container>
+                        <Title>Exemplar</Title>
+                        {returnList(exemplarList)}
+                    </Container>
+                </Section>
             </Page>
 
         </>

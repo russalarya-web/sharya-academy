@@ -84,19 +84,18 @@ export const listChapters = Chapters.map((chapter) =>
 );
 
 export const Page = styled.div`
-    width: 100%;
-    margin: 30px 0;
+    width: 95vw;
+    margin: 30px 0 0 0;
+    overflow: hidden;
 `;
 
 export const Section = styled.div`
-    width: 100%;
     padding: 20px 0;
 `;
 
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
-    width: 95vw;
 `;
 
 export const Search = styled.input`
