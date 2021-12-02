@@ -68,7 +68,6 @@ export const BoxButton = styled.button`
     background: transparent;
     border: solid 1px;
     font-size: calc(10px + 1vmin);
-    font-family: 'Noto Sans', sans-serif;
     z-index: 1;
     border-radius: 5px;
 `;
