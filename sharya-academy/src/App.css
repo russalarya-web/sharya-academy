@@ -52,6 +52,11 @@ html {
   margin: 10px 1% !important;
 }
 
+.right {
+  position: absolute;
+  right: 90px;
+}
+
 
 .AppForeground {
   z-index: 1;

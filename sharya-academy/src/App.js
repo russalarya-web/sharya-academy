@@ -12,6 +12,7 @@ import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
 import Dashboard from "./routes/Dashboard";
 import ChapterView from "./routes/ChapterView";
+import QuizView from "./routes/QuizView";
 
 export const Title = styled.h1`
   color: #1E5128;
@@ -78,6 +79,7 @@ function App() {
             <Route path="/login" component={SignIn} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/chapter" component={ChapterView} />
+            <Route path="/quiz" component={QuizView} />
           </Switch>
         </div>
 

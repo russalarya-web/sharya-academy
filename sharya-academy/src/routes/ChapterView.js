@@ -9,7 +9,7 @@ export const Section = styled.div`
     padding: 20px 0;
     display: flex;
     flex-direction: row;
-    overflow: scroll;
+    overflow-x: scroll;
 `;
 
 export const Container = styled.div`
