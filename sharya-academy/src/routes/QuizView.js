@@ -26,6 +26,7 @@ const options = [
 export const RoundLabel = styled.p`
     border-radius: 20px;
     padding: 5px 15px;
+    border: solid 1px;
 `;
 
 export const BigText = styled.h2`
@@ -52,7 +53,7 @@ export const Option = styled.button`
     padding: 1em;
     opacity: 0.9;
     width: 50%;
-    border: none;
+    border: solid 1px;
     font-size: calc(10px + 1.2vmin);
     margin: 10px;
     text-align: left;
@@ -61,7 +62,7 @@ export const Option = styled.button`
 export const Button = styled.button`
     border-radius: 10px;
     padding: 0.8em 1.2em;
-    border: none;
+    border: solid 1px;
     font-size: calc(10px + 1.2vmin);
     margin: 10px;
 `;

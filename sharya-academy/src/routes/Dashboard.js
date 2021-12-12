@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 
 import {Title} from "../App";
 import {Box} from "./Home";
-
 
 export const HeaderContainer = styled.div`
     position: fixed;
@@ -141,6 +140,7 @@ const listSortOptions = sortOptions.map((option) =>
     }}
 );
 
+// Pulled from API
 const recentChapters = [
     "Metals and Non Metals",
     "Life Processes"
@@ -150,6 +150,7 @@ const displayRecent = recentChapters.map((chapter) =>
     <Box className="dark-green white-text">{chapter}</Box>
 );
 
+// Pulled from API
 const recommendedChapters = [
     "Acids, Bases, and Salts",
     "Control and Coordination"
@@ -161,6 +162,10 @@ const displayRecommended = recommendedChapters.map((chapter) =>
 
 // Landing Page
 function Dashboard() {
+    // Pull from API
+    var firstName = "John";
+    var lastName = "Doe";
+
     return (
         <>
             {/* Header */}
@@ -179,7 +184,7 @@ function Dashboard() {
                         e.preventDefault();
                         window.location.href='/login';
                     }}>
-                        John Doe
+                        {firstName + ' ' + lastName}
                     </Profile>
                 </Header>
             </HeaderContainer>

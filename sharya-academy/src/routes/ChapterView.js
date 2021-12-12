@@ -1,7 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
 
-import {Box} from "./Home";
 import {Title} from "../App";
 import {Page, Header, HeaderContainer, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
 
@@ -19,6 +18,15 @@ export const Container = styled.div`
     flex-direction: column;
     min-width: 380px;
     overflow-y: scroll;
+`;
+
+const Box = styled.div`
+    border-radius: 5px;
+    padding: 1em;
+    min-width: 100px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const notesList = [
