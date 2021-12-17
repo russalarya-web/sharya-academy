@@ -97,9 +97,9 @@ const displayAbout = About.map((aboutText) =>
 const Pricing = [
     {planName: 'Free', price: 'Always ₹0', classColor: 'white',
     points: ['Chapter Notes', 'NCERT Solutions', 'Exemplar Questions'], button: 'Sign Up'},
-    {planName: 'Basic', price: 'From ₹299 a year', classColor: 'green white-text',
+    {planName: 'Basic', price: 'From ₹599 a year', classColor: 'green white-text',
     points: ['Everything in Free, plus:', 'Practice Tests', 'Worksheets'], button: 'Sign Up'},
-    {planName: 'Premium', price: 'From ₹499 a year', classColor: 'dark-green white-text',
+    {planName: 'Premium', price: 'From ₹999 a year', classColor: 'dark-green white-text',
     points: ['Everything in Basic, plus:', 'Auto-Graded Tests', 'Detailed Feedback'], button: 'Sign Up'}
 ];
 

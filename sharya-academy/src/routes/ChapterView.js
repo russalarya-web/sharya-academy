@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 
 import {Title} from "../App";
-import {Page, Header, HeaderContainer, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
+import {Page, Menu, Header, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
 
 export const Section = styled.div`
     padding: 20px 0;
@@ -79,8 +79,8 @@ function ChapterView() {
     return (
         <>
             {/* Header */}
-            <HeaderContainer>
-                <Header>
+            <Header>
+                <Menu>
                     <Subject>
                         {listSubjects}
                     </Subject>
@@ -96,8 +96,8 @@ function ChapterView() {
                     }}>
                         John Doe
                     </Profile>
-                </Header>
-            </HeaderContainer>
+                </Menu>
+            </Header>
 
             {/* Page */}
             <Page>

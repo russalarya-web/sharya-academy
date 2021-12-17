@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from 'styled-components';
 
 import {Title} from "../App";
-import {Box} from "./Home";
-
-export const HeaderContainer = styled.div`
-    position: fixed;
-    width: 100%;
-    top: 30px;
-    right: 30px;
-`;
+import {Box, Text} from "./Home";
 
 export const Header = styled.header`
-    background: transparent;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+`;
+
+export const Menu = styled.div`
     display: flex;
     flex-direction: row;
     position: absolute;
-    right: 0;
+    top: 30px;
+    right: 30px;
+    background: #D8E9A8;
+    // background: #fff;
+    // border: dashed 1px;
+    border-radius: 10px;
+    z-index: 2;
+
 `;
 
 export const Profile = styled.button`
@@ -84,7 +93,7 @@ export const listChapters = Chapters.map((chapter) =>
 
 export const Page = styled.div`
     width: 95vw;
-    margin: 30px 0 0 0;
+    margin: 30px 40px 0 40px;
     overflow: hidden;
 `;
 
@@ -115,7 +124,7 @@ export const Sort = styled.select`
     color: #fff;
     border: none;
     border-radius: 10px;
-    margin: 1.25em 10px;
+    margin: 1.25em;
     height: 2.5em;
     font-size: calc(10px + 1.2vmin);
     position: absolute;
@@ -146,31 +155,39 @@ const recentChapters = [
     "Life Processes"
 ];
 
-const displayRecent = recentChapters.map((chapter) =>
-    <Box className="dark-green white-text">{chapter}</Box>
-);
-
 // Pulled from API
 const recommendedChapters = [
     "Acids, Bases, and Salts",
     "Control and Coordination"
 ];
 
-const displayRecommended = recommendedChapters.map((chapter) =>
-    <Box className="dark-green white-text">{chapter}</Box>
-);
+function display(itemList) {
+    const boxes = itemList.map((item) =>
+        <Box className="dark-green white-text">{item}</Box>
+    );
+
+    return boxes;
+}
 
 // Landing Page
 function Dashboard() {
-    // Pull from API
-    var firstName = "John";
-    var lastName = "Doe";
+    // API Handling
+    const [name, setName] = useState([]);
+
+    async function getName() {
+        const response = await axios.get("http://localhost:9000/name");
+        setName(response.data);
+    }
+
+    useEffect(() => {
+        getName();
+    }, [])
 
     return (
         <>
             {/* Header */}
-            <HeaderContainer>
-                <Header>
+            <Header>
+                <Menu>
                     <Subject>
                         {listSubjects}
                     </Subject>
@@ -184,10 +201,10 @@ function Dashboard() {
                         e.preventDefault();
                         window.location.href='/login';
                     }}>
-                        {firstName + ' ' + lastName}
+                        {name}
                     </Profile>
-                </Header>
-            </HeaderContainer>
+                </Menu>
+            </Header>
 
             {/* Page */}
             <Page>
@@ -198,7 +215,7 @@ function Dashboard() {
                     </Container>
                     
                     <Container>
-                        {displayRecent}
+                        {display(recentChapters)}
                     </Container>
                 </Section>
 
@@ -206,16 +223,14 @@ function Dashboard() {
                 <Section>
                     <Container>
                         <Title>Recommended</Title>
-
                         <Sort>
                             {listSortOptions}
                         </Sort>
 
                         <Search placeholder="Search" />
                     </Container>
-
                     <Container>
-                        {displayRecommended}
+                        {display(recommendedChapters)}
                     </Container>
                 </Section>
             </Page>
