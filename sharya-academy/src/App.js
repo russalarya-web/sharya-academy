@@ -10,9 +10,8 @@ import React from "react";
 import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
-import Dashboard from "./routes/Dashboard";
-import ChapterView from "./routes/ChapterView";
-import QuizView from "./routes/QuizView";
+import LoggedIn from "./routes/LoggedIn";
+import ChapterView from './routes/loggedIn/ChapterView';
 
 export const Title = styled.h1`
   color: #1E5128;
@@ -77,9 +76,7 @@ function App() {
             <Route path="/" component={Home} exact />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={SignIn} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/chapter" component={ChapterView} />
-            <Route path="/quiz" component={QuizView} />
+            <Route path="/user" component={LoggedIn} />
           </Switch>
         </div>
 

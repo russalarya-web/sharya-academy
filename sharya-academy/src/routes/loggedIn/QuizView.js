@@ -1,14 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
 
-import { Menu, Header, Profile, Subject, Chapter, listSubjects, listChapters} from "./Dashboard";
-
-export const Page = styled.div`
-    width: 95vw;
-    margin: 80px 0 0 40px;
-    overflow: hidden;
-`;
-
 export const Section = styled.div`
     padding: 20px 50px;
     display: flex;
@@ -100,43 +92,18 @@ function displayQuestions(listQuestions) {
 function QuizView() {
     return (
         <>
-            {/* Header */}
-            <Header>
-                <Menu>
-                    <Subject>
-                        {listSubjects}
-                    </Subject>
+            {/* Quiz Section */}
+            <Section>
+                {displayQuestions(questions)}
 
-                    <Chapter>
-                        {listChapters}
-                    </Chapter>
-
-                    <Profile
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href='/login';
-                    }}>
-                        John Doe
-                    </Profile>
-                </Menu>
-            </Header>
-
-            {/* Page */}
-            <Page>
-                {/* Quiz Section */}
-                <Section>
-                    {displayQuestions(questions)}
-
-                    <Container>
-                        {/* <Button className="green white-text">Previous</Button> */}
-                        <div className="right">
-                            {/* <Button className="green white-text">Next</Button> */}
-                            <Button className="dark-green white-text">Submit</Button>
-                        </div>
-                    </Container>
-                </Section>
-            </Page>
-
+                <Container>
+                    {/* <Button className="green white-text">Previous</Button> */}
+                    <div className="right">
+                        {/* <Button className="green white-text">Next</Button> */}
+                        <Button className="dark-green white-text">Submit</Button>
+                    </div>
+                </Container>
+            </Section>
         </>
     );
 }
