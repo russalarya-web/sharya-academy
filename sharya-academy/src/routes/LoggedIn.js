@@ -57,8 +57,6 @@ export const Subject = styled.select`
     min-width: 210px;
 `;
 
-
-
 export const Chapter = styled.select`
     padding: 10px 15px;
     margin: 10px;
@@ -70,19 +68,11 @@ export const Chapter = styled.select`
     min-width: 320px;
 `;
 
-const Chapters = [
-    "disabled",
-    "Acids, Bases, and Salts",
-    "Metals and Non Metals",
-    "Life Processes",
-    "Control and Coordination"
-];
-
-function listMenu(list) {
+export function listMenu(list, disabledValue) {
     if (list) {
         return list.map((listObject) =>
             { if (listObject === "disabled") { 
-                return(<option selected="true" disabled value="default">Select</option>)
+                return(<option selected="true" disabled value="default">{disabledValue}</option>)
             } else {
                 return(<option value={listObject}>{listObject}</option>)
             }}
@@ -112,10 +102,37 @@ function DetailsFromAPI(){
     return details;
 };
 
+export function ChaptersFromAPI(){
+    const [chapters, setChapters] = useState([{}]);
+
+    async function getChapters() {
+        const response = await axios.get("http://localhost:9000/api/chapters");
+        setChapters(response.data);
+    }
+
+    useEffect(() => {
+        getChapters();
+    }, [])
+
+    return chapters;
+};
+
+function chapterProcessing() {
+    const chapters = ChaptersFromAPI();
+    var chapterNames = [];
+
+    chapters.forEach(chapter => {
+        chapterNames.push(chapter.name);
+    });
+
+    return chapterNames;
+}
+
 // Landing Page
 function LoggedIn() {
     const FirstName = DetailsFromAPI().firstName;
     const Subjects = DetailsFromAPI().subjects;
+    const Chapters = chapterProcessing();
 
     return (
         <>
@@ -123,11 +140,11 @@ function LoggedIn() {
             <Header>
                 <Menu>
                     <Subject>
-                        {listMenu(Subjects)}
+                        {listMenu(Subjects, "Select Subject")}
                     </Subject>
 
                     <Chapter>
-                        {listMenu(Chapters)}
+                        {listMenu(Chapters, "Select Chapter")}
                     </Chapter>
 
                     <Profile

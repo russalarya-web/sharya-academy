@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import {Title} from "../../App";
 import {Box, Text} from "../Home";
+import {listMenu, ChaptersFromAPI} from "../LoggedIn";
 
 export const Section = styled.div`
     padding: 20px 0;
@@ -40,35 +41,6 @@ export const Sort = styled.select`
     padding: 0.5em 20px;
 `;
 
-const sortOptions = [
-    "disabled",
-    "No Sort",
-    "Most to Least",
-    "Least to Most",
-    "A to Z",
-    "Z to A"
-];
-
-const listSortOptions = sortOptions.map((option) =>
-    { if (option === "disabled") { 
-        return(<option selected="true" disabled value="default">Sort</option>)
-    } else {
-        return(<option value={option}>{option}</option>)
-    }}
-);
-
-// Pulled from API
-const recentChapters = [
-    "Metals and Non Metals",
-    "Life Processes"
-];
-
-// Pulled from API
-const recommendedChapters = [
-    "Acids, Bases, and Salts",
-    "Control and Coordination"
-];
-
 function display(itemList) {
     const boxes = itemList.map((item) =>
         <Box className="dark-green white-text">{item}</Box>
@@ -77,8 +49,46 @@ function display(itemList) {
     return boxes;
 }
 
+function SortFromAPI() {
+    const [sort, setSort] = useState([]);
+
+    async function getSort() {
+        const response = await axios.get("http://localhost:9000/api/sorting");
+        setSort(response.data);
+    }
+
+    useEffect(() => {
+        getSort();
+    }, [])
+
+    return sort;
+}
+
+function chapterProcessing() {
+    const chapters = ChaptersFromAPI();
+
+    var recent = [];
+    var recommended = [];
+
+    chapters.forEach(chapter => {
+        if (chapter.name != "disabled") {
+            if (chapter.recent) {
+                recent.push(chapter.name);
+            }
+            else if (chapter.recommended) {
+                recommended.push(chapter.name);
+            }
+        }
+    });
+
+    return {recentList: recent, recommendedList: recommended};
+}
+
 // Landing Page
 function Dashboard() {
+    const sortOptions = SortFromAPI();
+    const processedChapters = chapterProcessing();
+
     return (
         <>
             {/* Recently Viewed Section */}
@@ -88,7 +98,7 @@ function Dashboard() {
                 </Container>
                 
                 <Container>
-                    {display(recentChapters)}
+                    {display(processedChapters.recentList)}
                 </Container>
             </Section>
 
@@ -97,13 +107,13 @@ function Dashboard() {
                 <Container>
                     <Title>Recommended</Title>
                     <Sort>
-                        {listSortOptions}
+                        {listMenu(sortOptions, "Sort by")}
                     </Sort>
 
                     <Search placeholder="Search" />
                 </Container>
                 <Container>
-                    {display(recommendedChapters)}
+                    {display(processedChapters.recommendedList)}
                 </Container>
             </Section>
         </>

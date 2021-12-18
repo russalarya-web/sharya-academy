@@ -10,8 +10,9 @@ var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI');
 
 // Basic Details
-var nameRouter = require('./routes/name');
+var chapterRouter = require('./routes/chapterDetails');
 var detailsRouter = require('./routes/userDetails');
+var sortRouter = require('./routes/sortOptions');
 
 var app = express();
 
@@ -31,8 +32,9 @@ app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
 
 // Basic Details
-app.use('/api/name', nameRouter);
+app.use('/api/chapters', chapterRouter);
 app.use('/api/details', detailsRouter);
+app.use('/api/sorting', sortRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
