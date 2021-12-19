@@ -1,0 +1,68 @@
+{
+    "subjects": [
+        {
+            "name": "Physics",
+            "chapters": [
+                {
+                    "name": "Kinematics",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Chemistry",
+            "chapters": [
+                {
+                    "name": "Atoms and Molecules",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -11,7 +11,7 @@ import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
 import LoggedIn from "./routes/LoggedIn";
-import ChapterView from './routes/loggedIn/ChapterView';
+import AdminLoggedIn from "./routes/AdminLoggedIn";
 
 export const Title = styled.h1`
   color: #1E5128;
@@ -77,6 +77,7 @@ function App() {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={SignIn} />
             <Route path="/user" component={LoggedIn} />
+            <Route path="/admin" component={AdminLoggedIn} />
           </Switch>
         </div>
 

@@ -1,0 +1,60 @@
+{
+    "subjects": [
+        {
+            "name": "Physics",
+            "chapters": [
+                {
+                    "name": "Current Electricity",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Chemistry",
+            "chapters": [
+                {
+                    "name": "p-block",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,102 @@
+{
+    "subjects": [
+        {
+            "name": "Science",
+            "chapters": [
+                {
+                    "name": "Acids, Bases, and Salts",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ],
+                    "recommended": 0
+                },
+                {
+                    "name": "Metals and Non Metals",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                },
+                                {
+                                    "name": "Topic 2",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ],
+                    "recommended": 0
+                }
+            ]
+        },
+        {
+            "name": "Mathematics",
+            "chapters": [
+                {
+                    "name": "Triangles",
+                    "content": [
+                        {
+                            "name": "Chapter Notes",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Worksheets",
+                            "content": [
+                                {
+                                    "name": "Topic 1",
+                                    "link": "/hfhsd"
+                                }
+                            ]
+                        }
+                    ],
+                    "recommended": 0
+                }
+            ]
+        }
+    ]
+}
