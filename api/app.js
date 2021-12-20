@@ -14,10 +14,14 @@ var chapterRouter = require('./routes/chapterDetails');
 var adminRouter = require('./routes/adminDetails');
 var detailsRouter = require('./routes/userDetails');
 var sortRouter = require('./routes/sortOptions');
+
 var contentRouter = require('./routes/content');
 var contentXIIRouter = require('./routes/content/xii');
 var contentXIRouter = require('./routes/content/xi');
 var contentXRouter = require('./routes/content/x');
+
+var quizRouter = require('./routes/content/quizzes/quiz-1');
+
 
 var app = express();
 
@@ -45,6 +49,8 @@ app.use('/api/content', contentRouter);
 app.use('/api/content/xii', contentXIIRouter);
 app.use('/api/content/xi', contentXIRouter);
 app.use('/api/content/x', contentXRouter);
+
+app.use('/api/quiz/quiz-1', quizRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

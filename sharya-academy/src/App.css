@@ -84,11 +84,7 @@ select {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:focus {
+  background: rgba(78, 159, 61, 0.8);
+  color: #fff;
 }

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import {Title} from "../App";
-import {Box, Text} from "./Home";
+import { Route, Switch } from 'react-router-dom';
 
 import Dashboard from "./loggedIn/Dashboard";
 import ChapterView from "./loggedIn/ChapterView";

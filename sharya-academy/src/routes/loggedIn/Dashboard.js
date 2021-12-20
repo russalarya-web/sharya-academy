@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 
 import {Title} from "../../App";
-import {Box, Text} from "../Home";
+import {Box} from "../Home";
 import {listMenu, ChaptersFromAPI} from "../LoggedIn";
 
 export const Section = styled.div`
@@ -71,7 +71,7 @@ function chapterProcessing() {
     var recommended = [];
 
     chapters.forEach(chapter => {
-        if (chapter.name != "disabled") {
+        if (chapter.name !== "disabled") {
             if (chapter.recent) {
                 recent.push(chapter.name);
             }

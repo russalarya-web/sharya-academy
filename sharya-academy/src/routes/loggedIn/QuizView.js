@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from 'styled-components';
 
 export const Section = styled.div`
@@ -12,13 +13,6 @@ export const Container = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
 `;
-
-var questions = [
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 1},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 2},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 3},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 4},
-];
 
 export const RoundLabel = styled.p`
     border-radius: 20px;
@@ -65,47 +59,80 @@ export const Button = styled.button`
     margin: 10px;
 `;
 
-function returnList(sampleList) {
-    return (sampleList.map((option) =>
-        <Option className="white">{option}</Option>
-    ));
+function QuizFromAPI() {
+    const [sort, setSort] = useState([]);
+
+    async function getSort() {
+        const response = await axios.get("http://localhost:9000/api/quiz/quiz-1");
+        setSort(response.data);
+    }
+
+    useEffect(() => {
+        getSort();
+    }, [])
+
+    return sort;
 }
 
-function displayQuestions(listQuestions) {
-    return (listQuestions.map((questionItem) =>
-    <>
-        <Container>
-            <RoundLabel className="dark-green white-text">Question {questionItem.number} of {listQuestions.length}</RoundLabel>
-            <RoundLabel className="green white-text right">{questionItem.points} points</RoundLabel>
-        </Container>
-
-        <BigText>{questionItem.question}</BigText>
-
-        <Container>
-            {returnList(questionItem.options)}
-        </Container>
-    </>
-    ));
+function getCurrentQuestion(listQuestions, current) {
+    if (listQuestions) {
+        return (listQuestions[0]);
+    }
 }
 
-// ChapterView Page
+var current = 0;
+
+function prevQuestion(current) {
+    return current - 1;
+}
+
+function nextQuestion(current) {
+    return current + 1;
+}
+
+// QuizView Page
+// One Question per Page
 function QuizView() {
-    return (
-        <>
-            {/* Quiz Section */}
-            <Section>
-                {displayQuestions(questions)}
+    const quiz = QuizFromAPI();
 
-                <Container>
-                    {/* <Button className="green white-text">Previous</Button> */}
-                    <div className="right">
-                        {/* <Button className="green white-text">Next</Button> */}
-                        <Button className="dark-green white-text">Submit</Button>
-                    </div>
-                </Container>
-            </Section>
-        </>
-    );
+    let questions;
+    let currentQuestion;
+
+    if (quiz.questions) {
+        questions = quiz.questions;
+        currentQuestion = getCurrentQuestion(questions, current);
+
+        return (
+            <>
+                {/* Quiz Section */}
+                <Section>
+                    {/* {displayQuestions(quiz.questions)} */}
+                    <Container>
+                        <RoundLabel className="dark-green white-text">Question {current + 1} of {questions.length}</RoundLabel>
+                        <RoundLabel className="green white-text right">{currentQuestion.points} points</RoundLabel>
+                    </Container>
+
+                    <BigText>{currentQuestion.question}</BigText>
+
+                    <Container>
+                        {currentQuestion.options.map((option) =>
+                            <Option className="white">{option}</Option>
+                        )}
+                    </Container>
+
+                    <Container>
+                        <Button className="green white-text" onClick={prevQuestion()} >Previous</Button>
+                        <div className="right">
+                            <Button className="green white-text" onClick={nextQuestion()}>Next</Button>
+                            <Button className="dark-green white-text">Submit</Button>
+                        </div>
+                    </Container>
+                </Section>
+            </>
+        );
+    } else {
+        return (null);
+    }
 }
 
 export default QuizView;
