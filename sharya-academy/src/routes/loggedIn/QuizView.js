@@ -74,33 +74,29 @@ function QuizFromAPI() {
     return sort;
 }
 
-function getCurrentQuestion(listQuestions, current) {
-    if (listQuestions) {
-        return (listQuestions[0]);
-    }
-}
-
-var current = 0;
-
-function prevQuestion(current) {
-    return current - 1;
-}
-
-function nextQuestion(current) {
-    return current + 1;
-}
-
 // QuizView Page
-// One Question per Page
 function QuizView() {
     const quiz = QuizFromAPI();
 
     let questions;
-    let currentQuestion;
+    const [currentQuestion, setCurrentQuestion] = useState(0);
 
     if (quiz.questions) {
         questions = quiz.questions;
-        currentQuestion = getCurrentQuestion(questions, current);
+
+        const handlePrevButtonClick = (answerOption) => {
+            if (currentQuestion !== 0) {
+                const prevQuestion = currentQuestion - 1;
+                setCurrentQuestion(prevQuestion);
+            }
+        };
+    
+        const handleNextButtonClick = (answerOption) => {
+            if (currentQuestion !== questions.length - 1) {
+                const nextQuestion = currentQuestion + 1;
+                setCurrentQuestion(nextQuestion);
+            }
+        };
 
         return (
             <>
@@ -108,22 +104,24 @@ function QuizView() {
                 <Section>
                     {/* {displayQuestions(quiz.questions)} */}
                     <Container>
-                        <RoundLabel className="dark-green white-text">Question {current + 1} of {questions.length}</RoundLabel>
-                        <RoundLabel className="green white-text right">{currentQuestion.points} points</RoundLabel>
+                        <RoundLabel className="dark-green white-text">Question {currentQuestion + 1} of {questions.length}</RoundLabel>
+                        <RoundLabel className="green white-text right">{questions[currentQuestion].points} points</RoundLabel>
                     </Container>
 
-                    <BigText>{currentQuestion.question}</BigText>
+                    <BigText>{questions[currentQuestion].question}</BigText>
 
                     <Container>
-                        {currentQuestion.options.map((option) =>
+                        {questions[currentQuestion].options.map((option) =>
                             <Option className="white">{option}</Option>
                         )}
                     </Container>
 
                     <Container>
-                        <Button className="green white-text" onClick={prevQuestion()} >Previous</Button>
+                        {/* {PrevButton([currentQuestion, setCurrentQuestion])} */}
+                        <Button className="green white-text" onClick={() => handlePrevButtonClick()}>Previous</Button>
                         <div className="right">
-                            <Button className="green white-text" onClick={nextQuestion()}>Next</Button>
+                            {/* {NextButton([currentQuestion, setCurrentQuestion])} */}
+                            <Button className="green white-text" onClick={() => handleNextButtonClick()}>Next</Button>;
                             <Button className="dark-green white-text">Submit</Button>
                         </div>
                     </Container>
