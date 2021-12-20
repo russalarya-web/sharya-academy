@@ -1,6 +1,6 @@
 # sharya-academy
 Ensure you have npm installed.
-## Steps to run: 
+## Terminal Commands to run: 
 ### `cd api && node ./bin/www`
 Starts the Node backend.
 
