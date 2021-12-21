@@ -93,7 +93,7 @@ function Dashboard() {
     const processedChapters = chapterProcessing();
 
     function displayChapters(idType) {
-        const chapters = ChaptersFromAPI(currentSubject);
+        const chapters = ChaptersFromAPI("x", currentSubject);
         var idList = chapters[idType];
 
         if (idList) {

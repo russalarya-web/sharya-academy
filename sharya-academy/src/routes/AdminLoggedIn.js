@@ -66,13 +66,25 @@ export const Chapter = styled.select`
     min-width: 320px;
 `;
 
-export function listMenu(list, disabledValue) {
+function listMenu(list, disabledValue) {
     if (list) {
         return list.map((listObject) =>
             { if (listObject === "disabled") { 
                 return(<option selected="true" disabled value="default">{disabledValue}</option>)
             } else {
                 return(<option value={listObject}>{listObject}</option>)
+            }}
+        );
+    }
+}
+
+function listSubjects(list, disabledValue) {
+    if (list) {
+        return list.map((listObject) =>
+            { if (listObject.name === "disabled") { 
+                return(<option selected="true" disabled value="default">{disabledValue}</option>)
+            } else {
+                return(<option value={listObject.id}>{listObject.name}</option>)
             }}
         );
     }
@@ -138,7 +150,7 @@ function AdminLoggedIn() {
             <Header>
                 <Menu>
                     <Subject>
-                        {listMenu(Subjects, "Select Subject")}
+                        {listSubjects(Subjects, "Select Subject")}
                     </Subject>
 
                     <Chapter>

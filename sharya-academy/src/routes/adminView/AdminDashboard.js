@@ -37,10 +37,19 @@ function ContentFromAPI() {
     return content;
 }
 
-function returnList(sampleList) {
-    return (sampleList.map((object) =>
-        <Box className="green dark-click white-text">{object.name}</Box>
-    ));
+function returnContent(content, listName, prefix, capitalize) {
+    if (content[listName]) {
+        if (capitalize) {
+            return (content[listName].map((object) =>
+                <Box className="green dark-click white-text">{prefix + " " + object.toUpperCase()}</Box>
+            ));
+        
+        } else {
+            return (content[listName].map((object) =>
+                <Box className="green dark-click white-text">{prefix + " " + object}</Box>
+            ));
+        }
+    }
 }
 
 function AdminDashboard() {
@@ -51,7 +60,7 @@ function AdminDashboard() {
             <Section>
                 <Container>
                     <Title>Classes</Title>
-                    {returnList(content)}
+                    {returnContent(content, "classIdList", "Class", true)}
                 </Container>
             </Section>
         </>

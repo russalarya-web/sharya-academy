@@ -3,9 +3,9 @@ import axios from "axios";
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 
-import Dashboard from "./loggedIn/Dashboard";
-import ChapterView from "./loggedIn/ChapterView";
-import QuizView from "./loggedIn/QuizView";
+import Dashboard from "./userView/Dashboard";
+import ChapterView from "./userView/ChapterView";
+import QuizView from "./userView/QuizView";
 
 export const Header = styled.header`
     position: fixed;
@@ -99,11 +99,11 @@ function DetailsFromAPI(){
     return details;
 };
 
-export function ChaptersFromAPI(currentSubject){
+export function ChaptersFromAPI(classId, currentSubject){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const link = "http://localhost:9000/api/content/subject?class=x&id=" + currentSubject;
+        const link = "http://localhost:9000/api/content/subject?class=" + classId + "&id=" + currentSubject;
         const response = await axios.get(link);
         setChapters(response.data);
     }
@@ -127,6 +127,7 @@ function LoggedIn() {
     const details = DetailsFromAPI();
 
     const FirstName = details.firstName;
+    var classId = details.class;
     const SubjectsFromDetails = details.subjects;
 
     const handleSubjectSelection = (disabledValue) => {
@@ -142,7 +143,7 @@ function LoggedIn() {
     }
 
     function displayChapters () {
-        const chapters = ChaptersFromAPI(currentSubject);
+        const chapters = ChaptersFromAPI("x", currentSubject);
         var chIds = chapters["chIds"];
 
         if (chIds) {
