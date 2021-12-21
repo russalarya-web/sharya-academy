@@ -1,0 +1,48 @@
+{
+    "x": {
+        "sci": {
+            "name": "Science",
+            "chapters": 3,
+            "ch1": {
+                "classId" : "x",
+                "subjectId" : "x-sci",
+                "chapterNo" : 1,
+                "chapterId" : "x-sci-ch1",
+                "name" : "Chemical Reactions and Equations",
+                "recent": false, "recommended": true
+            },
+            "ch2": {
+                "classId" : "x",
+                "subjectId" : "x-sci",
+                "chapterNo" : 2,
+                "chapterId" : "x-sci-ch2",
+                "name" : "Acids, Bases, and Salts",
+                "recent": false, "recommended": true
+            },
+            "ch3": {
+                "classId" : "x",
+                "subjectId" : "x-sci",
+                "chapterNo" : 3,
+                "chapterId" : "x-sci-ch3",
+                "name" : "Metals and Non-Metals",
+                "recent": true, "recommended": false
+            }
+        },
+        "ssc": {
+            "name": "Social Science",
+            "chapters": 0
+        },
+        "mat": {
+            "name": "Mathematics",
+            "chapters": 0
+        },
+        "hin": {
+            "name": "Hindi",
+            "chapters": 0
+        },
+        "eng": {
+            "name": "English",
+            "chapters": 0
+        }
+    }
+}

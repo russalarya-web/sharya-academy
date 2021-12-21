@@ -99,6 +99,21 @@ function DetailsFromAPI(){
     return details;
 };
 
+export function SubjectsFromAPI(){
+    const [subjects, setSubjects] = useState([{}]);
+
+    async function getSubjects() {
+        const response = await axios.get("http://localhost:9000/api/content?class=x");
+        setSubjects(response.data);
+    }
+
+    useEffect(() => {
+        getSubjects();
+    }, [])
+
+    return subjects;
+};
+
 export function ChaptersFromAPI(){
     const [chapters, setChapters] = useState([{}]);
 
@@ -114,22 +129,43 @@ export function ChaptersFromAPI(){
     return chapters;
 };
 
-function chapterProcessing() {
-    const chapters = ChaptersFromAPI();
-    var chapterNames = [];
-
-    chapters.forEach(chapter => {
-        chapterNames.push(chapter.name);
-    });
-
-    return chapterNames;
-}
-
 // Landing Page
 function LoggedIn() {
-    const FirstName = DetailsFromAPI().firstName;
-    const Subjects = DetailsFromAPI().subjects;
-    const Chapters = chapterProcessing();
+    const details = DetailsFromAPI();
+
+    const FirstName = details.firstName;
+    const Subjects = details.subjects;
+
+    const AllSubjects = SubjectsFromAPI();
+    const Chapters = ChaptersFromAPI();
+
+    const [currentSubject, setCurrentSubject] = useState("sci");
+    const [currentChapter, setCurrentChapter] = useState();
+
+    const handleSubjectSelection = (list, disabledValue) => {
+        if (list) {
+            return list.map((listObject) =>
+                { if (listObject === "disabled") { 
+                    return(<option selected="true" disabled value="default">{disabledValue}</option>)
+                } else {
+                    return(<option value={listObject.name}>{listObject.name}</option>)
+                }}
+            );
+        }
+    }
+
+    function listMenu (list, disabledValue) {
+        if (list) {
+            return list.map((listObject) =>
+                { if (listObject.name === "disabled") { 
+                    return(<option selected="true" disabled value="default">{disabledValue}</option>)
+                } else {
+                    return(<option value={listObject.name}>{listObject.name}</option>)
+                }}
+            );
+        }
+    }
+
 
     return (
         <>

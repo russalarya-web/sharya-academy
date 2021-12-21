@@ -1,0 +1,36 @@
+{
+    "x": {
+        "sci": {
+            "ch3": {
+                "q1": {
+                    "classId" : "x",
+                    "subjectId" : "x-sci",
+                    "chapterId" : "x-sci-ch3",
+                    "quizId" : "x-sci-ch3-q1",
+                    "questions": [
+                        {
+                            "question": "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?",
+                            "options": ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], 
+                            "correct": 3, "points": 2
+                        },
+                        {
+                            "question": "Non-metals are not lustrous. Which of the following nonmetal is lustrous?",
+                            "options": ["Sulphur", "Oxygen", "Nitrogen", "Iodine"],
+                            "correct": 3, "points": 2
+                        },
+                        {
+                            "question": "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?",
+                            "options": ["Sulphur", "Oxygen", "Nitrogen", "Iodine"],
+                            "correct": 3, "points": 2
+                        },
+                        {
+                            "question": "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?",
+                            "options": ["Sulphur", "Oxygen", "Nitrogen", "Iodine"],
+                            "correct": 3, "points": 2
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

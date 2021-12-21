@@ -60,18 +60,19 @@ export const Button = styled.button`
 `;
 
 function QuizFromAPI() {
-    const [sort, setSort] = useState([]);
+    const [quiz, setQuiz] = useState([]);
 
-    async function getSort() {
-        const response = await axios.get("http://localhost:9000/api/quiz/quiz-1");
-        setSort(response.data);
+    async function getQuiz() {
+        // Used Specific Quiz for Testing
+        const response = await axios.get("http://localhost:9000/api/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
+        setQuiz(response.data);
     }
 
     useEffect(() => {
-        getSort();
+        getQuiz();
     }, [])
 
-    return sort;
+    return quiz;
 }
 
 // QuizView Page
@@ -84,14 +85,14 @@ function QuizView() {
     if (quiz.questions) {
         questions = quiz.questions;
 
-        const handlePrevButtonClick = (answerOption) => {
+        const handlePrevButtonClick = () => {
             if (currentQuestion !== 0) {
                 const prevQuestion = currentQuestion - 1;
                 setCurrentQuestion(prevQuestion);
             }
         };
     
-        const handleNextButtonClick = (answerOption) => {
+        const handleNextButtonClick = () => {
             if (currentQuestion !== questions.length - 1) {
                 const nextQuestion = currentQuestion + 1;
                 setCurrentQuestion(nextQuestion);
