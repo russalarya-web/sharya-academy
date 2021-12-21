@@ -99,26 +99,12 @@ function DetailsFromAPI(){
     return details;
 };
 
-export function SubjectsFromAPI(){
-    const [subjects, setSubjects] = useState([{}]);
-
-    async function getSubjects() {
-        const response = await axios.get("http://localhost:9000/api/content?class=x");
-        setSubjects(response.data);
-    }
-
-    useEffect(() => {
-        getSubjects();
-    }, [])
-
-    return subjects;
-};
-
-export function ChaptersFromAPI(){
+export function ChaptersFromAPI(currentSubject){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const response = await axios.get("http://localhost:9000/api/chapters");
+        const link = "http://localhost:9000/api/content/subject?class=x&id=" + currentSubject;
+        const response = await axios.get(link);
         setChapters(response.data);
     }
 
@@ -129,42 +115,57 @@ export function ChaptersFromAPI(){
     return chapters;
 };
 
+export function GetSubjectState() {
+    return useState("sci");
+}
+
 // Landing Page
 function LoggedIn() {
+    const [currentSubject, setCurrentSubject] = GetSubjectState();
+    const [currentChapter, setCurrentChapter] = useState();
+
     const details = DetailsFromAPI();
 
     const FirstName = details.firstName;
-    const Subjects = details.subjects;
+    const SubjectsFromDetails = details.subjects;
 
-    const AllSubjects = SubjectsFromAPI();
-    const Chapters = ChaptersFromAPI();
-
-    const [currentSubject, setCurrentSubject] = useState("sci");
-    const [currentChapter, setCurrentChapter] = useState();
-
-    const handleSubjectSelection = (list, disabledValue) => {
-        if (list) {
-            return list.map((listObject) =>
-                { if (listObject === "disabled") { 
-                    return(<option selected="true" disabled value="default">{disabledValue}</option>)
-                } else {
-                    return(<option value={listObject.name}>{listObject.name}</option>)
-                }}
-            );
-        }
-    }
-
-    function listMenu (list, disabledValue) {
-        if (list) {
-            return list.map((listObject) =>
+    const handleSubjectSelection = (disabledValue) => {
+        if (SubjectsFromDetails) {
+            return SubjectsFromDetails.map((listObject) =>
                 { if (listObject.name === "disabled") { 
-                    return(<option selected="true" disabled value="default">{disabledValue}</option>)
+                    return(<option selected="true" disabled value="">{disabledValue}</option>)
                 } else {
-                    return(<option value={listObject.name}>{listObject.name}</option>)
+                    return(<option value={listObject.id}>{listObject.name}</option>)
                 }}
             );
         }
     }
+
+    function displayChapters () {
+        const chapters = ChaptersFromAPI(currentSubject);
+        var chIds = chapters["chIds"];
+
+        if (chIds) {
+            return chIds.map((chId) => {
+                return (<option>{chapters[chId]["name"]}</option>)
+            });
+        }
+    }
+
+    const SubjectDropdown = ({
+        options
+    }) => {
+        const [selectedOption, setSelectedOption] = useState(options[0].value);
+        return (
+            <select
+              value={selectedOption}
+              onChange={e => setSelectedOption(e.target.value)}>
+              {options.map(o => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+        );
+    };
 
 
     return (
@@ -172,12 +173,15 @@ function LoggedIn() {
             {/* Header */}
             <Header>
                 <Menu>
+                    {/* <Subject value={selectedOption} */}
                     <Subject>
-                        {listMenu(Subjects, "Select Subject")}
+                        {/* onChange={e => setSelectedOption(e.target.value)} */}
+                        {handleSubjectSelection("Select Subject")}
                     </Subject>
 
                     <Chapter>
-                        {listMenu(Chapters, "Select Chapter")}
+                        <option selected="true" disabled value="">Select Chapter</option>
+                        {displayChapters()}
                     </Chapter>
 
                     <Profile
@@ -199,6 +203,8 @@ function LoggedIn() {
                 </Switch>
             </Page>
 
+            {/* <p>{ChaptersOfSubject.totalChapters}</p>
+            <p>{currentSubject}</p> */}
         </>
     );
 }

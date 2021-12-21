@@ -3,7 +3,11 @@ var router = express.Router();
 
 router.get("/", function(req, res, next) {
     res.send({firstName: "John", lastName: "Doe", class: "X", plan: "Basic", subjects: [
-        {name: "Science"}, {name: "Social Science"}, {name: "Mathematics"}, {name: "Hindi"}, {name: "English"}]});
+        {name: "Science", id: "sci"},
+        {name: "Social Science", id: "ssc"},
+        {name: "Mathematics", id: "mat"},
+        {name: "Hindi", id: "hin"},
+        {name: "English", id: "eng"}]});
 });
 
 module.exports = router;

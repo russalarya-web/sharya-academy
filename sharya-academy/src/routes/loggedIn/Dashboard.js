@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {Title} from "../../App";
 import {Box} from "../Home";
-import {listMenu, ChaptersFromAPI} from "../LoggedIn";
+import {listMenu, ChaptersFromAPI, GetSubjectState} from "../LoggedIn";
 
 export const Section = styled.div`
     padding: 20px 0;
@@ -68,26 +68,40 @@ function chapterProcessing() {
     const chapters = ChaptersFromAPI();
 
     var recent = [];
-    var recommended = [];
+    // var allChapters = [];
 
-    chapters.forEach(chapter => {
-        if (chapter.name !== "disabled") {
-            if (chapter.recent) {
-                recent.push(chapter.name);
-            }
-            else if (chapter.recommended) {
-                recommended.push(chapter.name);
-            }
-        }
-    });
+    // chapters.forEach(chapter => {
+    //     if (chapter.name !== "disabled") {
+    //         if (chapter.recent) {
+    //             recent.push(chapter.name);
+    //         }
+    //         else if (chapter.recommended) {
+    //             allChapters.push(chapter.name);
+    //         }
+    //     }
+    // });
 
-    return {recentList: recent, recommendedList: recommended};
+    // return {recentList: recent, allList: allChapters};
+    return {recentList: recent, allList: chapters};
 }
 
 // Landing Page
 function Dashboard() {
+    const [currentSubject, setCurrentSubject] = GetSubjectState();
+
     const sortOptions = SortFromAPI();
     const processedChapters = chapterProcessing();
+
+    function displayChapters () {
+        const chapters = ChaptersFromAPI(currentSubject);
+        var chIds = chapters["chIds"];
+
+        if (chIds) {
+            return chIds.map((chId) => {
+                return (<Box className="dark-green white-text">{chapters[chId]["name"]}</Box>)
+            });
+        }
+    }
 
     return (
         <>
@@ -105,7 +119,7 @@ function Dashboard() {
             {/* Recommended Section */}
             <Section>
                 <Container>
-                    <Title>Recommended</Title>
+                    <Title>All Chapters</Title>
                     <Sort>
                         {listMenu(sortOptions, "Sort by")}
                     </Sort>
@@ -113,7 +127,7 @@ function Dashboard() {
                     <Search placeholder="Search" />
                 </Container>
                 <Container>
-                    {display(processedChapters.recommendedList)}
+                    {displayChapters()}
                 </Container>
             </Section>
         </>
