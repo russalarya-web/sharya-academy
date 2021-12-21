@@ -92,13 +92,13 @@ function Dashboard() {
     const sortOptions = SortFromAPI();
     const processedChapters = chapterProcessing();
 
-    function displayChapters () {
+    function displayChapters(idType) {
         const chapters = ChaptersFromAPI(currentSubject);
-        var chIds = chapters["chIds"];
+        var idList = chapters[idType];
 
-        if (chIds) {
-            return chIds.map((chId) => {
-                return (<Box className="dark-green white-text">{chapters[chId]["name"]}</Box>)
+        if (idList) {
+            return idList.map((id) => {
+                return (<Box className="dark-green white-text">{chapters[id]["name"]}</Box>)
             });
         }
     }
@@ -112,7 +112,7 @@ function Dashboard() {
                 </Container>
                 
                 <Container>
-                    {display(processedChapters.recentList)}
+                    {displayChapters("recentIds")}
                 </Container>
             </Section>
 
@@ -127,7 +127,7 @@ function Dashboard() {
                     <Search placeholder="Search" />
                 </Container>
                 <Container>
-                    {displayChapters()}
+                    {displayChapters("chIds")}
                 </Container>
             </Section>
         </>

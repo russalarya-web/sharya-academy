@@ -4,14 +4,14 @@
             "name": "Science",
             "totalChapters": 3,
             "chIds": ["ch1", "ch2", "ch3"],
+            "recentIds": ["ch3"],
             "ch1": {
                 "classId" : "x",
                 "subjectId" : "x-sci",
                 "chapterNo" : 1,
                 "chapterId" : "x-sci-ch1",
                 "term": 1,
-                "name" : "Chemical Reactions and Equations",
-                "recent": false, "recommended": true
+                "name" : "Chemical Reactions and Equations"
             },
             "ch2": {
                 "classId" : "x",
@@ -19,8 +19,7 @@
                 "chapterNo" : 2,
                 "chapterId" : "x-sci-ch2",
                 "term": 1,
-                "name" : "Acids, Bases, and Salts",
-                "recent": false, "recommended": true
+                "name" : "Acids, Bases, and Salts"
             },
             "ch3": {
                 "classId" : "x",
@@ -28,29 +27,33 @@
                 "chapterNo" : 3,
                 "chapterId" : "x-sci-ch3",
                 "term": 1,
-                "name" : "Metals and Non-Metals",
-                "recent": true, "recommended": false
+                "name" : "Metals and Non-Metals"
             }
         },
         "ssc": {
             "name": "Social Science",
             "totalChapters": 0,
-            "chIds": []
+            "chIds": [],
+            "recentIds": []
+
         },
         "mat": {
             "name": "Mathematics",
             "totalChapters": 0,
-            "chIds": []
+            "chIds": [],
+            "recentIds": []
         },
         "hin": {
             "name": "Hindi",
             "totalChapters": 0,
-            "chIds": []
+            "chIds": [],
+            "recentIds": []
         },
         "eng": {
             "name": "English",
             "totalChapters": 0,
-            "chIds": []
+            "chIds": [],
+            "recentIds": []
         }
     }
 }
