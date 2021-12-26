@@ -84,7 +84,7 @@ export const Page = styled.div`
 `;
 
 // API Handling
-function DetailsFromAPI(){
+export function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
@@ -97,6 +97,22 @@ function DetailsFromAPI(){
     }, [])
 
     return details;
+};
+
+export function ContentFromAPI(classId){
+    const [content, setContent] = useState([{}]);
+
+    async function getContent() {
+        const link = "http://localhost:9000/api/content/class?id=" + classId;
+        const response = await axios.get(link);
+        setContent(response.data);
+    }
+
+    useEffect(() => {
+        getContent();
+    }, [])
+
+    return content;
 };
 
 export function ChaptersFromAPI(classId, currentSubject){
@@ -174,12 +190,12 @@ function LoggedIn() {
             {/* Header */}
             <Header>
                 <Menu>
-                    {/* <Subject value={selectedOption} */}
-                    <Subject>
-                        {/* onChange={e => setSelectedOption(e.target.value)} */}
+                    {/* <Subject> */}
+                    <Subject value={currentSubject}
+                        onChange={e => setCurrentSubject(e.target.value)}>
                         {handleSubjectSelection("Select Subject")}
                     </Subject>
-
+                    
                     <Chapter>
                         <option selected="true" disabled value="">Select Chapter</option>
                         {displayChapters()}

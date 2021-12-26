@@ -88,3 +88,20 @@ button:focus {
   background: rgba(78, 159, 61, 0.8);
   color: #fff;
 }
+
+.sidebar {
+  background: transparent;
+  padding: 20px 10px;
+  margin: 0px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sidebar:hover {
+  background: rgba(30, 81, 40, 0.2);
+}
+
+.sidebar-current {
+  background: rgba(30, 81, 40, 0.8);
+}

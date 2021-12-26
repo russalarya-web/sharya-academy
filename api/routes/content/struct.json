@@ -1,6 +1,7 @@
 {
     "classIdList": ["x"],
     "x": {
+        "subIds": ["sci", "ssc", "mat", "hin", "eng"],
         "sci": {
             "name": "Science",
             "totalChapters": 3,
@@ -33,9 +34,17 @@
         },
         "ssc": {
             "name": "Social Science",
-            "totalChapters": 0,
-            "chIds": [],
-            "recentIds": []
+            "totalChapters": 1,
+            "chIds": ["ch1"],
+            "recentIds": [],
+            "ch1": {
+                "classId" : "x",
+                "subjectId" : "x-ssc",
+                "chapterNo" : 1,
+                "chapterId" : "x-ssc-ch1",
+                "term": 1,
+                "name" : "Rise of Nationalism in Europe"
+            }
 
         },
         "mat": {
