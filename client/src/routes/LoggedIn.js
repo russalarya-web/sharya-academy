@@ -138,7 +138,6 @@ export function GetSubjectState() {
 // Landing Page
 function LoggedIn() {
     const [currentSubject, setCurrentSubject] = GetSubjectState();
-    const [currentChapter, setCurrentChapter] = useState();
 
     const details = DetailsFromAPI();
 

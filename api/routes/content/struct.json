@@ -13,7 +13,14 @@
                 "chapterNo" : 1,
                 "chapterId" : "x-sci-ch1",
                 "term": 1,
-                "name" : "Chemical Reactions and Equations"
+                "name" : "Chemical Reactions and Equations",
+                "contentIds": ["notes", "worksheets", "tests", "quizzes", "ncertSol", "exemplar"],
+                "notes": {},
+                "worksheets": {},
+                "tests": {},
+                "quizzes": {},
+                "ncertSol": {},
+                "exemplar": {}
             },
             "ch2": {
                 "classId" : "x",
@@ -21,7 +28,8 @@
                 "chapterNo" : 2,
                 "chapterId" : "x-sci-ch2",
                 "term": 1,
-                "name" : "Acids, Bases, and Salts"
+                "name" : "Acids, Bases, and Salts",
+                "contentIds": []
             },
             "ch3": {
                 "classId" : "x",
@@ -29,7 +37,8 @@
                 "chapterNo" : 3,
                 "chapterId" : "x-sci-ch3",
                 "term": 1,
-                "name" : "Metals and Non-Metals"
+                "name" : "Metals and Non-Metals",
+                "contentIds": []
             }
         },
         "ssc": {
@@ -43,7 +52,8 @@
                 "chapterNo" : 1,
                 "chapterId" : "x-ssc-ch1",
                 "term": 1,
-                "name" : "Rise of Nationalism in Europe"
+                "name" : "Rise of Nationalism in Europe",
+                "contentIds": []
             }
 
         },

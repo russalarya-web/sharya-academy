@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 
 import {Title} from "../../App";
+import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
+import { Sidebar, MainView, sidebarItemClass } from "./Dashboard";
 
 export const Section = styled.div`
     padding: 20px 0;
@@ -10,7 +12,7 @@ export const Section = styled.div`
     overflow-x: scroll;
 `;
 
-export const Container = styled.div`
+export const OldContainer = styled.div`
     display: flex;
     height: 85vh;
     margin-top: 50px;
@@ -28,6 +30,7 @@ const Box = styled.div`
     flex-direction: column;
 `;
 
+// Temp Data
 const notesList = [
     "Topic 1",
     "Topic 2",
@@ -75,39 +78,51 @@ function returnList(sampleList) {
 
 // ChapterView Page
 function ChapterView() {
+    // const [currentItem, setCurrentItem] = useState([]);
+
+    // Fix up before Decommenting
+    // function listSubjects() {
+    //     var subjects = content["subIds"];
+
+    //     if (subjects) {
+    //         return subjects.map((id) => {
+    //             return (<div class={sidebarItemClass(id, currentSubject)} onClick={() => setCurrentSubject(id)}>{content[id]["name"]}</div>)
+    //         });
+    //     }
+    // }
     return (
         <>
             {/* Recently Viewed Section */}
             <Section>
-                <Container>
+                <OldContainer>
                     <Title>Chapter Notes</Title>
                     {returnList(notesList)}
-                </Container>
+                </OldContainer>
 
-                <Container>
+                <OldContainer>
                     <Title>Worksheets</Title>
                     {returnList(worksheetList)}
-                </Container>
+                </OldContainer>
 
-                <Container>
+                <OldContainer>
                     <Title>Practice Tests</Title>
                     {returnList(testList)}
-                </Container>
+                </OldContainer>
 
-                <Container>
+                <OldContainer>
                     <Title>Online Tests</Title>
                     {returnList(onlineTestList)}
-                </Container>
+                </OldContainer>
 
-                <Container>
+                <OldContainer>
                     <Title>NCERT Solutions</Title>
                     {returnList(solutionsList)}
-                </Container>
+                </OldContainer>
 
-                <Container>
+                <OldContainer>
                     <Title>Exemplar</Title>
                     {returnList(exemplarList)}
-                </Container>
+                </OldContainer>
             </Section>
 
         </>
