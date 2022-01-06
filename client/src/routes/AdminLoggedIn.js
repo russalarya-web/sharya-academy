@@ -101,7 +101,7 @@ function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
-        const response = await axios.get("http://localhost:9000/api/details");
+        const response = await axios.get("http://34.239.101.57:9000/api/details");
         setDetails(response.data);
     }
 
@@ -116,7 +116,7 @@ export function ChaptersFromAPI(){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const response = await axios.get("http://localhost:9000/api/chapters");
+        const response = await axios.get("http://34.239.101.57:9000/api/chapters");
         setChapters(response.data);
     }
 

@@ -93,7 +93,7 @@ function SortFromAPI() {
     const [sort, setSort] = useState([]);
 
     async function getSort() {
-        const response = await axios.get("http://localhost:9000/api/sorting");
+        const response = await axios.get("http://34.239.101.57:9000/api/sorting");
         setSort(response.data);
     }
 

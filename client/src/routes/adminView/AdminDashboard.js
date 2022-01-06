@@ -26,7 +26,7 @@ function ContentFromAPI() {
     const [content, setContent] = useState([]);
 
     async function getContent() {
-        const response = await axios.get("http://localhost:9000/api/content");
+        const response = await axios.get("http://34.239.101.57:9000/api/content");
         setContent(response.data);
     }
 

@@ -64,7 +64,7 @@ function QuizFromAPI() {
 
     async function getQuiz() {
         // Used Specific Quiz for Testing
-        const response = await axios.get("http://localhost:9000/api/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
+        const response = await axios.get("http://34.239.101.57:9000/api/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
         setQuiz(response.data);
     }
 
