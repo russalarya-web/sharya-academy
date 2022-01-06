@@ -16,10 +16,6 @@ var detailsRouter = require('./routes/userDetails');
 var sortRouter = require('./routes/sortOptions');
 
 var contentRouter = require('./routes/content');
-var contentXIIRouter = require('./routes/content/xii');
-var contentXIRouter = require('./routes/content/xi');
-var contentXRouter = require('./routes/content/x');
-
 var quizRouter = require('./routes/quiz');
 
 
@@ -46,9 +42,6 @@ app.use('/api/details', detailsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/sorting', sortRouter);
 app.use('/api/content', contentRouter);
-app.use('/api/content/xii', contentXIIRouter);
-app.use('/api/content/xi', contentXIRouter);
-app.use('/api/content/x', contentXRouter);
 
 app.use('/api/quiz', quizRouter);
 
