@@ -5,7 +5,7 @@ Ensure you have npm installed.
 ### `cd api && npm start`
 Starts the Node backend.
 
-### `cd sharya-academy && npm start`
+### `cd client && npm start`
 Runs the React app in development mode.
 
 ## List of keys for JSON files
