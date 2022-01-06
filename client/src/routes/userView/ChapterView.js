@@ -78,7 +78,9 @@ function returnList(sampleList) {
 
 // ChapterView Page
 function ChapterView() {
-    // const [currentItem, setCurrentItem] = useState([]);
+    // const [currentItem, setCurrentItem] = useState([]);'
+
+    // const content = ContentFromAPI("x");
 
     // Fix up before Decommenting
     // function listSubjects() {
