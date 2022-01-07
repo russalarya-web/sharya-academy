@@ -149,14 +149,6 @@ function AdminLoggedIn() {
             {/* Header */}
             <Header>
                 <Menu>
-                    <Subject>
-                        {listSubjects(Subjects, "Select Subject")}
-                    </Subject>
-
-                    <Chapter>
-                        {listMenu(Chapters, "Select Chapter")}
-                    </Chapter>
-
                     <Profile
                     onClick={(e) => {
                         e.preventDefault();
@@ -171,8 +163,6 @@ function AdminLoggedIn() {
             <Page>
                 <Switch>
                     <Route path="/admin/" component={AdminDashboard} exact />
-                    {/* <Route path="/user/chapter" component={ChapterView} />
-                    <Route path="/user/quiz" component={QuizView} /> */}
                 </Switch>
             </Page>
 

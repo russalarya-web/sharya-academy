@@ -5,26 +5,27 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 
+var db = require('./db/connect')
+
+// import routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI');
-
-// Basic Details
 var chapterRouter = require('./routes/chapterDetails');
 var adminRouter = require('./routes/adminDetails');
 var detailsRouter = require('./routes/userDetails');
 var sortRouter = require('./routes/sortOptions');
-
 var contentRouter = require('./routes/content');
 var quizRouter = require('./routes/quiz');
 
-
+// set up app
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// set up app elements
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,17 +33,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// create routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
-
-// Basic Details
 app.use('/api/chapters', chapterRouter);
 app.use('/api/details', detailsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/sorting', sortRouter);
 app.use('/api/content', contentRouter);
-
 app.use('/api/quiz', quizRouter);
 
 // catch 404 and forward to error handler
