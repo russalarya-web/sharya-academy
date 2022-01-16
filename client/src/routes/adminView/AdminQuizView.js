@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from 'styled-components';
+
+import {Title, subjectCodes} from "../../App";
+import CreateQuestion from "./modals/CreateQuestion";
+import { useParams } from "react-router";
 
 export const Section = styled.div`
     padding: 20px 50px;
@@ -13,99 +18,143 @@ export const Container = styled.div`
     flex-wrap: wrap;
 `;
 
-var questions = [
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 1},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 2},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 3},
-    {question: "Generally, non-metals are not lustrous. Which of the following nonmetal is lustrous?", options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"], points: 2, number: 4},
-];
-
-export const RoundLabel = styled.p`
-    border-radius: 20px;
-    padding: 5px 15px;
-    margin: 0;
-    margin-top: 50px;
-    border: solid 1px;
-`;
-
-export const BigText = styled.h2`
-    color: #1E5128;
-    font-weight: 400;
-    margin: 0.2em 0 0.2em 0;
-    z-index: 1;
-    text-align: justify;W
-`;
-
-export const Box = styled.div`
-    border-radius: 10px;
-    padding: 1.2em;
-    min-width: 200px;
-    margin: 15px;
-    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-`;
-
-export const Option = styled.button`
-    border-radius: 10px;
-    padding: 1em;
-    width: 48%;
-    border: solid 1px;
-    font-size: calc(10px + 1.2vmin);
-    margin: 10px 1%;
-    text-align: left;
-`;
-
 export const Button = styled.button`
-    border-radius: 10px;
-    padding: 0.8em 1.2em;
-    border: solid 1px;
-    font-size: calc(10px + 1.2vmin);
-    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    margin: auto;
+    cursor: pointer;
 `;
 
-function returnList(sampleList) {
-    return (sampleList.map((option) =>
-        <Option className="option white">{option}</Option>
-    ));
+function GetQuizDetails(quizId) {
+    const [quiz, setQuiz] = useState({});
+
+    async function getQuiz() {
+        // Used Specific Quiz for Testing
+        const link = "http://localhost:9000/quiz/" + quizId
+        const response = await axios.get(link);
+
+        setQuiz(response.data);
+    }
+
+    useEffect(() => {
+        getQuiz();
+    }, [])
+
+    return quiz;
 }
 
-function displayQuestions(listQuestions) {
-    return (listQuestions.map((questionItem) =>
-    <>
-        <Container>
-            <RoundLabel className="dark-green white-text">Question {questionItem.number} of {listQuestions.length}</RoundLabel>
-            <RoundLabel className="green white-text right">{questionItem.points} points</RoundLabel>
-        </Container>
+function GetQuestions(quizId) {
+    const [questions, setQuestions] = useState([{}]);
 
-        <BigText>{questionItem.question}</BigText>
+    async function getQuestions() {
+        // Used Specific Quiz for Testing
+        const link = "http://localhost:9000/quiz/" + quizId + "/questions";
+        const response = await axios.get(link);
 
-        <Container>
-            {returnList(questionItem.options)}
-        </Container>
-    </>
-    ));
+        setQuestions(response.data);
+    }
+
+    useEffect(() => {
+        getQuestions();
+    }, [])
+
+    return questions;
+}
+
+function getSubjectName(id) {
+    var name = "";
+
+    subjectCodes.forEach(code => {
+        if (code.id === id) {
+            name = code.name;
+        }
+    });
+
+    return name;
 }
 
 // ChapterView Page
-function QuizView() {
-    return (
-        <>
-            {/* Quiz Section */}
-            <Section>
-                {displayQuestions(questions)}
+const AdminQuizView = props => {
+    let { quizId } = useParams();
+    const [show, setShow] = useState(false);
 
-                <Container>
-                    {/* <Button className="green white-text">Previous</Button> */}
-                    <div className="right">
-                        {/* <Button className="green white-text">Next</Button> */}
-                        <Button className="dark-green white-text">Submit</Button>
+    const [questionId, setQuestionId] = useState(quizId);
+
+    var quiz = GetQuizDetails(quizId);
+
+    var quizQuestions = GetQuestions(quizId);
+
+    if (quizQuestions) {
+        return (
+            <Section>
+                {/* Quiz View */}
+                <div className="top-align">
+                    <div className="row-container top-align">
+                        <p className="round-label dark-green white-text">Class {quiz.classId}</p>
+                        <p className="round-label green white-text">{getSubjectName(quiz.subjectId)}</p>
+                        <p className="round-label dark-green white-text">{quiz.chapterId}</p>
                     </div>
-                </Container>
+                    <Title>Creating <u>{quiz.name}</u></Title>
+                </div>
+
+                {/* Display Questions */}
+                {quizQuestions.map((question, index) => {
+                    var currentInt = index + 1;
+
+                    if (question.options) {
+                        return (
+                            <div className="dashed white box">
+                                {/* Display Question Details */}
+                                <div className="row-container">
+                                    <p className="round-label dark-green white-text">Question {currentInt}</p>
+                                    <p className="round-label green white-text">{question.points} points</p>
+                                </div>
+                                <p className="text align-left">{question.question}</p>
+
+                                {/* Display Options */}
+                                <div className="row-container">
+                                    {question.options.map((option, index) => {
+                                        var currentIndex = index + 1;
+                                        if (currentIndex === question.correctOption) {
+                                            return <p className="option green white-text">{currentIndex}. {option}</p>
+                                        }
+                                        return <p className="option">{currentIndex}. {option}</p>
+                                    })}
+                                </div>
+                            </div>
+                        );
+                    }
+                })}
+
+                {/* Create Question Modal */}
+                <CreateQuestion onClose={() => setShow(false)} quizId={quizId} questionId={questionId} show={show}/>
+                
+                {/* Bottom Buttons */}
+                <div className="row-container">
+                    {/* Add Button */}
+                    <Button 
+                        className="green white-text standard-spacing"
+                        onClick={() => {
+                            const newIdNumber = quizQuestions.length + 1;
+                            setQuestionId(quizId + "-" + newIdNumber.toString());
+                            setShow(true);
+                        }}>
+                        Add Question
+                    </Button>
+
+                    {/* Back Button */}
+                    <Button
+                        className="dark-green white-text standard-spacing"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.location.href="../content";
+                        }}>
+                        Return to Dashboard
+                    </Button>
+                </div>
             </Section>
-        </>
-    );
+        );
+    }
 }
 
-export default QuizView;
+export default AdminQuizView;

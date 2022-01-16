@@ -2,29 +2,32 @@ var db = require('./connect');
 
 // create mongoDB schemas
 const userSchema = new db.Schema ({
-    _id: {type: String, require: true, unique: true, index: true},
+    _id: {
+        type: String, 
+        require: [true, "Email required"]
+    },
     firstName: String,
     lastName: String,
     class: Number,
     password: String,
+    verified: Boolean,
     plan: String,
     subjects: Array
   });
   
 const classSchema = new db.Schema ({
-    _id: Number,
-    subjects: Array
+    _id: Number
 });
 
 const subjectSchema = new db.Schema ({
     _id: String,
     classId: Number,
     name: String,
-    chapters: Array
 });
 
 const chapterSchema = new db.Schema ({
     _id: String,
+    classId: Number,
     subjectId: String,
     term: Number,
     name: String
@@ -32,6 +35,8 @@ const chapterSchema = new db.Schema ({
 
 const quizSchema = new db.Schema ({
     _id: String,
+    classId: Number,
+    subjectId: String,
     chapterId: String,
     name: String
 });

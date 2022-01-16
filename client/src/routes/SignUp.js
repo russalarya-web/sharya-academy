@@ -94,7 +94,7 @@ function SignUp() {
             <TextBox type="password" placeholder="Password"></TextBox>
             <TextBox type="password" placeholder="Confirm Password"></TextBox>
             <Submit type="submit" value="Sign Up"></Submit>
-            <SmallText>Have an account? <Link href="/login">Sign In</Link></SmallText>
+            <SmallText>Have an account? <Link href="/login">Sign in</Link></SmallText>
         </Box>
     );
 }

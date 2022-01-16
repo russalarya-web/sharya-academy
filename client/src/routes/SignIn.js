@@ -15,7 +15,7 @@ function SignIn() {
             <TextBox type="password" placeholder="Password"></TextBox>
             <SmallText><Link>Forgot Password?</Link></SmallText>
             <Submit type="submit" value="Sign In"></Submit>
-            <SmallText>New here? <Link href="/signup">Sign Up</Link></SmallText>
+            <SmallText>New here? <Link href="/signup">Sign up</Link></SmallText>
         </Box>
     );
 }

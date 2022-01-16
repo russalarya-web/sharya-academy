@@ -1,9 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-import textLogo from '../resources/text-logo.png';
-
-import { Title, Element, TextLogo } from "../App";
+import { Title, Element } from "../App";
 
 export const Header = styled.header`
     background: transparent;
@@ -72,13 +70,21 @@ export const BoxButton = styled.button`
     border-radius: 5px;
 `;
 
-export const Footer = styled.footer`
-    background: #1E5128;
+export const Button = styled.button`
+    padding: 10px 15px;
+    background: rgba(78, 159, 61, 0.8);
     color: #fff;
-    position: relative;
-    margin: 0;
-    bottom: 0;
-    padding: 10px;
+    border: none;
+    font-size: calc(10px + 1vmin);
+    z-index: 1;
+    border-radius: 5px;
+`;
+
+const Link = styled.a`
+    color: #fff;
+    text-decoration: none;
+    line-spacing: 1.5;
+    padding: 10px 0;
 `;
 
 const About = [
@@ -95,16 +101,16 @@ const displayAbout = About.map((aboutText) =>
 );
 
 const Pricing = [
-    {planName: 'Free', price: 'Always ₹0', classColor: 'white',
+    {planName: 'Free', price: 'Always ₹0', className: 'pricing-box white',
     points: ['Chapter Notes', 'NCERT Solutions', 'Exemplar Questions'], button: 'Sign Up'},
-    {planName: 'Basic', price: 'From ₹599 a year', classColor: 'green white-text',
+    {planName: 'Basic', price: 'From ₹599 a year', className: 'pricing-box green white-text',
     points: ['Everything in Free, plus:', 'Practice Tests', 'Worksheets'], button: 'Sign Up'},
-    {planName: 'Premium', price: 'From ₹999 a year', classColor: 'dark-green white-text',
+    {planName: 'Premium', price: 'From ₹999 a year', className: 'pricing-box dark-green white-text',
     points: ['Everything in Basic, plus:', 'Auto-Graded Tests', 'Detailed Feedback'], button: 'Sign Up'}
 ];
 
 const listPricing = Pricing.map((planItem) =>
-    <Box className={planItem.classColor}>
+    <div className={planItem.className}>
         <BoxTitle>{planItem.planName}</BoxTitle>
         <Text>{planItem.points[0]}</Text>
         <Text>{planItem.points[1]}</Text>
@@ -117,53 +123,102 @@ const listPricing = Pricing.map((planItem) =>
         }}>
             {planItem.button}
         </BoxButton>
-    </Box>
+    </div>
 );
+
+const Updates = [
+    {label: "Individual Pricing", link: "/pricing"},
+    {label: "What's Next?", link: "/future"},
+    {label: "FAQs", link: "/faq"},
+    {label: "Book a Demo", link: "/demo"},
+    {label: "School Pricing", link: "/school-pricing"},
+];
+
+const Company = [
+    {label: "About Us", link: "/about"},
+    {label: "Contact", link: "/contact"},
+    {label: "Terms of Service", link: "/terms-of-service"},
+    {label: "Privacy Policy", link: "/privacy-policy"},
+    {label: "Sitemap", link: "/sitemap"},
+    {label: "Refund Policy", link: "/refund-policy"},
+];
+
+const FooterLists = [
+    {title: "Updates", list: Updates},
+    {title: "Company", list: Company}
+]
+
+function createList(list) {
+    const listItems = list.map((listObject) =>
+        <Link className="footer-text align-left" href={listObject.link}>{listObject.label}</Link>
+    )
+
+    return listItems;
+}
+
+const footerLists = FooterLists.map((footerList) => 
+    <div className="footer-list">
+        <h3 className="align-left">{footerList.title}</h3>
+        {createList(footerList.list)}
+    </div>
+)
 
 // Landing Page
 function Home() {
     return (
-        <>
+        <div className="fullWidth">
             {/* Header */}
             <Header>
-                <Menu>
-                    <MenuItem>About</MenuItem>
-                    <MenuItem>Pricing</MenuItem>
-                </Menu>
                 <SignIn
                 className="dark-green white-text"
                 onClick={(e) => {
                     e.preventDefault();
                     window.location.href='/login';
                 }}>
-                    Sign In
+                    Sign in
                 </SignIn>
             </Header>
 
             {/* Start Screen */}
             <Element>
-                <TextLogo src={textLogo} />
+                <Title>Newer Look. Same Affordability</Title>
+                <h3>Plan available for Class 10 board prep.</h3>
+                <Button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href='/signup';
+                    }}>
+                    Get started
+                </Button>
             </Element>
 
             {/* About Screen */}
-            <Element>
+            <Element className="green white-text">
                 <Title>About</Title>
                 {displayAbout}
             </Element>
             
             {/* Pricing Screen */}
             <Element>
-                <Title>Introductory Pricing</Title>
+                <Title>Pricing</Title>
                 <div className="pricing">
                     {listPricing}
                 </div>
             </Element>
 
-            <Footer>
-                <SmallText>&copy; Sharya Academy.</SmallText>
-            </Footer>
+            <footer>
+                <div className="row-container outer">
+                    <div className="row-container hide">
+                    </div>
+                    <div className="row-container">
+                        {footerLists}
+                    </div>
+                </div>
 
-        </>
+                <p className="footer-text align-left">&copy; Sharya Academy. All rights reserved.</p>
+            </footer>
+
+        </div>
     );
 }
 

@@ -27,7 +27,7 @@ export const BigText = styled.h2`
     font-weight: 400;
     margin: 0.2em 0 0.2em 0;
     z-index: 1;
-    text-align: justify;W
+    text-align: justify;
 `;
 
 export const Box = styled.div`
@@ -64,7 +64,7 @@ function QuizFromAPI() {
 
     async function getQuiz() {
         // Used Specific Quiz for Testing
-        const response = await axios.get("http://34.239.101.57:9000/api/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
+        const response = await axios.get("http://34.239.101.57:9000/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
         setQuiz(response.data);
     }
 
@@ -100,34 +100,31 @@ function QuizView() {
         };
 
         return (
-            <>
-                {/* Quiz Section */}
-                <Section>
-                    {/* {displayQuestions(quiz.questions)} */}
-                    <Container>
-                        <RoundLabel className="dark-green white-text">Question {currentQuestion + 1} of {questions.length}</RoundLabel>
-                        <RoundLabel className="green white-text right">{questions[currentQuestion].points} points</RoundLabel>
-                    </Container>
+            <Section>
+                {/* {displayQuestions(quiz.questions)} */}
+                <Container>
+                    <RoundLabel className="dark-green white-text">Question {currentQuestion + 1} of {questions.length}</RoundLabel>
+                    <RoundLabel className="green white-text right">{questions[currentQuestion].points} points</RoundLabel>
+                </Container>
 
-                    <BigText>{questions[currentQuestion].question}</BigText>
+                <BigText>{questions[currentQuestion].question}</BigText>
 
-                    <Container>
-                        {questions[currentQuestion].options.map((option) =>
-                            <Option className="white">{option}</Option>
-                        )}
-                    </Container>
+                <Container>
+                    {questions[currentQuestion].options.map((option) =>
+                        <Option className="white">{option}</Option>
+                    )}
+                </Container>
 
-                    <Container>
-                        {/* {PrevButton([currentQuestion, setCurrentQuestion])} */}
-                        <Button className="green white-text" onClick={() => handlePrevButtonClick()}>Previous</Button>
-                        <div className="right">
-                            {/* {NextButton([currentQuestion, setCurrentQuestion])} */}
-                            <Button className="green white-text" onClick={() => handleNextButtonClick()}>Next</Button>;
-                            <Button className="dark-green white-text">Submit</Button>
-                        </div>
-                    </Container>
-                </Section>
-            </>
+                <Container>
+                    {/* {PrevButton([currentQuestion, setCurrentQuestion])} */}
+                    <Button className="green white-text" onClick={() => handlePrevButtonClick()}>Previous</Button>
+                    <div className="right">
+                        {/* {NextButton([currentQuestion, setCurrentQuestion])} */}
+                        <Button className="green white-text" onClick={() => handleNextButtonClick()}>Next</Button>;
+                        <Button className="dark-green white-text">Submit</Button>
+                    </div>
+                </Container>
+            </Section>
         );
     } else {
         return (null);

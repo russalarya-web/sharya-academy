@@ -7,14 +7,14 @@ router.get("/", function(req, res, next) {
     res.json(content);
 });
 
-// Acceptable format: /class?id=x
-router.get("/class", function(req, res, next) {
-    res.json(content[req.query.id]);
+// Acceptable format: /x
+router.get("/:classId", function(req, res, next) {
+    res.json(content[req.params.classId]);
 });
 
-// Acceptable format: /subject?class=x&id=sci
-router.get("/subject", function(req, res, next) {
-    res.json(content[req.query.class][req.query.id]);
+// Acceptable format: /x/sci
+router.get("/:classId/:subjectId", function(req, res, next) {
+    res.json(content[req.params.classId][req.params.subjectId]);
 });
 
 module.exports = router;

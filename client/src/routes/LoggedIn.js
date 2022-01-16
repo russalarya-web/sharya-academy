@@ -88,7 +88,7 @@ export function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
-        const response = await axios.get("http://34.239.101.57:9000/api/details");
+        const response = await axios.get("http://34.239.101.57:9000/details");
         setDetails(response.data);
     }
 
@@ -103,7 +103,7 @@ export function ContentFromAPI(classId){
     const [content, setContent] = useState([{}]);
 
     async function getContent() {
-        const link = "http://34.239.101.57:9000/api/content/class?id=" + classId;
+        const link = "http://34.239.101.57:9000/content/" + classId;
         const response = await axios.get(link);
         setContent(response.data);
     }
@@ -119,7 +119,7 @@ export function ChaptersFromAPI(classId, currentSubject){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const link = "http://34.239.101.57:9000/api/content/subject?class=" + classId + "&id=" + currentSubject;
+        const link = "http://34.239.101.57:9000/content/" + classId + "/" + currentSubject;
         const response = await axios.get(link);
         setChapters(response.data);
     }

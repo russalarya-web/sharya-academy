@@ -1,3 +1,4 @@
+var db = require('../connect');
 const schema = require('../schema').userSchema;
 
 const User = db.model("User", schema);

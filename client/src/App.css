@@ -2,7 +2,6 @@
   text-align: center;
   min-height: 100vh;
   background-color: #D8E9A8;
-  /* background-color: #fff; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +15,8 @@
   font-family: 'Noto Sans', sans-serif;
 }
 
-html {
-  background-color: #D8E9A8;
+html, body, footer {
+  background-color: #1E5128;
 }
 
 .pricing {
@@ -27,16 +26,74 @@ html {
   justify-content: center;
 }
 
-.white {
-  background: #f2f2f2;
+.pricing-box {
+  border-radius: 10px;
+  padding: 1.2em;
+  min-width: 300px;
+  margin: 15px;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
 }
+
+.white {
+  background: #fff;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.question-box {
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 450px;
+  margin: auto;
+}
+
+.question-box .input {
+  padding: 12px 2%;
+  border: none;
+  width: 94%;
+  margin: 8px 1%;
+}
+
+.question-input {
+  resize: none;
+  height: 100px;
+}
+
+.option-input {
+  width: 44% !important;
+}
+
+.submit-input {
+  padding: 10px 2% !important;
+  width: 48% !important;
+}
+
 
 .white, .white button {
   color: #1E5128;
 }
 
 .green {
-  background: rgba(78, 159, 61, 0.8);
+  background: #4e9f3d;
 }
 
 .dark-green {
@@ -65,26 +122,45 @@ html {
   z-index: 1;
 }
 
+.fullWidth {
+  width: 100vw;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+/* Select Styles */
 select {
   -webkit-appearance: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.standard {
+  min-width: 120px;
+}
+
+.semi-long {
+  min-width: 180px;
+}
+
+.long {
+  min-width: 280px;
+}
+
+.standard-spacing {
+  padding: 10px;
+  margin: 5px 6px;
+  font-size: calc(10px + 0.8vmin);
+  border-radius: 5px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-button:focus {
+/* Sidebar Styles */
+.sidebar:focus {
   background: rgba(78, 159, 61, 0.8);
   color: #fff;
 }
@@ -104,4 +180,159 @@ button:focus {
 
 .sidebar-current {
   background: rgba(30, 81, 40, 0.8);
+}
+
+.sidebar-current:hover {
+  background: rgba(30, 81, 40, 0.8);
+}
+
+h3, h5 {
+  font-weight: 300;
+}
+
+/* Box Handling */
+.dashed {
+  border: dashed 1px #000;
+}
+
+.box {
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.round-label {
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin: 5px;
+  font-size: calc(10px + 1vmin);
+}
+
+.text {
+  margin: 10px;
+  font-size: calc(10px + 1.5vmin);
+}
+
+.option {
+  border: solid 1px;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: calc(10px + 1vmin);
+}
+
+/* Align */
+.align-center {
+  text-align: center;
+}
+
+.top-align {
+  margin: auto;
+}
+
+.top-align .round-label {
+  margin: auto;
+}
+
+.align-left {
+  text-align: left;
+}
+
+/* Footer */
+footer {
+  background: #1E5128;
+  color: #fff;
+  position: relative;
+  margin: 0;
+  bottom: 0;
+  padding: 50px 10%;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+footer .row-container {
+  margin-bottom: 50px;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+}
+
+.footer-text {
+  font-size: calc(10px + 1vmin);
+}
+
+@media screen and (max-width: 1080px) {
+  .pricing {
+    flex-direction: column;
+  }
+
+  .pricing-box {
+    margin: 15px 25%;
+    width: 50%;
+  }
+
+  .outer {
+    margin-bottom: 0;
+  }
+
+  .hide {
+    width: 60%;
+  }
+
+  .footer-list {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    padding: 20px 80px;
+  }
+  .hide {
+    display: none;
+  }
+
+  .pricing-box {
+    margin: 15px 20%;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pricing-box {
+    margin: 15px 15%;
+    width: 70%;
+  }
+
+  .row-container {
+    flex-direction: column;
+  }
+
+  .align-left {
+    text-align: center;
+  }
+
+  .option-input {
+    width: 94% !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .pricing-box {
+    margin: 15px 10%;
+    width: 80%;
+    min-width: 200px;
+  }
+
+  footer {
+    padding: 20px 5%;
+  }
 }

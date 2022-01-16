@@ -1,3 +1,5 @@
+import MetaTags from 'react-meta-tags';
+
 import triangle from './resources/triangle.png';
 import './App.css';
 
@@ -13,8 +15,15 @@ import SignIn from "./routes/SignIn";
 import LoggedIn from "./routes/LoggedIn";
 import AdminLoggedIn from "./routes/AdminLoggedIn";
 
+export const subjectCodes = [
+  {id: "sci", name: "Science"}, 
+  {id: "ssc", name: "Social Science"}, 
+  {id: "mat", name: "Mathematics"}, 
+  {id: "hin", name: "Hindi"}, 
+  {id: "eng", name: "English"}
+];
+
 export const Title = styled.h1`
-  color: #1E5128;
   font-weight: 400;
   margin: 0.2em 0 0.2em 0;
   z-index: 1;
@@ -25,6 +34,7 @@ export const Logo = styled.img`
   position: fixed;
   left: 30px;
   top: 30px;
+  z-index: 2;
 `;
 
 export const Triangle = styled.img`
@@ -37,13 +47,10 @@ export const Triangle = styled.img`
 `;
 
 export const Element = styled.div`
-  min-height: 70vh;
+  min-height: 80vh;
+  vertical-algin: middle;
   padding: 10vh 10%;
   width: 80%;
-`;
-
-export const TextLogo = styled.img`
-  height: 100vh;
 `;
 
 export const Link = styled.a`
@@ -58,6 +65,9 @@ export const Users = [
 function App() {
   return (
     <BrowserRouter>
+      <MetaTags>
+        <meta name="theme-color" content="#1E5128" />
+      </MetaTags>
       <link rel="preconnect" href="https://fonts.googleapis.com" /> 
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Open+Sans&display=swap" rel="stylesheet" />

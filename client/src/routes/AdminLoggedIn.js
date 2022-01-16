@@ -7,6 +7,8 @@ import {Title} from "../App";
 import {Box, Text} from "./Home";
 
 import AdminDashboard from "./adminView/AdminDashboard";
+import AdminQuizView from "./adminView/AdminQuizView";
+import AdminContentView from "./adminView/AdminContentView";
 
 export const Header = styled.header`
     position: fixed;
@@ -94,6 +96,7 @@ export const Page = styled.div`
     width: 95vw;
     margin: 30px 40px 0 40px;
     overflow: hidden;
+    align-items: center;
 `;
 
 // API Handling
@@ -101,7 +104,7 @@ function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
-        const response = await axios.get("http://34.239.101.57:9000/api/details");
+        const response = await axios.get("http://34.239.101.57:9000/details");
         setDetails(response.data);
     }
 
@@ -163,6 +166,12 @@ function AdminLoggedIn() {
             <Page>
                 <Switch>
                     <Route path="/admin/" component={AdminDashboard} exact />
+                    <Route path="/admin/content" exact>
+                        <AdminContentView classId="x" subjectId="sci" chapterId="x-sci-4"/>
+                    </Route>
+                    <Route path="/admin/quiz/:quizId" exact>
+                        <AdminQuizView />
+                    </Route>
                 </Switch>
             </Page>
 

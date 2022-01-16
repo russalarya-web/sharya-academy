@@ -1,13 +1,13 @@
+var db = require('../connect');
 const schema = require('../schema').classSchema;
 
 const Class = db.model("Class", schema);
 
-function create(classId, subjectList) {
+function create(classId) {
     var success = false;
 
     const classObject = new Class ({
-        _id: classId,
-        subjects: subjectList
+        _id: classId
     });
 
     classObject.save()

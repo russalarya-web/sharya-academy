@@ -7,14 +7,14 @@ import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
 
 export const MainView = styled.div`
     padding: 20px 10px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     width: 75%;
 `;
 
 export const Sidebar = styled.div`
     padding: 0px;
-    background: linear-gradient(160.41deg, rgba(78, 159, 61, 0.6) 0%, rgba(78, 159, 61, 0.9) 100%);
+    background: rgba(78, 159, 61, 0.8);
     border-radius: 10px;
     width: 25%;
     display: flex;
@@ -32,7 +32,7 @@ export const Structure = styled.div`
     vertical-align: middle;
 `;
 
-const Search = styled.input`
+export const Search = styled.input`
     background: rgba(216, 233, 168, 0.1);
     border: 1px solid rgba(78, 159, 61, 0.5);
     color: rgba(30, 81, 40, 0.8);
@@ -56,7 +56,7 @@ const Sort = styled.select`
     padding: 0.5em 20px;
 `;
 
-const Listing = styled.div`
+export const Listing = styled.div`
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -64,6 +64,8 @@ const Listing = styled.div`
     color: #4E9F3D;
     text-indent: 10px;
     text-align: left;
+    font-size: calc(10px + 1vmin);
+    cursor: pointer;
 `;
 
 const Filter = styled.span`
@@ -93,7 +95,7 @@ function SortFromAPI() {
     const [sort, setSort] = useState([]);
 
     async function getSort() {
-        const response = await axios.get("http://34.239.101.57:9000/api/sorting");
+        const response = await axios.get("http://34.239.101.57:9000/sorting");
         setSort(response.data);
     }
 
@@ -104,8 +106,8 @@ function SortFromAPI() {
     return sort;
 }
 
-export function sidebarItemClass(subjectId, currentValue) {
-    if (subjectId === currentValue) {
+export function sidebarItemClass(id, currentValue) {
+    if (id === currentValue) {
         return "sidebar sidebar-current";
     } else {
         return "sidebar";
