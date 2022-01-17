@@ -48,7 +48,7 @@ function GetQuestions(quizId) {
 
     async function getQuestions() {
         // Used Specific Quiz for Testing
-        const link = "http://localhost:9000/quiz/" + quizId + "/questions";
+        const link = currentUrl + ":9000/quiz/" + quizId + "/questions";
         const response = await axios.get(link);
 
         setQuestions(response.data);

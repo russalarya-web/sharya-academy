@@ -8,7 +8,7 @@ Starts the Node server.
 ### `cd client && npm start`
 Runs the React app in development mode.
 
-## List of keys for JSON files
+## List of keys
 ### Subjects:
 #### `sci`: Science
 #### `ssc`: Social Science
