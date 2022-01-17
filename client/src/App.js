@@ -15,7 +15,7 @@ import SignIn from "./routes/SignIn";
 import LoggedIn from "./routes/LoggedIn";
 import AdminLoggedIn from "./routes/AdminLoggedIn";
 
-export const currentUrl = "http://localhost";
+export const currentUrl = "http://34.239.101.57";
 
 export const subjectCodes = [
   {id: "sci", name: "Science"}, 
