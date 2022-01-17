@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
+import { currentUrl } from '../../App';
+
 export const Section = styled.div`
     padding: 20px 50px;
     display: flex;
@@ -64,7 +66,7 @@ function QuizFromAPI() {
 
     async function getQuiz() {
         // Used Specific Quiz for Testing
-        const response = await axios.get("http://34.239.101.57:9000/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
+        const response = await axios.get(currentUrl + ":9000/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
         setQuiz(response.data);
     }
 

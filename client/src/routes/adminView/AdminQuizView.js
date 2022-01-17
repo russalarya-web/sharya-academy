@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title, subjectCodes} from "../../App";
+import {Title, subjectCodes, currentUrl} from "../../App";
 import CreateQuestion from "./modals/CreateQuestion";
 import { useParams } from "react-router";
 
@@ -30,7 +30,7 @@ function GetQuizDetails(quizId) {
 
     async function getQuiz() {
         // Used Specific Quiz for Testing
-        const link = "http://localhost:9000/quiz/" + quizId
+        const link = currentUrl + ":9000/quiz/" + quizId
         const response = await axios.get(link);
 
         setQuiz(response.data);
@@ -74,7 +74,7 @@ function getSubjectName(id) {
 }
 
 // ChapterView Page
-const AdminQuizView = props => {
+function AdminQuizView() {
     let { quizId } = useParams();
     const [show, setShow] = useState(false);
 

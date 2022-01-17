@@ -15,6 +15,7 @@
   font-family: 'Noto Sans', sans-serif;
 }
 
+/* Basic Styles */
 html, body, footer {
   background-color: #1E5128;
 }
@@ -40,6 +41,7 @@ html, body, footer {
   background: #fff;
 }
 
+/* Modal View */
 .modal {
   position: fixed;
   left: 0;
@@ -67,9 +69,9 @@ html, body, footer {
 }
 
 .question-box .input {
-  padding: 12px 2%;
+  padding: 12px 4%;
   border: none;
-  width: 94%;
+  width: 90%;
   margin: 8px 1%;
 }
 
@@ -79,7 +81,7 @@ html, body, footer {
 }
 
 .option-input {
-  width: 44% !important;
+  width: 40% !important;
 }
 
 .submit-input {
@@ -87,7 +89,7 @@ html, body, footer {
   width: 48% !important;
 }
 
-
+/* Color Styles */
 .white, .white button {
   color: #1E5128;
 }
@@ -108,6 +110,7 @@ html, body, footer {
   color: #fff;
 }
 
+/* Formatting Styles */
 .half {
   width: 43% !important;
   margin: 10px 1% !important;
@@ -118,6 +121,7 @@ html, body, footer {
   right: 90px;
 }
 
+/* App Styles */
 .AppForeground {
   z-index: 1;
 }

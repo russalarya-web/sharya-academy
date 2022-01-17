@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title} from "../../App";
+import {Title, currentUrl} from "../../App";
 import {Box, Text} from "../Home";
 import {listMenu} from "../LoggedIn";
 
@@ -26,7 +26,7 @@ function ContentFromAPI() {
     const [content, setContent] = useState([]);
 
     async function getContent() {
-        const response = await axios.get("http://34.239.101.57:9000/api/content");
+        const response = await axios.get(currentUrl + ":9000/content");
         setContent(response.data);
     }
 

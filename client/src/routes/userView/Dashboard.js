@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title} from "../../App";
+import {Title, currentUrl} from "../../App";
 import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
 
 export const MainView = styled.div`
@@ -58,7 +58,7 @@ const Sort = styled.select`
 
 export const Listing = styled.div`
     padding: 10px;
-    margin: 10px;
+    margin: 6px 10px;
     border-radius: 10px;
     background: rgba(78, 159, 61, 0.1);
     color: #4E9F3D;
@@ -95,7 +95,7 @@ function SortFromAPI() {
     const [sort, setSort] = useState([]);
 
     async function getSort() {
-        const response = await axios.get("http://34.239.101.57:9000/sorting");
+        const response = await axios.get(currentUrl + ":9000/sorting");
         setSort(response.data);
     }
 

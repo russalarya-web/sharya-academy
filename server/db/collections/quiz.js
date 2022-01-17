@@ -4,13 +4,14 @@ const schema = require('../schema').quizSchema;
 const Quiz = db.model("Quiz", schema);
 
 // create quiz
-function create(quizId, classId, chapterId, quizName) {
+function create(quizId, classId, chapterId, subjectId, quizName) {
     var success = false;
 
     const quiz = new Quiz ({
         _id: quizId,
         classId: classId,
         chapterId: chapterId,
+        subjectId: subjectId,
         name: quizName
     });
 
@@ -19,17 +20,6 @@ function create(quizId, classId, chapterId, quizName) {
     .catch(success = false);
 
     return success;
-}
-
-// returns questions from a quiz
-async function getQuestions(quizId) {
-    var currentQuiz = await get(quizId);
-
-    if (currentQuiz) {
-        console.log("running getQuestions in quiz.js");
-        console.log(currentQuiz.questions);
-        return currentQuiz.questions;
-    }
 }
 
 // get all quizzes
@@ -61,4 +51,6 @@ async function get(quizId) {
     return quiz;
 }
 
-module.exports = {create, getAll, get, getQuestions};
+// delete quiz
+
+module.exports = {create, getAll, get};

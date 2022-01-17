@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
+import {currentUrl} from "../../App";
 import { Structure, Sidebar, sidebarItemClass, MainView, Container, Listing } from "../userView/Dashboard";
 import { Button } from "./AdminQuizView";
 
@@ -31,7 +32,7 @@ function QuizzesFromAPI() {
     const [content, setContent] = useState([]);
 
     async function getContent() {
-        const response = await axios.get("http://localhost:9000/quiz/all");
+        const response = await axios.get(currentUrl + ":9000/quiz/all");
         setContent(response.data);
     }
 

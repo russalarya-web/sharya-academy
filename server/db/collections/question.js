@@ -26,7 +26,7 @@ function create(questionId, quizId, questionText, optionList, correctIndex, poin
     return success;
 }
 
-// get questions by quiz id
+// get questions by id
 async function get(questionId) {
     const question = await Question.findById(questionId)
     .then(question => {
@@ -53,4 +53,15 @@ async function getByQuizId(quizId) {
     return questions;
 }
 
-module.exports = {create, getByQuizId, get};
+// delete question by id
+async function deleteQuestion(questionId) {
+    var success = false;
+
+    const question = await Question.remove({_id: questionId})
+    .then(success = true)
+    .catch(success = false);
+
+    return success;
+}
+
+module.exports = {create, getByQuizId, get, deleteQuestion};

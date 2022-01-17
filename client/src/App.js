@@ -15,12 +15,17 @@ import SignIn from "./routes/SignIn";
 import LoggedIn from "./routes/LoggedIn";
 import AdminLoggedIn from "./routes/AdminLoggedIn";
 
+export const currentUrl = "http://localhost";
+
 export const subjectCodes = [
   {id: "sci", name: "Science"}, 
   {id: "ssc", name: "Social Science"}, 
   {id: "mat", name: "Mathematics"}, 
   {id: "hin", name: "Hindi"}, 
-  {id: "eng", name: "English"}
+  {id: "eng", name: "English"},
+  {id: "phy", name: "Physics"},
+  {id: "chem", name: "Chemistry"},
+  {id: "bio", name: "Biology"},
 ];
 
 export const Title = styled.h1`

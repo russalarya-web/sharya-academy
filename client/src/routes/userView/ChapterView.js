@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 
-import {Title} from "../../App";
+import {Title, currentUrl} from "../../App";
 import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
 import { Sidebar, MainView, sidebarItemClass } from "./Dashboard";
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import {Title} from "../App";
+import {Title, currentUrl} from "../App";
 import {Box, Text} from "./Home";
 
 import AdminDashboard from "./adminView/AdminDashboard";
@@ -104,7 +104,7 @@ function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
-        const response = await axios.get("http://34.239.101.57:9000/details");
+        const response = await axios.get(currentUrl + ":9000/details");
         setDetails(response.data);
     }
 
@@ -119,7 +119,7 @@ export function ChaptersFromAPI(){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const response = await axios.get("http://34.239.101.57:9000/api/chapters");
+        const response = await axios.get(currentUrl + ":9000/api/chapters");
         setChapters(response.data);
     }
 

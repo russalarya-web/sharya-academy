@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 
+import { currentUrl } from "../App";
+
 import Dashboard from "./userView/Dashboard";
 import ChapterView from "./userView/ChapterView";
 import QuizView from "./userView/QuizView";
@@ -88,7 +90,7 @@ export function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
     async function getDetails() {
-        const response = await axios.get("http://34.239.101.57:9000/details");
+        const response = await axios.get(currentUrl + ":9000/details");
         setDetails(response.data);
     }
 
@@ -103,7 +105,7 @@ export function ContentFromAPI(classId){
     const [content, setContent] = useState([{}]);
 
     async function getContent() {
-        const link = "http://34.239.101.57:9000/content/" + classId;
+        const link = currentUrl + ":9000/content/" + classId;
         const response = await axios.get(link);
         setContent(response.data);
     }
@@ -119,7 +121,7 @@ export function ChaptersFromAPI(classId, currentSubject){
     const [chapters, setChapters] = useState([{}]);
 
     async function getChapters() {
-        const link = "http://34.239.101.57:9000/content/" + classId + "/" + currentSubject;
+        const link = currentUrl + ":9000/content/" + classId + "/" + currentSubject;
         const response = await axios.get(link);
         setChapters(response.data);
     }

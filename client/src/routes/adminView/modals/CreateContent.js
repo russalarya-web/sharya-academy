@@ -1,12 +1,15 @@
 import {Container} from '../AdminQuizView';
 
+import { currentUrl } from '../../../App';
+
 const CreateContent = props => {
     if (!props.show) {
         return null
     }
 
-    const link = "http://localhost:9000/quiz/create/question/" + props.quizId;
     if (props.contentType === "quiz") {
+        const link = currentUrl + ":9000/quiz/create";
+        
         return (
             <div className="modal">
                 <form action={link} method="post" className="question-box">
