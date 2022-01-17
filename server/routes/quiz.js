@@ -2,6 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var router = express.Router();
 
+const currentUrl = require("../current-url");
+
 var quiz = require("../db/collections/quiz");
 var question = require("../db/collections/question");
 
@@ -24,7 +26,7 @@ router.post("/create", function(req, res, next) {
     if (quiz.create(req.body.quizId, req.body.classId, req.body.chapterId, req.body.subjectId, req.body.quizName)) {
         console.log(req.body);
     }
-    res.redirect('http://localhost:3000/admin/content');
+    res.redirect(currentUrl + ':3000/admin/content');
 });
 
 // create quiz questions in db
@@ -32,7 +34,7 @@ router.post("/create/question/:quizId", function(req, res, next) {
     if (question.create(req.body.questionId, req.params.quizId, req.body.question, [req.body.option1, req.body.option2, req.body.option3, req.body.option4], req.body.correctOption, req.body.points)) {
         console.log(req.body);
     }
-    res.redirect('http://localhost:3000/admin/quiz/' + req.params.quizId);
+    res.redirect(currentUrl + ':3000/admin/quiz/' + req.params.quizId);
 });
 
 
