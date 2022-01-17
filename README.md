@@ -15,6 +15,9 @@ Runs the React app in development mode.
 #### `mat`: Mathematics
 #### `hin`: Hindi
 #### `eng`: English
+#### `phy`: Physics
+#### `chem`: Chemistry
+#### `bio`: Biology
 
 ### Content Codes:
 #### `chnt`: Chapter Notes
