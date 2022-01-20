@@ -44,7 +44,7 @@ function GetQuizzes() {
 }
 
 
-const AdminContentView = ({classes, subjects}) => {
+const AdminContentView = ({classes, subjects, chapters}) => {
     useTitle("Admin Content View - Sharya Academy");
 
     var items = [
@@ -62,6 +62,7 @@ const AdminContentView = ({classes, subjects}) => {
 
     const [currentClass, setCurrentClass] = useState(12);
     const [currentSubject, setCurrentSubject] = useState("");
+    const [currentChapter, setCurrentChapter] = useState("");
 
     function listItems() {
         return items.map((item) => {
@@ -85,11 +86,13 @@ const AdminContentView = ({classes, subjects}) => {
                 if (contentObject.classId == currentClass) {
                     // filter by subject
                     if (currentSubject === "" || contentObject.subjectId === currentSubject) {
-                        return <Listing
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href="./" + currentItem.id + "/" + contentObject._id;
-                        }}>{contentObject.name}</Listing>
+                        if (currentChapter === "" || contentObject.chapterId === currentChapter) {
+                            return <Listing
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href="./" + currentItem.id + "/" + contentObject._id;
+                            }}>{contentObject.name}</Listing>
+                        }
                     }
                 }
             })
@@ -123,6 +126,22 @@ const AdminContentView = ({classes, subjects}) => {
         )
     }
 
+    function chapterOptions() {
+        return (
+            chapters.map((item) => {
+                if (item.classId == currentClass) {
+                    if (currentSubject === "" || item.subjectId === currentSubject) {
+                        return (
+                            <option value={item._id}>
+                                {item.name}
+                            </option>
+                        )
+                    }
+                }
+            })
+        )
+    }
+
     return (
         <Structure>
             {/* Sidebar */}
@@ -138,20 +157,24 @@ const AdminContentView = ({classes, subjects}) => {
                     <Select onChange={e => {
                         setCurrentClass(e.target.value);
                         setCurrentSubject("");
+                        setCurrentChapter("");
                         }} className="standard standard-spacing">
                         {classOptions()}
                     </Select>
 
                     {/* Subject Select */}
-                    <Select onChange={e => setCurrentSubject(e.target.value)} className="semi-long standard-spacing">
-                        <option value="">Select</option>
+                    <Select onChange={e => {
+                        setCurrentSubject(e.target.value);
+                        setCurrentChapter("");
+                        }} className="semi-long standard-spacing">
+                        <option value="">Select Subject</option>
                         {subjectOptions()}
                     </Select>
 
                     {/* Chapter Select */}
-                    <Select className="long standard-spacing">
-                        <option>Kinematics</option>
-                        <option>Metals and Non Metals</option>
+                    <Select onChange={e => setCurrentChapter(e.target.value)} className="long standard-spacing">
+                        <option value="">Select Chapter</option>
+                        {chapterOptions()}
                     </Select>
 
                     {/* Search Box */}
@@ -169,8 +192,9 @@ const AdminContentView = ({classes, subjects}) => {
 
                 {/* Content View */}
                 <Container>
-                    <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} show={show}/>
+                    <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} classId={currentClass} subjectId={currentSubject} chapterId={currentChapter} show={show}/>
                     {displayContent(currentItem)}
+                    <p>If you see nothing, try switching Classes.</p>
                 </Container>
             </MainView>
         </Structure>

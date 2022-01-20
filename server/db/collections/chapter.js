@@ -21,4 +21,17 @@ function create(chId, classId, subject, chTerm, chName) {
     return success;
 }
 
-module.exports = create;
+// get all chapters
+async function getAll() {
+    const chapters = await Chapter.find({})
+    .then(chapterList => {
+        return chapterList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return chapters;
+}
+
+module.exports = {create, getAll};

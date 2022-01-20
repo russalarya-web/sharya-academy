@@ -100,6 +100,7 @@ export const Page = styled.div`
     align-items: center;
 `;
 
+// get classes from API
 function GetClasses() {
     const [content, setContent] = useState([]);
 
@@ -115,6 +116,7 @@ function GetClasses() {
     return content;
 }
 
+// get subjects from API
 function GetSubjects() {
     const [subjects, setSubjects] = useState([]);
 
@@ -128,6 +130,22 @@ function GetSubjects() {
     }, [])
 
     return subjects;
+}
+
+// get chapters from API
+function GetChapters() {
+    const [chapters, setChapters] = useState([]);
+
+    async function getContent() {
+        const response = await axios.get(currentUrl + ":9000/chapter/all");
+        setChapters(response.data);
+    }
+
+    useEffect(() => {
+        getContent();
+    }, [])
+
+    return chapters;
 }
 
 // API Handling
@@ -161,25 +179,14 @@ export function ChaptersFromAPI(){
     return chapters;
 };
 
-function chapterProcessing() {
-    const chapters = ChaptersFromAPI();
-    var chapterNames = [];
-
-    chapters.forEach(chapter => {
-        chapterNames.push(chapter.name);
-    });
-
-    return chapterNames;
-}
 
 // Landing Page
 function AdminLoggedIn() {
     const FirstName = DetailsFromAPI().firstName;
-    const Subjects = DetailsFromAPI().subjects;
-    const Chapters = chapterProcessing();
 
     const classes = GetClasses();
     const subjects = GetSubjects();
+    const chapters = GetChapters();
 
     classes.sort((a, b) => {
         return b._id - a._id;
@@ -206,10 +213,10 @@ function AdminLoggedIn() {
                     <Switch>
                         <Route path="/admin/" component={AdminDashboard} exact />
                         <Route path="/admin/content" exact>
-                            <AdminContentView classes={classes} subjects={subjects} />
+                            <AdminContentView classes={classes} subjects={subjects} chapters={chapters} />
                         </Route>
                         <Route path="/admin/structure" exact>
-                            <AdminStructureView classes={classes} subjects={subjects} />
+                            <AdminStructureView classes={classes} subjects={subjects} chapters={chapters} />
                         </Route>
                         <Route path="/admin/quiz/:quizId" exact>
                             <AdminQuizView />

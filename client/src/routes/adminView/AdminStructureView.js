@@ -9,6 +9,7 @@ import { Search } from "./AdminContentView";
 
 import CreateClass from "./modals/CreateClass";
 import CreateSubject from "./modals/CreateSubject";
+import CreateChapter from "./modals/CreateChapter";
 
 function GetSubjects() {
     const [content, setContent] = useState([]);
@@ -40,7 +41,7 @@ function GetChapters() {
     return content;
 }
 
-const AdminStructureView = ({classes, subjects}) => {
+const AdminStructureView = ({classes, subjects, chapters}) => {
     useTitle("Admin Structure View - Sharya Academy");
 
     const [showClassModal, setShowClassModal] = useState(false);
@@ -48,20 +49,20 @@ const AdminStructureView = ({classes, subjects}) => {
     const [showChapterModal, setShowChapterModal] = useState(false);
 
     const [currentClass, setCurrentClass] = useState(12);
-    const [currentSubject, setCurrentSubject] = useState("12-chem");
+    const [currentSubject, setCurrentSubject] = useState("");
 
-    function displayContent(item) {
-        if (item.content.length !== 0) {
-            return item.content.map((contentObject) => {
-                return <Listing
-                onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href="./" + currentClass + "/" + contentObject._id;
-                }}>{contentObject.name}</Listing>
+    function displayContent() {
+        if (chapters.length !== 0) {
+            return chapters.map((contentObject) => {
+                if (contentObject.classId == currentClass) {
+                    if (currentSubject === "" || currentSubject === contentObject.subjectId) {
+                        return <Listing>{contentObject.name}</Listing>
+                    }
+                }
             })
         }
         else {
-            return <p>No {item.title} to display.</p>
+            return <p>No chapters to display.</p>
         }
     }
 
@@ -72,6 +73,7 @@ const AdminStructureView = ({classes, subjects}) => {
                 class={sidebarItemClass(item._id, currentClass)} 
                 onClick={() => {
                     setCurrentClass(item._id);
+                    setCurrentSubject("");
                 }}
             >
                 Class {item._id}
@@ -158,18 +160,16 @@ const AdminStructureView = ({classes, subjects}) => {
                         <Button 
                             className="green white-text standard-spacing"
                             onClick={() => {
-                                // const newIdNumber = quizQuestions.length + 1;
-                                // setQuestionId(quizId + "-" + newIdNumber.toString());
                                 setShowChapterModal(true);
                             }}>
-                            Add New
+                            New Chapter
                         </Button>
                     </div>
 
                     {/* Content View */}
                     <Container>
-
-                        {/* {displayContent(currentClass)} */}
+                        <CreateChapter classId={currentClass} subjectId={currentSubject} onClose={() => setShowChapterModal(false)} show={showChapterModal}/>
+                        {displayContent()}
                     </Container>
                 </MainView>
             </Structure>
