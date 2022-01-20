@@ -3,7 +3,7 @@ const schema = require('../schema').subjectSchema;
 
 const Subject = db.model("Subject", schema);
 
-function create(subjectId, classId, subjectName, chapterList) {
+function create(subjectId, classId, subjectName) {
     var success = false;
 
     const subject = new Subject ({
@@ -19,4 +19,17 @@ function create(subjectId, classId, subjectName, chapterList) {
     return success;
 }
 
-module.exports = create;
+// get all subjects
+async function getAll() {
+    const subjects = await Subject.find({})
+    .then(subjectList => {
+        return subjectList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return subjects;
+}
+
+module.exports = {create, getAll};

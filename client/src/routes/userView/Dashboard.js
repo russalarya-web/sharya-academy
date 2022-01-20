@@ -17,6 +17,7 @@ export const Sidebar = styled.div`
     background: rgba(78, 159, 61, 0.8);
     border-radius: 10px;
     width: 25%;
+    border: solid 0.25px #fff;
     display: flex;
     flex-direction: column;
 `;

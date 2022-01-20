@@ -7,7 +7,7 @@ import logo from './resources/logo.png';
 
 import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import React from "react";
+import React, { useEffect } from "react";
 
 import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
@@ -27,6 +27,19 @@ export const subjectCodes = [
   {id: "chem", name: "Chemistry"},
   {id: "bio", name: "Biology"},
 ];
+
+// set page title
+export function useTitle(title) {
+	useEffect(() => {
+		const prevTitle = document.title;
+
+		document.title = title;
+		
+		return () => {
+			document.title = prevTitle
+		}
+	})
+}
 
 export const Title = styled.h1`
   font-weight: 400;

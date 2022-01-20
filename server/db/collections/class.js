@@ -17,4 +17,17 @@ function create(classId) {
     return success;
 }
 
-module.exports = create;
+// get all classes
+async function getAll() {
+    const classes = await Class.find({})
+    .then(classList => {
+        return classList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return classes;
+}
+
+module.exports = {create, getAll};

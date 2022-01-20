@@ -17,6 +17,8 @@ var detailsRouter = require('./routes/userDetails');
 var sortRouter = require('./routes/sortOptions');
 var contentRouter = require('./routes/content');
 var quizRouter = require('./routes/quiz');
+var classRouter = require('./routes/class');
+var subjectRouter = require('./routes/subject');
 
 // set up app
 var app = express();
@@ -37,6 +39,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
+
+// class router
+app.use('/class', classRouter);
+
+// subject router
+app.use('/subject', subjectRouter);
+
 app.use('/chapters', chapterRouter);
 app.use('/details', detailsRouter);
 app.use('/admin', adminRouter);

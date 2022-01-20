@@ -9,6 +9,7 @@ import {Box, Text} from "./Home";
 import AdminDashboard from "./adminView/AdminDashboard";
 import AdminQuizView from "./adminView/AdminQuizView";
 import AdminContentView from "./adminView/AdminContentView";
+import AdminStructureView from "./adminView/AdminStructureView";
 
 export const Header = styled.header`
     position: fixed;
@@ -99,6 +100,36 @@ export const Page = styled.div`
     align-items: center;
 `;
 
+function GetClasses() {
+    const [content, setContent] = useState([]);
+
+    async function getContent() {
+        const response = await axios.get(currentUrl + ":9000/class/all");
+        setContent(response.data);
+    }
+
+    useEffect(() => {
+        getContent();
+    }, [])
+
+    return content;
+}
+
+function GetSubjects() {
+    const [subjects, setSubjects] = useState([]);
+
+    async function getContent() {
+        const response = await axios.get(currentUrl + ":9000/subject/all");
+        setSubjects(response.data);
+    }
+
+    useEffect(() => {
+        getContent();
+    }, [])
+
+    return subjects;
+}
+
 // API Handling
 function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
@@ -147,36 +178,48 @@ function AdminLoggedIn() {
     const Subjects = DetailsFromAPI().subjects;
     const Chapters = chapterProcessing();
 
-    return (
-        <>
-            {/* Header */}
-            <Header>
-                <Menu>
-                    <Profile
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href='/login';
-                    }}>
-                        Hi, {FirstName}!
-                    </Profile>
-                </Menu>
-            </Header>
+    const classes = GetClasses();
+    const subjects = GetSubjects();
 
-            {/* Page */}
-            <Page>
-                <Switch>
-                    <Route path="/admin/" component={AdminDashboard} exact />
-                    <Route path="/admin/content" exact>
-                        <AdminContentView classId="x" subjectId="sci" chapterId="x-sci-4"/>
-                    </Route>
-                    <Route path="/admin/quiz/:quizId" exact>
-                        <AdminQuizView />
-                    </Route>
-                </Switch>
-            </Page>
+    classes.sort((a, b) => {
+        return b._id - a._id;
+    });
 
-        </>
-    );
+    if (classes) {
+        return (
+            <>
+                {/* Header */}
+                <Header>
+                    <Menu>
+                        <Profile
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.location.href='/login';
+                        }}>
+                            Hi, {FirstName}!
+                        </Profile>
+                    </Menu>
+                </Header>
+
+                {/* Page */}
+                <Page>
+                    <Switch>
+                        <Route path="/admin/" component={AdminDashboard} exact />
+                        <Route path="/admin/content" exact>
+                            <AdminContentView classes={classes} subjects={subjects} />
+                        </Route>
+                        <Route path="/admin/structure" exact>
+                            <AdminStructureView classes={classes} subjects={subjects} />
+                        </Route>
+                        <Route path="/admin/quiz/:quizId" exact>
+                            <AdminQuizView />
+                        </Route>
+                    </Switch>
+                </Page>
+
+            </>
+        );
+    }
 }
 
 export default AdminLoggedIn;

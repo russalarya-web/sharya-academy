@@ -26,8 +26,6 @@ function create(quizId, classId, chapterId, subjectId, quizName) {
 async function getAll() {
     const quizzes = await Quiz.find({})
     .then(quizzesList => {
-        console.log("quizzesList");
-        console.log(quizzesList);
         return quizzesList;
     })
     .catch(err => {

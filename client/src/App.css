@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 1.5vmin);
+  font-size: calc(10px + 1.1vmin);
   color: #1E5128;
   overflow: hidden;
 }
@@ -141,22 +141,26 @@ select {
 }
 
 .standard {
-  min-width: 120px;
+  min-width: 80px;
 }
 
 .semi-long {
-  min-width: 180px;
+  min-width: 130px;
 }
 
 .long {
-  min-width: 280px;
+  min-width: 210px;
 }
 
 .standard-spacing {
   padding: 10px;
   margin: 5px 6px;
-  font-size: calc(10px + 0.8vmin);
+  font-size: calc(10px + 0.5vmin);
   border-radius: 5px;
+}
+
+.standard-spacing.bottom {
+  margin: 10px 6px;
 }
 
 .App-link {
@@ -256,6 +260,10 @@ footer {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+
+.row-container * {
+  flex-grow: 1;
 }
 
 footer .row-container {
