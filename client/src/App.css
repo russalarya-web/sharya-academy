@@ -6,9 +6,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 1.1vmin);
+  font-size: calc(10px + 1vmin);
   color: #1E5128;
   overflow: hidden;
+}
+
+.element {
+  vertical-align: middle;
+  width: 100%;
+}
+
+.element-inner {
+  max-width: 900px;
+  padding: 60px;
+  margin: auto;
 }
 
 * {
@@ -20,6 +31,23 @@ html, body, footer {
   background-color: #1E5128;
 }
 
+/* Profile Styles */
+.profile-container {
+  display: flex;
+}
+
+.profile-item {
+  padding: 15px;
+  margin: 15px 10px;
+  border-radius: 5px;
+  width: 240px;
+}
+
+.profile-item * {
+  text-align: left !important;
+}
+
+/* Pricing Styles */
 .pricing {
   display: flex;
   flex-direction: row;
@@ -28,10 +56,10 @@ html, body, footer {
 }
 
 .pricing-box {
-  border-radius: 10px;
-  padding: 1.2em;
-  min-width: 300px;
-  margin: 15px;
+  border-radius: 5px;
+  padding: 1.2em 1em;
+  min-width: 240px;
+  margin: 0px;
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -39,6 +67,11 @@ html, body, footer {
 
 .white {
   background: #fff;
+  border: solid 1px #fff;
+}
+
+.green-text {
+  color:rgb(78, 159, 61) !important;
 }
 
 /* Modal View */
@@ -96,18 +129,16 @@ html, body, footer {
 
 .green {
   background: #4e9f3d;
+  border: solid 1px #4e9f3d;
 }
 
 .auto-margin {
   margin: auto !important;
 }
 
-.dark-green {
-  background: rgba(30, 81, 40, 0.8);
-}
-
-.dark-click:hover {
-  background: rgba(30, 81, 40, 0.8);
+.dark-green, .dark-click:hover {
+  background: rgba(30, 81, 40, 0.9);
+  border: solid 1px rgba(30, 81, 40, 0.9);
 }
 
 .white-text, .white-text button {
@@ -257,7 +288,6 @@ footer {
   position: relative;
   margin: 0;
   bottom: 0;
-  padding: 50px 10%;
 }
 
 .row-container {
@@ -265,6 +295,10 @@ footer {
   flex-direction: row;
   width: 100%;
 }
+
+/* .row-element {
+
+} */
 
 .row-container * {
   flex-grow: 1;
@@ -282,17 +316,21 @@ footer .row-container {
 }
 
 .footer-text {
-  font-size: calc(10px + 1vmin);
+  font-size: calc(10px + 0.6vmin);
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 920px) {
+  .element-inner {
+    padding: 60px 45px;
+  }
+
   .pricing {
-    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 10px;
   }
 
   .pricing-box {
-    margin: 15px 25%;
-    width: 50%;
+    width: 30%;
   }
 
   .outer {
@@ -308,24 +346,19 @@ footer .row-container {
   }
 }
 
-@media screen and (max-width: 800px) {
-  footer {
-    padding: 20px 80px;
+@media screen and (max-width: 600px) {
+  .element-inner {
+    padding: 60px 30px;
   }
+
   .hide {
     display: none;
   }
-
-  .pricing-box {
-    margin: 15px 20%;
-    width: 60%;
-  }
 }
 
-@media screen and (max-width: 600px) {
-  .pricing-box {
-    margin: 15px 15%;
-    width: 70%;
+@media screen and (max-width: 400px) {
+  .element-inner {
+    padding: 60px 15px;
   }
 
   .row-container {
@@ -338,17 +371,5 @@ footer .row-container {
 
   .option-input {
     width: 94% !important;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .pricing-box {
-    margin: 15px 10%;
-    width: 80%;
-    min-width: 200px;
-  }
-
-  footer {
-    padding: 20px 5%;
   }
 }

@@ -35,15 +35,14 @@ export const Menu = styled.div`
 `;
 
 export const Profile = styled.button`
-    padding: 10px 15px;
+    padding: 10px 20px;
     margin: 10px;
     border: solid 1px;
     color: #FFF;
     background: rgba(78, 159, 61, 0.8);
-    font-size: calc(10px + 1.2vmin);
+    font-size: calc(10px + 0.8vmin);
     border-radius: 5px;
     z-index: 1;
-    min-width: 150px;
 `;
 
 export const Subject = styled.select`
@@ -211,13 +210,16 @@ function AdminLoggedIn() {
                 {/* Page */}
                 <Page>
                     <Switch>
-                        <Route path="/admin/" component={AdminDashboard} exact />
+                        <Route path="/admin/" exact>
+                            <AdminStructureView classes={classes} subjects={subjects} chapters={chapters} />
+                        </Route>
                         <Route path="/admin/content" exact>
                             <AdminContentView classes={classes} subjects={subjects} chapters={chapters} />
                         </Route>
                         <Route path="/admin/structure" exact>
                             <AdminStructureView classes={classes} subjects={subjects} chapters={chapters} />
                         </Route>
+                        <Route path="/admin/statistics" component={AdminDashboard} exact />
                         <Route path="/admin/quiz/:quizId" exact>
                             <AdminQuizView />
                         </Route>

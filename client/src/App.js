@@ -48,10 +48,10 @@ export const Title = styled.h1`
 `;
 
 export const Logo = styled.img`
-  height: 70px;
+  height: 50px;
   position: fixed;
   left: 30px;
-  top: 30px;
+  top: 25px;
   z-index: 2;
 `;
 
@@ -66,7 +66,7 @@ export const Triangle = styled.img`
 
 export const Element = styled.div`
   min-height: 80vh;
-  vertical-algin: middle;
+  vertical-align: middle;
   padding: 10vh 10%;
   width: 80%;
 `;

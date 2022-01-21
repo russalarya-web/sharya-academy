@@ -65,7 +65,7 @@ export const Listing = styled.div`
     color: #4E9F3D;
     text-indent: 10px;
     text-align: left;
-    font-size: calc(10px + 1vmin);
+    font-size: calc(10px + 0.8vmin);
     cursor: pointer;
 `;
 

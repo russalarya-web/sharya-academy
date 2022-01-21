@@ -194,7 +194,7 @@ const AdminContentView = ({classes, subjects, chapters}) => {
                 <Container>
                     <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} classId={currentClass} subjectId={currentSubject} chapterId={currentChapter} show={show}/>
                     {displayContent(currentItem)}
-                    <p>If you see nothing, try switching Classes.</p>
+                    <p>If you see nothing, try adjusting Filters.</p>
                 </Container>
             </MainView>
         </Structure>

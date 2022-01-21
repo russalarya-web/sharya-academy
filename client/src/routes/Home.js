@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-import { Title, Element } from "../App";
+import { Title } from "../App";
 
 export const Header = styled.header`
     background: transparent;
@@ -21,16 +21,16 @@ export const Menu = styled.ul`
 
 export const MenuItem = styled.li`
     padding: 15px;
-    font-size: calc(10px + 1.2vmin);
+    font-size: calc(10px + 1vmin);
 `;
 
 export const SignIn = styled.button`
     position: fixed;
     right: 30px;
     top: 30px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: solid 1px;
-    font-size: calc(10px + 1.2vmin);
+    font-size: calc(10px + 0.8vmin);
     font-family: 'Noto Sans', sans-serif;
     border-radius: 5px;
     z-index: 1;
@@ -58,14 +58,14 @@ export const Text = styled.p`
 
 export const SmallText = styled.p`
     text-align: justify;
-    font-size: calc(10px + 1vmin);
+    font-size: calc(10px + 0.6vmin);
 `;
 
 export const BoxButton = styled.button`
     padding: 10px;
     background: transparent;
     border: solid 1px;
-    font-size: calc(10px + 1vmin);
+    font-size: calc(10px + 0.6vmin);
     z-index: 1;
     border-radius: 5px;
 `;
@@ -75,7 +75,7 @@ export const Button = styled.button`
     background: rgba(78, 159, 61, 0.8);
     color: #fff;
     border: none;
-    font-size: calc(10px + 1vmin);
+    font-size: calc(10px + 0.8vmin);
     z-index: 1;
     border-radius: 5px;
 `;
@@ -87,20 +87,23 @@ const Link = styled.a`
     padding: 10px 0;
 `;
 
-const About = [
-    "Sharya Academy is built around students to help them learn any time, anywhere. It serves you relevant content based on your preferences and uses your progress to serve you better content. It helps you attack your weaknesses by giving detailed feedback around your mistakes and suggests relevant topics to clear your concepts.",
-    "This website offers a unique process of learning and enriching to develop new areas of interest in a more interesting manner. It is further developed into multiple sections of materials for students to regularly test themselves by solving problems related to their subjects.",
-    "The website contains various Tests and Worksheets, and their solutions are in an easy format so that students get a clear and better understanding.",
-    "We have also incorporated NCERT Solutions for which students may need for exam preparation and completing their schoolwork. We have provided explanations of English and Hindi Literature.",
-    "We have Online Tests with which students can get to know where they are lacking.",
-    "Sharya Academy is available on Facebook and Instagram."
+const quizInfo = "Want to clear up concepts?  Or test yourself? Try our quizzes, sorted according to chapter. Or choose to do ones that have been mixed so you don’t know what chapters are they from. Try full syllabus quizzes to test your knowledge before the exams to improve your grade.";
+
+const aboutPlatform = [
+    "Sharya Academy is built around students to help them learn any time, anywhere. It serves you relevant content based on your preferences and uses your progress to serve you better content.",
+    "Attack your weaknesses using detailed feedback around your mistakes and refer to relevant topics to clear your concepts.",
+    "We offer a unique process of learning to develop new areas of interest in an interesting manner. We have developed content in multiple sections where you can regularly test your progress by solving problems related to your subjects.",
+    "We have various Tests and Worksheets with well formatted solutions for you to get a clear understanding.",
+    "Our most searched pages were of English and Hindi Literature. So we are doubling down and improving content availability for them. ",
+    "We have Online Tests with which students can get to know where they are lacking."
 ];
 
-const displayAbout = About.map((aboutText) =>
-    <Text>{aboutText}</Text>
-);
+const WhoWeAreList = [
+    {name: "Shalini Jayaswal", position: "Co-Founder, Content and Marketing Lead"},
+    {name: "Russal Arya", position: "Co-Founder, Technology and Operations Lead"}
+];
 
-const Pricing = [
+const pricingList = [
     {planName: 'Free', price: 'Always ₹0', className: 'pricing-box white',
     points: ['Chapter Notes', 'NCERT Solutions', 'Exemplar Questions'], button: 'Sign Up'},
     {planName: 'Basic', price: 'From ₹599 a year', className: 'pricing-box green white-text',
@@ -109,7 +112,7 @@ const Pricing = [
     points: ['Everything in Basic, plus:', 'Auto-Graded Tests', 'Detailed Feedback'], button: 'Sign Up'}
 ];
 
-const listPricing = Pricing.map((planItem) =>
+const listPricing = pricingList.map((planItem) =>
     <div className={planItem.className}>
         <BoxTitle>{planItem.planName}</BoxTitle>
         <Text>{planItem.points[0]}</Text>
@@ -163,7 +166,118 @@ const footerLists = FooterLists.map((footerList) =>
     </div>
 )
 
-// Landing Page
+// landing page
+function Landing() {
+    return (
+        <div className="element">
+            <div className="element-inner">
+                <Title>New Look. Same Affordability</Title>
+                <h3>Plan available for Class 10 board prep.</h3>
+                <Button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href='/signup';
+                    }}>
+                    Get started
+                </Button>
+            </div>
+        </div>
+    )
+}
+
+const Element = ({title, text, color, callToAction, buttons, rightBlock}) => {
+    return (
+        <div className={"element " + color}>
+            <div className="element-inner">
+                <div className="row-container">
+                    <div className="row-element">
+                        <Title className="align-left">{title}</Title>
+                        <Text>{text}</Text>
+                        <Text>{callToAction}</Text>
+                        <div className="row-container">
+                            {buttons.map((button) => {
+                                return <button 
+                                    className={button.color + " standard-spacing"}
+                                    onClick={button.onClick}>
+                                    {button.text}
+                                </button>
+                            })}
+                        </div>
+                    </div>
+                    <div className="row-element">
+                        {rightBlock}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// about platform page
+function AboutPlatform() {
+    return (
+        <div className="element green white-text">
+            <div className="element-inner">
+                <Title>Our Platform</Title>
+                {aboutPlatform.map((text) =>
+                    <Text>{text}</Text>
+                )}
+            </div>
+        </div>
+    )
+}
+
+// profiles
+function Profiles() {
+    return WhoWeAreList.map((item) => {
+        return (<div className="profile-item white green-text">
+            <Text>{item.name}</Text>
+            <Text>{item.position}</Text>
+        </div>)
+    })
+}
+
+// who are we section
+function WhoAreWe() {
+    return (
+        <div className="element dark-green white-text">
+            <div className="element-inner">
+                <Title>Our Team</Title>
+                <div className="profile-container">
+                    <Profiles />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// social media section
+function SocialMedia() {
+    return (
+        <div className="element white green-text">
+            <div className="element-inner">
+                <Title>Our Social Presence</Title>
+                <Text>Sharya Academy is available on Facebook and Instagram.</Text>
+            </div>
+        </div>
+    )
+}
+
+// pricing section
+function PricingDisplay() {
+    return (
+        <div className="element">
+            <div className="element-inner">
+                <Title>Pricing</Title>
+                <div className="pricing">
+                    {listPricing}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// home page
 function Home() {
     return (
         <div className="fullWidth">
@@ -179,43 +293,67 @@ function Home() {
                 </SignIn>
             </Header>
 
-            {/* Start Screen */}
-            <Element>
-                <Title>Newer Look. Same Affordability</Title>
-                <h3>Plan available for Class 10 board prep.</h3>
-                <Button
-                    onClick={(e) => {
+            {/* Landing */}
+            {/* <Landing /> */}
+            <Element 
+            title="New Look. Same Affordability" 
+            color="" 
+            callToAction="Plan available for Class 10 board prep"
+            buttons={
+                [
+                    {color: "green white-text", text: "Get started", onClick: (e) =>  {
                         e.preventDefault();
                         window.location.href='/signup';
-                    }}>
-                    Get started
-                </Button>
-            </Element>
+                    }}, 
+                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) =>  {
+                        e.preventDefault();
+                        window.location.href='/demo';
+                    }}
+                ]
+            } />
 
-            {/* About Screen */}
-            <Element className="green white-text">
-                <Title>About</Title>
-                {displayAbout}
-            </Element>
+            <Element 
+            title="Online Quizzes" 
+            color="green white-text" 
+            text={quizInfo} 
+            callToAction="Now available for classes X and XII."
+            buttons={
+                [
+                    {color: "white green-text", text: "Sign up", onClick: (e) =>  {
+                        e.preventDefault();
+                        window.location.href='/signup';
+                    }}, 
+                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) =>  {
+                        e.preventDefault();
+                        window.location.href='/demo';
+                    }}
+                ]
+            } />
+
+            {/* About Platform */}
+            {/* <AboutPlatform /> */}
             
-            {/* Pricing Screen */}
-            <Element>
-                <Title>Pricing</Title>
-                <div className="pricing">
-                    {listPricing}
-                </div>
-            </Element>
+            {/* Who are We */}
+            <WhoAreWe />
+            
+            {/* Pricing */}
+            <PricingDisplay />
 
-            <footer>
-                <div className="row-container outer">
-                    <div className="row-container hide">
-                    </div>
-                    <div className="row-container">
-                        {footerLists}
-                    </div>
-                </div>
+            {/* Social Presence */}
+            <SocialMedia />
 
-                <p className="footer-text align-left">&copy; Sharya Academy. All rights reserved.</p>
+            <footer className="element">
+                <div className="element-inner">
+                    <div className="row-container outer">
+                        <div className="row-container hide">
+                        </div>
+                        <div className="row-container">
+                            {footerLists}
+                        </div>
+                    </div>
+
+                    <p className="footer-text align-left">&copy; Sharya Academy. All rights reserved.</p>
+                </div>
             </footer>
 
         </div>
