@@ -34,4 +34,17 @@ async function getAll() {
     return chapters;
 }
 
-module.exports = {create, getAll};
+// get chapters by class
+async function getByClass(classId) {
+    const chapters = await Chapter.find({classId: classId})
+    .then(chapterList => {
+        return chapterList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return chapters;
+}
+
+module.exports = {create, getAll, getByClass};

@@ -63,4 +63,10 @@ router.get("/:quizId/questions", async function(req, res, next) {
     res.send(current);
 });
 
+// get quizzes by class from db
+router.get("/all/:classId", async function(req, res, next) {
+    var quizzes = await quiz.getByClass(Number.parseInt(req.params.classId));
+    res.send(quizzes);
+});
+
 module.exports = router;

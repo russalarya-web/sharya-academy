@@ -49,6 +49,19 @@ async function get(quizId) {
     return quiz;
 }
 
+// get quizzes by class
+async function getByClass(classId) {
+    const quizzes = await Quiz.find({classId: classId})
+    .then(quizzesList => {
+        return quizzesList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return quizzes;
+}
+
 // delete quiz
 
-module.exports = {create, getAll, get};
+module.exports = {create, getAll, get, getByClass};

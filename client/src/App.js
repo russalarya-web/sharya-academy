@@ -12,8 +12,8 @@ import React, { useEffect } from "react";
 import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
-import LoggedIn from "./routes/LoggedIn";
-import AdminLoggedIn from "./routes/AdminLoggedIn";
+import UserView from "./routes/UserView";
+import AdminView from "./routes/AdminView";
 
 export const currentUrl = "http://34.239.101.57";
 
@@ -39,6 +39,18 @@ export function useTitle(title) {
 			document.title = prevTitle
 		}
 	})
+}
+
+// match id from given db list
+export function matchFromDbList(list, id) {
+  var name;
+  list.forEach(listObject => {
+      if (listObject._id === id) {
+          name = listObject.name;
+      }
+  });
+
+  return name;
 }
 
 export const Title = styled.h1`
@@ -104,8 +116,8 @@ function App() {
             <Route path="/" component={Home} exact />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={SignIn} />
-            <Route path="/user" component={LoggedIn} />
-            <Route path="/admin" component={AdminLoggedIn} />
+            <Route path="/app" component={UserView} />
+            <Route path="/admin" component={AdminView} />
           </Switch>
         </div>
 

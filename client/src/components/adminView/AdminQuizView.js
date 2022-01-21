@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title, subjectCodes, currentUrl} from "../../App";
+import {Title, subjectCodes, currentUrl, useTitle} from "../../App";
 import CreateQuestion from "./modals/CreateQuestion";
 import { useParams } from "react-router";
 
@@ -61,20 +61,8 @@ function GetQuestions(quizId) {
     return questions;
 }
 
-function getSubjectName(id) {
-    var name = "";
-
-    subjectCodes.forEach(code => {
-        if (code.id === id) {
-            name = code.name;
-        }
-    });
-
-    return name;
-}
-
 // ChapterView Page
-function AdminQuizView() {
+const AdminQuizView = props => {
     let { quizId } = useParams();
     const [show, setShow] = useState(false);
 
@@ -84,6 +72,8 @@ function AdminQuizView() {
 
     var quizQuestions = GetQuestions(quizId);
 
+    useTitle("Editing " + quiz.name + " - Sharya Academy")
+
     if (quizQuestions) {
         return (
             <Section>
@@ -91,8 +81,8 @@ function AdminQuizView() {
                 <div className="top-align">
                     <div className="row-container top-align">
                         <p className="round-label dark-green white-text">Class {quiz.classId}</p>
-                        <p className="round-label green white-text">{getSubjectName(quiz.subjectId)}</p>
-                        <p className="round-label dark-green white-text">{quiz.chapterId}</p>
+                        <p className="round-label green white-text">{props.getSubjectName(quiz.subjectId)}</p>
+                        <p className="round-label dark-green white-text">{props.getChapterName(quiz.chapterId)}</p>
                     </div>
                     <Title>Creating <u>{quiz.name}</u></Title>
                 </div>

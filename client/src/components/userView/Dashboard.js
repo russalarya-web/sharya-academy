@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title, currentUrl} from "../../App";
-import { listMenu, ContentFromAPI, GetSubjectState } from "../../routes/LoggedIn";
+import {useTitle, currentUrl, matchFromDbList} from "../../App";
+import {Search} from "../adminView/AdminContentView";
 
 export const MainView = styled.div`
     padding: 20px 10px;
@@ -33,30 +33,6 @@ export const Structure = styled.div`
     vertical-align: middle;
 `;
 
-export const Search = styled.input`
-    background: rgba(216, 233, 168, 0.1);
-    border: 1px solid rgba(78, 159, 61, 0.5);
-    color: rgba(30, 81, 40, 0.8);
-    border-radius: 10px;
-    margin: 0.5em;
-    height: 2em;
-    font-size: calc(10px + 1.2vmin);
-    right: 30px;
-    padding: 0.25em 20px;
-`;
-
-const Sort = styled.select`
-    background: rgba(78, 159, 61, 0.8);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    margin: 0.5em;
-    height: 2.5em;
-    font-size: calc(10px + 1.2vmin);
-    right: 290px;
-    padding: 0.5em 20px;
-`;
-
 export const Listing = styled.div`
     padding: 10px;
     margin: 6px 10px;
@@ -69,42 +45,21 @@ export const Listing = styled.div`
     cursor: pointer;
 `;
 
-const Filter = styled.span`
-    height: 30px;
-    padding: 5px 20px;
-    margin: 0.5em;
-    border: solid 1px rgba(30, 81, 40, 0.9);
-    color: rgba(30, 81, 40, 0.9);
-    border-radius: 30px;
-    vertical-align: middle;
-`;
+// get quizzes by class
+function GetQuizzes(classId) {
+    const [content, setContent] = useState([]);
 
-const Label = styled.span`
-    height: 24px;
-    padding: 5px 15px;
-    float: right;
-    margin: 0;
-    font-size: calc(8px + 1.2vmin);
-    background: rgba(30, 81, 40, 0.9);
-    color: #fff;
-    border-radius: 30px;
-    text-indent: 0px;
-    vertical-align: middle;
-`;
-
-function SortFromAPI() {
-    const [sort, setSort] = useState([]);
-
-    async function getSort() {
-        const response = await axios.get(currentUrl + ":9000/sorting");
-        setSort(response.data);
+    async function getContent() {
+        const response = await axios.get(currentUrl + ":9000/quiz/all/" + classId);
+        console.log(response.data);
+        setContent(response.data);
     }
 
     useEffect(() => {
-        getSort();
+        getContent();
     }, [])
 
-    return sort;
+    return content;
 }
 
 export function sidebarItemClass(id, currentValue) {
@@ -116,55 +71,126 @@ export function sidebarItemClass(id, currentValue) {
 }
 
 // Landing Page
-function Dashboard() {
-    const [currentSubject, setCurrentSubject] = GetSubjectState();
+const Dashboard = ({subjects, chapters}) => {
+    useTitle("Dashboard - Sharya Academy");
 
-    const sortOptions = SortFromAPI();
+    var items = [
+        {id: "chnt", title: "Chapter Notes", content: []},
+        {id: "quiz", title: "Quizzes", content: GetQuizzes(10)},
+        {id: "test", title: "Practice Tests", content: []},
+        {id: "wkst", title: "Worksheets", content: []},
+        {id: "nsol", title: "NCERT Solutions", content: []},
+        {id: "xmpl", title: "Exemplar", content: []}
+    ];
 
-    const content = ContentFromAPI("x");
-    var chapters = content[currentSubject];
+    const [currentItem, setCurrentItem] = useState(items[0]);
 
-    function listSubjects() {
-        var subjects = content["subIds"];
+    const [currentSubject, setCurrentSubject] = useState("");
+    const [currentChapter, setCurrentChapter] = useState("");
 
-        if (subjects) {
-            return subjects.map((id) => {
-                return (<div class={sidebarItemClass(id, currentSubject)} onClick={() => setCurrentSubject(id)}>{content[id]["name"]}</div>)
-            });
+    function listItems() {
+        return items.map((item) => {
+            return (
+            <div 
+                class={sidebarItemClass(item.id, currentItem.id)} 
+                onClick={() => {
+                    setCurrentItem(item);
+                }}
+            >
+                {item.title}
+            </div>
+            )
+        });
+    }
+
+    function displayContent(item) {
+        if (item.content.length !== 0) {
+            return <>
+                {item.content.map((contentObject) => {
+                    // filter by subject
+                    if (currentSubject === "" || contentObject.subjectId === currentSubject) {
+                        // filter by chapter
+                        if (currentChapter === "" || contentObject.chapterId === currentChapter) {
+                            return <Listing
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href="/app/" + currentItem.id + "/" + contentObject._id;
+                            }}>{contentObject.name}
+                            <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
+                            <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
+                            </Listing>
+                        }
+                    }
+                })}
+                <p>If you see nothing, try adjusting Filters.</p>
+            </>
+        }
+        else {
+            return <p>{item.title} not yet available.</p>
         }
     }
 
-    function listChapters() {
-        if (chapters) {
-            var idList = chapters["chIds"];
+    function subjectOptions() {
+        return (
+            subjects.map((item) => {
+                return (
+                    <option value={item._id}>
+                        {item.name}
+                    </option>
+                )
+            })
+        )
+    }
 
-            return idList.map((id) => {
-                return (<Listing>{chapters[id]["name"]} <Label>Term {chapters[id]["term"]}</Label></Listing>)
-            });
-        }
+    function chapterOptions() {
+        return (
+            chapters.map((item) => {
+                if (currentSubject === "" || item.subjectId === currentSubject) {
+                    return (
+                        <option value={item._id}>
+                            {item.name}
+                        </option>
+                    )
+                }
+            })
+        )
     }
 
     return (
         <Structure>
             {/* Sidebar */}
             <Sidebar>
-                {listSubjects()}
+                {listItems()}
             </Sidebar>
 
             {/* Main View */}
             <MainView>
                 {/* Top Bar */}
-                {/* <Structure>
-                    <Filter>Term 1</Filter>
-                    <Filter>Term 2</Filter>
-                    <Sort>
-                        {listMenu(sortOptions, "Sort by")}
-                    </Sort>
-                    <Search placeholder="Search" />
-                </Structure> */}
+                <div className="row-container">
+                    {/* Subject Select */}
+                    <select onChange={e => {
+                        setCurrentSubject(e.target.value);
+                        setCurrentChapter("");
+                        }} className="green white-text semi-long standard-spacing">
+                        <option value="">Select Subject</option>
+                        {subjectOptions()}
+                    </select>
+
+                    {/* Chapter Select */}
+                    <select
+                        onChange={e => setCurrentChapter(e.target.value)} 
+                        className="green white-text long standard-spacing">
+                        <option value="">Select Chapter</option>
+                        {chapterOptions()}
+                    </select>
+
+                    {/* Search Box */}
+                    <Search className="semi-long standard-spacing" placeholder="Search..."/>
+                </div>
 
                 <Container>
-                    {listChapters()}
+                    {displayContent(currentItem)}
+                    {/* {listChapters()} */}
                 </Container>
             </MainView>
         </Structure>

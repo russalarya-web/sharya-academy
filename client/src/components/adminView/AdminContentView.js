@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import { currentUrl, useTitle } from "../../App";
+import { currentUrl, useTitle, matchFromDbList } from "../../App";
 import { Structure, Sidebar, sidebarItemClass, MainView, Container, Listing } from "../userView/Dashboard";
 import { Button } from "./AdminQuizView";
 
@@ -22,12 +22,6 @@ export const Search = styled.input`
     border-radius: 10px;
 `;
 
-const Select = styled.select`
-    background: rgba(78, 159, 61, 0.8);
-    color: #fff;
-    border: 1px solid rgba(78, 159, 61, 0.5);
-`;
-
 function GetQuizzes() {
     const [content, setContent] = useState([]);
 
@@ -42,7 +36,6 @@ function GetQuizzes() {
 
     return content;
 }
-
 
 const AdminContentView = ({classes, subjects, chapters}) => {
     useTitle("Admin Content View - Sharya Academy");
@@ -81,24 +74,30 @@ const AdminContentView = ({classes, subjects, chapters}) => {
 
     function displayContent(item) {
         if (item.content.length !== 0) {
-            return item.content.map((contentObject) => {
-                // filter by class
-                if (contentObject.classId == currentClass) {
-                    // filter by subject
-                    if (currentSubject === "" || contentObject.subjectId === currentSubject) {
-                        if (currentChapter === "" || contentObject.chapterId === currentChapter) {
-                            return <Listing
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.location.href="./" + currentItem.id + "/" + contentObject._id;
-                            }}>{contentObject.name}</Listing>
+            return <>
+                {item.content.map((contentObject) => {
+                    // filter by class
+                    if (contentObject.classId == currentClass) {
+                        // filter by subject
+                        if (currentSubject === "" || contentObject.subjectId === currentSubject) {
+                            if (currentChapter === "" || contentObject.chapterId === currentChapter) {
+                                return <Listing
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href="./" + currentItem.id + "/" + contentObject._id;
+                                }}>{contentObject.name}
+                                <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
+                                <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
+                                </Listing>
+                            }
                         }
                     }
-                }
-            })
+                })}
+                <p>If you see nothing, try adjusting Filters.</p>
+            </>
         }
         else {
-            return <p>No {item.title} to display.</p>
+            return <p>{item.title} not yet available.</p>
         }
     }
 
@@ -154,28 +153,30 @@ const AdminContentView = ({classes, subjects, chapters}) => {
                 {/* Top Bar */}
                 <div className="row-container">
                     {/* Class Select */}
-                    <Select onChange={e => {
+                    <select onChange={e => {
                         setCurrentClass(e.target.value);
                         setCurrentSubject("");
                         setCurrentChapter("");
-                        }} className="standard standard-spacing">
+                        }} className="green white-text standard standard-spacing">
                         {classOptions()}
-                    </Select>
+                    </select>
 
                     {/* Subject Select */}
-                    <Select onChange={e => {
+                    <select onChange={e => {
                         setCurrentSubject(e.target.value);
                         setCurrentChapter("");
-                        }} className="semi-long standard-spacing">
+                        }} className="green white-text semi-long standard-spacing">
                         <option value="">Select Subject</option>
                         {subjectOptions()}
-                    </Select>
+                    </select>
 
                     {/* Chapter Select */}
-                    <Select onChange={e => setCurrentChapter(e.target.value)} className="long standard-spacing">
+                    <select
+                        onChange={e => setCurrentChapter(e.target.value)} 
+                        className="green white-text long standard-spacing">
                         <option value="">Select Chapter</option>
                         {chapterOptions()}
-                    </Select>
+                    </select>
 
                     {/* Search Box */}
                     <Search className="semi-long standard-spacing" placeholder="Search..."/>
@@ -194,7 +195,6 @@ const AdminContentView = ({classes, subjects, chapters}) => {
                 <Container>
                     <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} classId={currentClass} subjectId={currentSubject} chapterId={currentChapter} show={show}/>
                     {displayContent(currentItem)}
-                    <p>If you see nothing, try adjusting Filters.</p>
                 </Container>
             </MainView>
         </Structure>

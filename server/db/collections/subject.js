@@ -32,4 +32,17 @@ async function getAll() {
     return subjects;
 }
 
-module.exports = {create, getAll};
+// get subjects by class
+async function getByClass(classId) {
+    const subjects = await Subject.find({classId: classId})
+    .then(subjectList => {
+        return subjectList;
+    })
+    .catch(err => {
+        console.log("Something went wrong... " + err.message);
+    });
+
+    return subjects;
+}
+
+module.exports = {create, getAll, getByClass};

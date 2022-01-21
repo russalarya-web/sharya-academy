@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 
 import {Title, currentUrl} from "../../App";
-import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
+import { listMenu, ContentFromAPI, GetSubjectState } from "../../routes/UserView";
 import { Sidebar, MainView, sidebarItemClass } from "./Dashboard";
 
 export const Section = styled.div`

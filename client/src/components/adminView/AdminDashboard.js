@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {Title, currentUrl} from "../../App";
 import {Box, Text} from "../../routes/Home";
-import {listMenu} from "../../routes/LoggedIn";
+import {listMenu} from "../../routes/UserView";
 
 export const Section = styled.div`
     padding: 20px 0;

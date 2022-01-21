@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import { currentUrl } from '../../App';
+import { useParams } from "react-router";
+
+import { Title, currentUrl, useTitle } from '../../App';
 
 export const Section = styled.div`
     padding: 20px 50px;
@@ -48,7 +50,7 @@ export const Option = styled.button`
     padding: 1em;
     width: 48%;
     border: solid 1px;
-    font-size: calc(10px + 1.2vmin);
+    font-size: calc(10px + 1vmin);
     margin: 10px 1%;
     text-align: left;
 `;
@@ -61,12 +63,11 @@ export const Button = styled.button`
     margin: 10px;
 `;
 
-function QuizFromAPI() {
-    const [quiz, setQuiz] = useState([]);
+function GetQuizDetails(quizId) {
+    const [quiz, setQuiz] = useState({});
 
     async function getQuiz() {
-        // Used Specific Quiz for Testing
-        const response = await axios.get(currentUrl + ":9000/quiz?class=x&sub=sci&ch=ch3&quiz=q1");
+        const response = await axios.get(currentUrl + ":9000/quiz/" + quizId);
         setQuiz(response.data);
     }
 
@@ -77,16 +78,35 @@ function QuizFromAPI() {
     return quiz;
 }
 
-// QuizView Page
-function QuizView() {
-    const quiz = QuizFromAPI();
+function GetQuestions(quizId) {
+    const [questions, setQuestions] = useState([{}]);
 
-    let questions;
+    async function getQuestions() {
+        const link = currentUrl + ":9000/quiz/" + quizId + "/questions";
+        const response = await axios.get(link);
+
+        setQuestions(response.data);
+    }
+
+    useEffect(() => {
+        getQuestions();
+    }, [])
+
+    return questions;
+}
+
+// QuizView Page
+const QuizView = props => {
+    let { quizId } = useParams();
+
+    var quiz = GetQuizDetails(quizId);
+    var questions = GetQuestions(quizId);
+
     const [currentQuestion, setCurrentQuestion] = useState(0);
 
-    if (quiz.questions) {
-        questions = quiz.questions;
-
+    useTitle(quiz.name + " - Sharya Academy")
+    
+    if (questions) {
         const handlePrevButtonClick = () => {
             if (currentQuestion !== 0) {
                 const prevQuestion = currentQuestion - 1;
@@ -100,34 +120,52 @@ function QuizView() {
                 setCurrentQuestion(nextQuestion);
             }
         };
-
-        return (
-            <Section>
-                {/* {displayQuestions(quiz.questions)} */}
-                <Container>
-                    <RoundLabel className="dark-green white-text">Question {currentQuestion + 1} of {questions.length}</RoundLabel>
-                    <RoundLabel className="green white-text right">{questions[currentQuestion].points} points</RoundLabel>
-                </Container>
-
-                <BigText>{questions[currentQuestion].question}</BigText>
-
-                <Container>
-                    {questions[currentQuestion].options.map((option) =>
-                        <Option className="white">{option}</Option>
-                    )}
-                </Container>
-
-                <Container>
-                    {/* {PrevButton([currentQuestion, setCurrentQuestion])} */}
-                    <Button className="green white-text" onClick={() => handlePrevButtonClick()}>Previous</Button>
-                    <div className="right">
-                        {/* {NextButton([currentQuestion, setCurrentQuestion])} */}
-                        <Button className="green white-text" onClick={() => handleNextButtonClick()}>Next</Button>;
-                        <Button className="dark-green white-text">Submit</Button>
+        
+        if (questions[currentQuestion].options) {
+            return (
+                <Section>
+                    <div className="top-align">
+                        <div className="row-container top-align">
+                            <span className="round-label dark-green white-text">Class {quiz.classId}</span>
+                            <span className="round-label green white-text">{props.getSubjectName(quiz.subjectId)}</span>
+                            <span className="round-label dark-green white-text">{props.getChapterName(quiz.chapterId)}</span>
+                        </div>
+                        <Title>{quiz.name}</Title>
                     </div>
-                </Container>
-            </Section>
-        );
+                    <div className="dashed white box">
+                        <div className="row-container">
+                            <span className="round-label dark-green white-text">Question {currentQuestion + 1} of {questions.length}</span>
+                            <span className="round-label green white-text">{questions[currentQuestion].points} points</span>
+                        </div>
+
+                        <p className="text align-left">{questions[currentQuestion].question}</p>
+
+                        <div className="row-container">
+                            {questions[currentQuestion].options.map((option, index) =>
+                                <p className="option white">{index + 1}. {option}</p>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="row-container no-grow">
+                        <div>
+                        <button className="dark-green white-text standard-spacing" onClick={(e) => {
+                            e.preventDefault();
+                            window.location.href="../dashboard";
+                        }}>Return to Dashboard</button>
+                        <button className="green white-text standard-spacing" onClick={() => handlePrevButtonClick()}>Previous</button>
+                        </div>
+
+                        <div>
+                            <button className="green white-text standard-spacing" onClick={() => handleNextButtonClick()}>Next</button>;
+                            <button className="dark-green white-text standard-spacing">Submit</button>
+                        </div>
+                    </div>
+                </Section>
+            );
+        } else {
+            return null;
+        }
     } else {
         return (null);
     }

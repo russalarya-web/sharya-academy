@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import {Title, currentUrl} from "../App";
+import {Title, currentUrl, matchFromDbList} from "../App";
 import {Box, Text} from "./Home";
 
 import AdminDashboard from "../components/adminView/AdminDashboard";
@@ -35,11 +35,6 @@ export const Menu = styled.div`
 `;
 
 export const Profile = styled.button`
-    padding: 10px 20px;
-    margin: 10px;
-    border: solid 1px;
-    color: #FFF;
-    background: rgba(78, 159, 61, 0.8);
     font-size: calc(10px + 0.8vmin);
     border-radius: 5px;
     z-index: 1;
@@ -180,7 +175,7 @@ export function ChaptersFromAPI(){
 
 
 // Landing Page
-function AdminLoggedIn() {
+function AdminView() {
     const FirstName = DetailsFromAPI().firstName;
 
     const classes = GetClasses();
@@ -198,6 +193,7 @@ function AdminLoggedIn() {
                 <Header>
                     <Menu>
                         <Profile
+                        className="green white-text standard-spacing"
                         onClick={(e) => {
                             e.preventDefault();
                             window.location.href='/login';
@@ -221,7 +217,10 @@ function AdminLoggedIn() {
                         </Route>
                         <Route path="/admin/statistics" component={AdminDashboard} exact />
                         <Route path="/admin/quiz/:quizId" exact>
-                            <AdminQuizView />
+                            <AdminQuizView 
+                                getSubjectName={(subjectId) => matchFromDbList(subjects, subjectId)} 
+                                getChapterName={(chapterId) => matchFromDbList(chapters, chapterId)}
+                            />
                         </Route>
                     </Switch>
                 </Page>
@@ -231,4 +230,4 @@ function AdminLoggedIn() {
     }
 }
 
-export default AdminLoggedIn;
+export default AdminView;

@@ -104,22 +104,23 @@ const WhoWeAreList = [
 ];
 
 const pricingList = [
-    {planName: 'Free', price: 'Always ₹0', className: 'pricing-box white',
+    {planName: 'Free', price: 'Always ₹0', className: 'white',
     points: ['Chapter Notes', 'NCERT Solutions', 'Exemplar Questions'], button: 'Sign Up'},
-    {planName: 'Basic', price: 'From ₹599 a year', className: 'pricing-box green white-text',
+    {planName: 'Basic', price: 'From ₹599 a year', className: 'green white-text white-border',
     points: ['Everything in Free, plus:', 'Practice Tests', 'Worksheets'], button: 'Sign Up'},
-    {planName: 'Premium', price: 'From ₹999 a year', className: 'pricing-box dark-green white-text',
+    {planName: 'Premium', price: 'From ₹999 a year', className: 'dark-green white-text',
     points: ['Everything in Basic, plus:', 'Auto-Graded Tests', 'Detailed Feedback'], button: 'Sign Up'}
 ];
 
 const listPricing = pricingList.map((planItem) =>
-    <div className={planItem.className}>
+    <div className={"pricing-box " + planItem.className}>
         <BoxTitle>{planItem.planName}</BoxTitle>
         <Text>{planItem.points[0]}</Text>
         <Text>{planItem.points[1]}</Text>
         <Text>{planItem.points[2]}</Text>
         <BoxTitle>{planItem.price}</BoxTitle>
         <BoxButton
+        className={planItem.className}
         onClick={(e) => {
             e.preventDefault();
             window.location.href='/signup';
@@ -166,25 +167,6 @@ const footerLists = FooterLists.map((footerList) =>
     </div>
 )
 
-// landing page
-function Landing() {
-    return (
-        <div className="element">
-            <div className="element-inner">
-                <Title>New Look. Same Affordability</Title>
-                <h3>Plan available for Class 10 board prep.</h3>
-                <Button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href='/signup';
-                    }}>
-                    Get started
-                </Button>
-            </div>
-        </div>
-    )
-}
-
 const Element = ({title, text, color, callToAction, buttons, rightBlock}) => {
     return (
         <div className={"element " + color}>
@@ -194,7 +176,7 @@ const Element = ({title, text, color, callToAction, buttons, rightBlock}) => {
                         <Title className="align-left">{title}</Title>
                         <Text>{text}</Text>
                         <Text>{callToAction}</Text>
-                        <div className="row-container">
+                        <div className="row-container no-grow no-justify">
                             {buttons.map((button) => {
                                 return <button 
                                     className={button.color + " standard-spacing"}
@@ -216,7 +198,7 @@ const Element = ({title, text, color, callToAction, buttons, rightBlock}) => {
 // about platform page
 function AboutPlatform() {
     return (
-        <div className="element green white-text">
+        <div className="element dark-green white-text">
             <div className="element-inner">
                 <Title>Our Platform</Title>
                 {aboutPlatform.map((text) =>
@@ -294,7 +276,6 @@ function Home() {
             </Header>
 
             {/* Landing */}
-            {/* <Landing /> */}
             <Element 
             title="New Look. Same Affordability" 
             color="" 
@@ -311,6 +292,9 @@ function Home() {
                     }}
                 ]
             } />
+
+            {/* About Platform */}
+            {/* <AboutPlatform /> */}
 
             <Element 
             title="Online Quizzes" 
@@ -330,8 +314,7 @@ function Home() {
                 ]
             } />
 
-            {/* About Platform */}
-            {/* <AboutPlatform /> */}
+            
             
             {/* Who are We */}
             <WhoAreWe />

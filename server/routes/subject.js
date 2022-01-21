@@ -27,4 +27,10 @@ router.get("/all", async function(req, res, next) {
     res.send(subjects);
 });
 
+// get subjects by class from db
+router.get("/:classId", async function(req, res, next) {
+    var subjects = await subject.getByClass(Number.parseInt(req.params.classId));
+    res.send(subjects);
+});
+
 module.exports = router;
