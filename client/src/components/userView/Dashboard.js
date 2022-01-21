@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 
 import {Title, currentUrl} from "../../App";
-import { listMenu, ContentFromAPI, GetSubjectState } from "../LoggedIn";
+import { listMenu, ContentFromAPI, GetSubjectState } from "../../routes/LoggedIn";
 
 export const MainView = styled.div`
     padding: 20px 10px;

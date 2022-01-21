@@ -3,8 +3,8 @@ import axios from "axios";
 import styled from 'styled-components';
 
 import {Title, currentUrl} from "../../App";
-import {Box, Text} from "../Home";
-import {listMenu} from "../LoggedIn";
+import {Box, Text} from "../../routes/Home";
+import {listMenu} from "../../routes/LoggedIn";
 
 export const Section = styled.div`
     padding: 20px 0;

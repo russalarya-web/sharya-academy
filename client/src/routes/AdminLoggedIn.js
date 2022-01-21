@@ -6,10 +6,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {Title, currentUrl} from "../App";
 import {Box, Text} from "./Home";
 
-import AdminDashboard from "./adminView/AdminDashboard";
-import AdminQuizView from "./adminView/AdminQuizView";
-import AdminContentView from "./adminView/AdminContentView";
-import AdminStructureView from "./adminView/AdminStructureView";
+import AdminDashboard from "../components/adminView/AdminDashboard";
+import AdminQuizView from "../components/adminView/AdminQuizView";
+import AdminContentView from "../components/adminView/AdminContentView";
+import AdminStructureView from "../components/adminView/AdminStructureView";
 
 export const Header = styled.header`
     position: fixed;
