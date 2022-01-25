@@ -99,16 +99,17 @@ const AdminQuizView = props => {
                                     <p className="round-label dark-green white-text">Question {currentInt}</p>
                                     <p className="round-label green white-text">{question.points} points</p>
                                 </div>
-                                <p className="text align-left">{question.question}</p>
+                                
+                                <p className="text align-left" dangerouslySetInnerHTML={{__html: question.question }} />
 
                                 {/* Display Options */}
                                 <div className="row-container">
                                     {question.options.map((option, index) => {
                                         var currentIndex = index + 1;
                                         if (currentIndex === question.correctOption) {
-                                            return <p className="option green white-text">{currentIndex}. {option}</p>
+                                            return <p className="option green white-text" dangerouslySetInnerHTML={{__html: currentIndex + ". " + option }} />
                                         }
-                                        return <p className="option">{currentIndex}. {option}</p>
+                                        return <p className="option" dangerouslySetInnerHTML={{__html: currentIndex + ". " + option }} />
                                     })}
                                 </div>
                             </div>

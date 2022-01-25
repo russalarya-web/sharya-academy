@@ -138,11 +138,11 @@ const QuizView = props => {
                             <span className="round-label green white-text">{questions[currentQuestion].points} points</span>
                         </div>
 
-                        <p className="text align-left">{questions[currentQuestion].question}</p>
+                        <p className="text align-left" dangerouslySetInnerHTML={{__html: questions[currentQuestion].question }} />
 
                         <div className="row-container">
                             {questions[currentQuestion].options.map((option, index) =>
-                                <p className="option white">{index + 1}. {option}</p>
+                                <p className="option white" dangerouslySetInnerHTML={{__html: (index + 1) + ". " + option }} />
                             )}
                         </div>
                     </div>
