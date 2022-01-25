@@ -90,21 +90,21 @@ html, body, footer {
 
 .question-box {
   background: #f2f2f2;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 5px;
   border: none;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-width: 300px;
-  max-width: 450px;
+  min-width: 280px;
+  max-width: 420px;
   margin: auto;
 }
 
 .question-box .input {
-  padding: 12px 4%;
+  padding: 10px 3%;
   border: none;
-  width: 90%;
+  width: 92%;
   margin: 8px 1%;
 }
 
@@ -113,12 +113,27 @@ html, body, footer {
   height: 100px;
 }
 
-.option-input {
-  width: 40% !important;
+.margin-spacing {
+  margin: 1px 0;
+}
+
+.option-input, .small-input, .big-input {
+  margin: 6px 1% !important;
+}
+
+.option-input{
+  width: 42% !important;
+}
+
+.small-input {
+  width: 28% !important;
+}
+
+.big-input {
+  width: 56% !important;
 }
 
 .submit-input {
-  padding: 10px 2% !important;
   width: 48% !important;
 }
 
