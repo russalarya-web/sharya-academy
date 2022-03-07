@@ -1,0 +1,1 @@
+export const currentUrl = "http://34.239.101.57";

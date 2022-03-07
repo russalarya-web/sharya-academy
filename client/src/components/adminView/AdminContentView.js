@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import { currentUrl, useTitle, matchFromDbList } from "../../App";
+import { useTitle, matchFromDbList } from "../../App";
+import {currentUrl} from "../../currentUrl";
 import { Structure, Sidebar, sidebarItemClass, MainView, Container, Listing } from "../userView/Dashboard";
 import { Button } from "./AdminQuizView";
 

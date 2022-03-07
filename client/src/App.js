@@ -15,8 +15,6 @@ import SignIn from "./routes/SignIn";
 import UserView from "./routes/UserView";
 import AdminView from "./routes/AdminView";
 
-export const currentUrl = "http://34.239.101.57";
-
 export const subjectCodes = [
   {id: "sci", name: "Science"}, 
   {id: "ssc", name: "Social Science"}, 

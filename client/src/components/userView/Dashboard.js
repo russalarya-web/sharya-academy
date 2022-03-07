@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {useTitle, currentUrl, matchFromDbList} from "../../App";
+import {useTitle, matchFromDbList} from "../../App";
+import {currentUrl} from "../../currentUrl";
 import {Search} from "../adminView/AdminContentView";
 
 export const MainView = styled.div`

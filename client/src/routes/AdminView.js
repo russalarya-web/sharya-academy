@@ -3,10 +3,12 @@ import axios from "axios";
 import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import {Title, currentUrl, matchFromDbList} from "../App";
+import {Title, matchFromDbList} from "../App";
+import {currentUrl} from "../currentUrl";
+
 import {Box, Text} from "./Home";
 
-import AdminDashboard from "../components/adminView/AdminDashboard";
+import AdminDashboard from "../components/adminView/Dashboard";
 import AdminQuizView from "../components/adminView/AdminQuizView";
 import AdminContentView from "../components/adminView/AdminContentView";
 import AdminStructureView from "../components/adminView/AdminStructureView";

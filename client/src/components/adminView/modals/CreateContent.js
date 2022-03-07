@@ -2,7 +2,7 @@ import randomString from 'randomstring';
 
 import {Container} from '../AdminQuizView';
 
-import { currentUrl } from '../../../App';
+import { currentUrl } from '../../../currentUrl';
 
 const CreateContent = props => {
     if (!props.show) {

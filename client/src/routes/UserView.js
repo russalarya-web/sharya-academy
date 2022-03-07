@@ -3,7 +3,8 @@ import axios from "axios";
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 
-import { currentUrl, matchFromDbList } from "../App";
+import { matchFromDbList } from "../App";
+import {currentUrl} from "../currentUrl";
 
 import { Profile } from "./AdminView";
 

@@ -3,8 +3,9 @@ import axios from "axios";
 import styled from 'styled-components';
 
 import { useParams } from "react-router";
+import {currentUrl} from "../../currentUrl";
 
-import { Title, currentUrl, useTitle } from '../../App';
+import { Title, useTitle } from '../../App';
 
 export const Section = styled.div`
     padding: 20px 50px;

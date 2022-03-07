@@ -98,7 +98,7 @@ const aboutPlatform = [
     "We have Online Tests with which students can get to know where they are lacking."
 ];
 
-const WhoWeAreList = [
+const teamMembers = [
     {name: "Shalini Jayaswal", position: "Co-Founder, Content and Marketing Lead"},
     {name: "Russal Arya", position: "Co-Founder, Technology and Operations Lead"}
 ];
@@ -121,10 +121,7 @@ const listPricing = pricingList.map((planItem) =>
         <BoxTitle>{planItem.price}</BoxTitle>
         <BoxButton
         className={planItem.className}
-        onClick={(e) => {
-            e.preventDefault();
-            window.location.href='/signup';
-        }}>
+        onClick={(e) => buttonClick(e, "signup")}>
             {planItem.button}
         </BoxButton>
     </div>
@@ -147,7 +144,7 @@ const Company = [
     {label: "Refund Policy", link: "/refund-policy"},
 ];
 
-const FooterLists = [
+const footerList = [
     {title: "Updates", list: Updates},
     {title: "Company", list: Company}
 ]
@@ -160,14 +157,14 @@ function createList(list) {
     return listItems;
 }
 
-const footerLists = FooterLists.map((footerList) => 
+const FooterLists = footerList.map((footerList) => 
     <div className="footer-list">
         <h3 className="align-left">{footerList.title}</h3>
         {createList(footerList.list)}
     </div>
 )
 
-const Element = ({title, text, color, callToAction, buttons, rightBlock}) => {
+const ClassicElement = ({title, text, color, callToAction, buttons, rightBlock}) => {
     return (
         <div className={"element " + color}>
             <div className="element-inner">
@@ -210,8 +207,8 @@ function AboutPlatform() {
 }
 
 // profiles
-function Profiles() {
-    return WhoWeAreList.map((item) => {
+function TeamMembers() {
+    return teamMembers.map((item) => {
         return (<div className="profile-item white green-text">
             <Text>{item.name}</Text>
             <Text>{item.position}</Text>
@@ -219,14 +216,14 @@ function Profiles() {
     })
 }
 
-// who are we section
-function WhoAreWe() {
+// team section
+function Team() {
     return (
         <div className="element dark-green white-text">
             <div className="element-inner">
                 <Title>Our Team</Title>
                 <div className="profile-container">
-                    <Profiles />
+                    <TeamMembers />
                 </div>
             </div>
         </div>
@@ -259,6 +256,12 @@ function PricingDisplay() {
     )
 }
 
+// click event
+function buttonClick(e, link) {
+    e.preventDefault();
+    window.location.href = '/' + link;
+}
+
 // home page
 function Home() {
     return (
@@ -267,57 +270,40 @@ function Home() {
             <Header>
                 <SignIn
                 className="dark-green white-text"
-                onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href='/login';
-                }}>
+                onClick={(e) => buttonClick(e, "login")}>
                     Sign in
                 </SignIn>
             </Header>
 
             {/* Landing */}
-            <Element 
+            <ClassicElement 
             title="New Look. Same Affordability" 
             color="" 
             callToAction="Plan available for Class 10 board prep"
             buttons={
                 [
-                    {color: "green white-text", text: "Get started", onClick: (e) =>  {
-                        e.preventDefault();
-                        window.location.href='/signup';
-                    }}, 
-                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) =>  {
-                        e.preventDefault();
-                        window.location.href='/demo';
-                    }}
+                    {color: "green white-text", text: "Get started", onClick: (e) => buttonClick(e, "signup")}, 
+                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
                 ]
             } />
 
             {/* About Platform */}
             {/* <AboutPlatform /> */}
 
-            <Element 
+            <ClassicElement 
             title="Online Quizzes" 
             color="green white-text" 
             text={quizInfo} 
             callToAction="Now available for classes X and XII."
             buttons={
                 [
-                    {color: "white green-text", text: "Sign up", onClick: (e) =>  {
-                        e.preventDefault();
-                        window.location.href='/signup';
-                    }}, 
-                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) =>  {
-                        e.preventDefault();
-                        window.location.href='/demo';
-                    }}
+                    {color: "white green-text", text: "Sign up", onClick: (e) => buttonClick(e, "signup")}, 
+                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
                 ]
             } />
-
-            
             
             {/* Who are We */}
-            <WhoAreWe />
+            <Team />
             
             {/* Pricing */}
             <PricingDisplay />
@@ -331,7 +317,7 @@ function Home() {
                         <div className="row-container hide">
                         </div>
                         <div className="row-container">
-                            {footerLists}
+                            {FooterLists}
                         </div>
                     </div>
 

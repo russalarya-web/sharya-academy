@@ -1,6 +1,6 @@
 import {Container} from '../AdminQuizView';
 
-import { currentUrl } from '../../../App';
+import { currentUrl } from '../../../currentUrl';
 
 const CreateClass = props => {
     if (!props.show) {

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title, subjectCodes, currentUrl, useTitle} from "../../App";
+import {Title, subjectCodes, useTitle} from "../../App";
+import {currentUrl} from "../../currentUrl";
+
 import CreateQuestion from "./modals/CreateQuestion";
 import { useParams } from "react-router";
 

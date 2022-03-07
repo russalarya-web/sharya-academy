@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-import {Title, currentUrl} from "../../App";
+import {Title} from "../../App";
+import {currentUrl} from "../../currentUrl";
 import {Box, Text} from "../../routes/Home";
 import {listMenu} from "../../routes/UserView";
 
