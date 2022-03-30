@@ -13,6 +13,26 @@ import CreateClass from "./modals/CreateClass";
 import CreateSubject from "./modals/CreateSubject";
 import CreateChapter from "./modals/CreateChapter";
 
+// post to db
+export function postToDb (link, formData, callback) {
+	// post request
+	axios.post(link, formData)
+
+	// get response
+	.then(function (response) {
+		console.log(response.data);
+        callback();
+        window.location.reload(false);
+	})
+
+	// error handling
+	.catch(function (error) {
+		console.log(error);
+        callback();
+        window.location.reload(false);
+	});
+}
+
 function GetSubjects() {
     const [content, setContent] = useState([]);
 

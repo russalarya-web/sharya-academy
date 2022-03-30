@@ -1,7 +1,7 @@
 import randomString from 'randomstring';
 
 import {Container} from '../AdminQuizView';
-
+import {postToDb} from '../AdminStructureView';
 import { currentUrl } from '../../../currentUrl';
 
 const CreateChapter = props => {
@@ -9,14 +9,6 @@ const CreateChapter = props => {
         return null
     }
     const link = currentUrl + ":9000/chapter/create";
-
-    function SubjectBox() {
-        if (props.subjectId === "") {
-          return <input name="subjectId" className="input standard-spacing" type="text" placeholder="Enter Subject ID" />;
-
-        }
-        return <input name="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
-    }
     
     if (props.subjectId === "") {
         return (
@@ -30,18 +22,47 @@ const CreateChapter = props => {
         );
     }
 
+    const saveAnswer = (event) => {
+        event.preventDefault();
+
+        const elementsArray = [...event.target.elements];
+
+        const formData = elementsArray.reduce((acc, element) => {
+            if (element.id) {
+                acc[element.id] = element.value.trim();
+            }
+
+            return acc;
+        }, {});
+
+        if (formData.chapterName !== '') {
+            if (formData.term !== '') {
+                postToDb(link, formData, props.onClose);
+                
+                alert("Chapter " + formData.chapterName + " created.");
+            }
+            else {
+                alert("Please enter the term.")
+            }
+        }
+
+        else {
+            alert("Please enter a chapter name.")
+        }
+    }
+
     return (
         <div className="modal">
-            <form action={link} method="post" className="question-box">
+            <form onSubmit={saveAnswer} className="question-box">
                 <input name="classId" className="input standard-spacing" type="hidden" value={props.classId} />
-                <SubjectBox />
+                <input name="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
                 <input name="chapterId" className="input standard-spacing" type="hidden" value={randomString.generate(7)} />
                 <input name="chapterName" className="input standard-spacing" type="text" placeholder="Enter Chapter Name" />
                 <input name="term" className="input standard-spacing" type="number" placeholder="Enter Term" />
 
                 <Container>
                     <button onClick={props.onClose} className="input submit-input standard-spacing green white-text">Close</button>
-                    <input type="submit" className="input submit-input standard-spacing dark-green white-text" value="Create" />
+                    <button className="input submit-input standard-spacing dark-green white-text">Create</button>
                 </Container>
             </form>
         </div>

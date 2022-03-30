@@ -1,1 +1,2 @@
-export const currentUrl = "http://34.239.101.57";
+export const currentUrl = "http://sharyaacademy.com";
+// export const currentUrl = "http://localhost";

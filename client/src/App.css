@@ -12,7 +12,6 @@
 }
 
 .element {
-  vertical-align: middle;
   width: 100%;
 }
 
@@ -20,6 +19,7 @@
   max-width: 900px;
   padding: 60px;
   margin: auto;
+  vertical-align: middle;
 }
 
 * {
@@ -314,11 +314,7 @@ h3, h5 {
 
 /* Footer */
 footer {
-  background: #1E5128;
   color: #fff;
-  position: relative;
-  margin: 0;
-  bottom: 0;
 }
 
 .row-container {

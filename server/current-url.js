@@ -1,3 +1,3 @@
-const currentUrl = "http://34.239.101.57";
+const currentUrl = "http://sharyaacademy.com";
 
 module.exports = currentUrl;

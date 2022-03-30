@@ -1,25 +1,41 @@
 import randomString from 'randomstring';
 
 import {Container} from '../AdminQuizView';
-
+import {postToDb} from '../AdminStructureView';
 import { currentUrl } from '../../../currentUrl';
 
 const CreateContent = props => {
+    const link = currentUrl + ":9000/" + props.contentType + "/create";
+
     if (!props.show) {
         return null
     }
 
-    function SubjectBox() {
-        if (props.subjectId === "") {
-          return <input name="subjectId" className="input standard-spacing" type="text" value={props.subjectId} placeholder="Enter Subject" />;
+    const saveAnswer = (event) => {
+        event.preventDefault();
 
+        const elementsArray = [...event.target.elements];
+
+        const formData = elementsArray.reduce((acc, element) => {
+            if (element.id) {
+                acc[element.id] = element.value.trim();
+            }
+
+            return acc;
+        }, {});
+
+        if (formData.quizName !== '') {
+            postToDb(link, formData, props.onClose);
+            
+            console.log("Quiz being added to subject " + props.subjectId + ".");
         }
-        return <input name="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
+
+        else {
+            alert("Please enter the quiz name.")
+        }
     }
 
     if (props.contentType === "quiz") {
-        const link = currentUrl + ":9000/quiz/create";
-
         if (props.subjectId === "") {
             return (
                 <div className="modal">
@@ -44,15 +60,15 @@ const CreateContent = props => {
         
         return (
             <div className="modal">
-                <form action={link} method="post" className="question-box">
-                    <input name="quizId" className="input standard-spacing" type="hidden" value={randomString.generate(6)} />
-                    <input name="classId" className="input standard-spacing" type="hidden" value={props.classId} />
-                    <SubjectBox />
-                    <input name="chapterId" className="input standard-spacing" type="hidden" value={props.chapterId} />
-                    <input name="quizName" className="input standard-spacing" type="text" placeholder="Enter Quiz Name" />
+                <form onSubmit={saveAnswer} className="question-box">
+                    <input id="quizId" className="input standard-spacing" type="hidden" value={randomString.generate(6)} />
+                    <input id="classId" className="input standard-spacing" type="hidden" value={props.classId} />
+                    <input id="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
+                    <input id="chapterId" className="input standard-spacing" type="hidden" value={props.chapterId} />
+                    <input id="quizName" className="input standard-spacing" type="text" placeholder="Enter Quiz Name" />
                     <Container>
                         <button onClick={props.onClose} className="input submit-input standard-spacing green white-text">Close</button>
-                        <input type="submit" className="input submit-input standard-spacing dark-green white-text" value="Create" />
+                        <button className="input submit-input standard-spacing dark-green white-text">Create</button>
                     </Container>
                 </form>
             </div>

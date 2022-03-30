@@ -277,30 +277,32 @@ function Home() {
 
             {/* Landing */}
             <ClassicElement 
-            title="New Look. Same Affordability" 
-            color="" 
-            callToAction="Plan available for Class 10 board prep"
-            buttons={
-                [
-                    {color: "green white-text", text: "Get started", onClick: (e) => buttonClick(e, "signup")}, 
-                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
-                ]
-            } />
+                title="New Look. Same Affordability" 
+                color="" 
+                callToAction="Plan available for Class 10 board prep"
+                buttons={
+                    [
+                        {color: "green white-text", text: "Get started", onClick: (e) => buttonClick(e, "signup")}, 
+                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
+                    ]
+                } 
+            />
 
             {/* About Platform */}
             {/* <AboutPlatform /> */}
 
             <ClassicElement 
-            title="Online Quizzes" 
-            color="green white-text" 
-            text={quizInfo} 
-            callToAction="Now available for classes X and XII."
-            buttons={
-                [
-                    {color: "white green-text", text: "Sign up", onClick: (e) => buttonClick(e, "signup")}, 
-                    {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
-                ]
-            } />
+                title="Online Quizzes" 
+                color="green white-text" 
+                text={quizInfo} 
+                callToAction="Now available for classes X and XII."
+                buttons={
+                    [
+                        {color: "white green-text", text: "Sign up", onClick: (e) => buttonClick(e, "signup")}, 
+                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
+                    ]
+                }
+            />
             
             {/* Who are We */}
             <Team />

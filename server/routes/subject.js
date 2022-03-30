@@ -17,8 +17,11 @@ app.use(bodyParser.json());
 router.post("/create", function(req, res, next) {
     if (subject.create(req.body.subjectId, req.body.classId, req.body.subjectName)) {
         console.log(req.body);
+        res.send(true);
     }
-    res.redirect(currentUrl + '/admin/structure');
+    else {
+        res.send(false);
+    }
 });
 
 // get all subjects from db
