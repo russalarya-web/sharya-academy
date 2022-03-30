@@ -1,8 +1,8 @@
 import randomString from 'randomstring';
 
-import {Container} from '../AdminQuizView';
-import {postToDb} from '../AdminStructureView';
-import { currentUrl } from '../../../currentUrl';
+import {Container} from '../../AdminQuizView';
+import {Modal, postToDb} from '../../AdminStructureView';
+import { currentUrl } from '../../../../currentUrl';
 
 const CreateSubject = props => {
     if (!props.show) {
@@ -35,7 +35,7 @@ const CreateSubject = props => {
     }
     
     return (
-        <div className="modal">
+        <Modal>
             <form onSubmit={saveAnswer} className="question-box">
                 <input id="classId" className="input standard-spacing" type="hidden" value={props.classId} />
                 <input id="subjectId" className="input standard-spacing" type="hidden" value={randomString.generate(5)} />
@@ -45,7 +45,7 @@ const CreateSubject = props => {
                     <button className="input submit-input standard-spacing dark-green white-text">Create</button>
                 </Container>
             </form>
-        </div>
+        </Modal>
     );
 }
 

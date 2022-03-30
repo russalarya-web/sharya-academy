@@ -37,6 +37,16 @@ router.post("/create/question/:quizId", function(req, res, next) {
     res.redirect(currentUrl + '/admin/quiz/' + req.params.quizId);
 });
 
+// update quiz questions in db
+router.post("/update/question/:questionId", function(req, res, next) {
+    if (question.update(req.params.questionId, req.body.question, [req.body.option1, req.body.option2, req.body.option3, req.body.option4], req.body.correctOption, req.body.points)) {
+        res.send(true);
+    }
+    else {
+        res.send(false);
+    }
+});
+
 
 // get all quizzes from db
 router.get("/all", async function(req, res, next) {

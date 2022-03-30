@@ -11,7 +11,6 @@ var db = require('./db/connect');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI');
-var chaptersRouter = require('./routes/chapterDetails');
 var adminRouter = require('./routes/adminDetails');
 var detailsRouter = require('./routes/userDetails');
 var sortRouter = require('./routes/sortOptions');
@@ -50,7 +49,6 @@ app.use('/subject', subjectRouter);
 // chapter router
 app.use('/chapter', chapterRouter);
 
-app.use('/chapters', chaptersRouter);
 app.use('/details', detailsRouter);
 app.use('/admin', adminRouter);
 app.use('/sorting', sortRouter);

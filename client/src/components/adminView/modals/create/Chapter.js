@@ -1,8 +1,8 @@
 import randomString from 'randomstring';
 
-import {Container} from '../AdminQuizView';
-import {postToDb} from '../AdminStructureView';
-import { currentUrl } from '../../../currentUrl';
+import {Container} from '../../AdminQuizView';
+import {Modal, postToDb} from '../../AdminStructureView';
+import { currentUrl } from '../../../../currentUrl';
 
 const CreateChapter = props => {
     if (!props.show) {
@@ -52,7 +52,7 @@ const CreateChapter = props => {
     }
 
     return (
-        <div className="modal">
+        <Modal>
             <form onSubmit={saveAnswer} className="question-box">
                 <input name="classId" className="input standard-spacing" type="hidden" value={props.classId} />
                 <input name="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
@@ -65,7 +65,7 @@ const CreateChapter = props => {
                     <button className="input submit-input standard-spacing dark-green white-text">Create</button>
                 </Container>
             </form>
-        </div>
+        </Modal>
     );
 }
 

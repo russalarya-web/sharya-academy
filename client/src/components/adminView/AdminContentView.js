@@ -7,7 +7,7 @@ import {currentUrl} from "../../currentUrl";
 import { Structure, Sidebar, sidebarItemClass, MainView, Container, Listing } from "../userView/Dashboard";
 import { Button } from "./AdminQuizView";
 
-import CreateContent from "./modals/CreateContent";
+import CreateContent from "./modals/create/Content";
 
 export const Section = styled.div`
     padding: 20px 0;

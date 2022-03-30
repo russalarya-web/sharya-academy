@@ -54,7 +54,7 @@ async function getByQuizId(quizId) {
 }
 
 // delete question by id
-async function deleteQuestion(questionId) {
+async function remove(questionId) {
     var success = false;
 
     const question = await Question.remove({_id: questionId})
@@ -64,4 +64,64 @@ async function deleteQuestion(questionId) {
     return success;
 }
 
-module.exports = {create, getByQuizId, get, deleteQuestion};
+// update question by id
+async function update(questionId, questionText, optionList, correctIndex, pointsInt) {
+    var success = false;
+
+    const question = await Question.updateOne({_id: questionId}, {
+        question: questionText,
+        options: optionList,
+        correctOption: correctIndex,
+        points: pointsInt
+    }, function(error) {
+        if (error) {
+            console.log(error);
+            success = false;
+        } else {
+            console.log("Updated " + questionId + " successfully...")
+            success = true;
+        }
+    });
+
+    return success;
+};
+
+// update question text by id
+async function updateQuestionText(questionId, questionText) {
+    var success = false;
+
+    const question = await Question.updateOne({_id: questionId}, {
+        question: questionText
+    }, function(error) {
+        if (error) {
+            console.log(error);
+            success = false;
+        } else {
+            console.log("Updated " + questionId + " successfully...")
+            success = true;
+        }
+    });
+
+    return success;
+};
+
+// update points by id
+async function updatePoints(questionId, points) {
+    var success = false;
+
+    const question = await Question.updateOne({_id: questionId}, {
+        points: points
+    }, function(error) {
+        if (error) {
+            console.log(error);
+            success = false;
+        } else {
+            console.log("Updated " + questionId + " successfully...")
+            success = true;
+        }
+    });
+
+    return success;
+};
+
+module.exports = {create, getByQuizId, get, remove, update, updateQuestionText, updatePoints};

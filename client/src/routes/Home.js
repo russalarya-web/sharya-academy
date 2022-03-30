@@ -115,13 +115,13 @@ const pricingList = [
 const listPricing = pricingList.map((planItem) =>
     <div className={"pricing-box " + planItem.className}>
         <BoxTitle>{planItem.planName}</BoxTitle>
-        <Text>{planItem.points[0]}</Text>
-        <Text>{planItem.points[1]}</Text>
-        <Text>{planItem.points[2]}</Text>
+        {planItem.points.map((point) => {
+            return <Text>{point}</Text> 
+        })}
         <BoxTitle>{planItem.price}</BoxTitle>
         <BoxButton
-        className={planItem.className}
-        onClick={(e) => buttonClick(e, "signup")}>
+            className={planItem.className}
+            onClick={(e) => buttonClick(e, "signup")}>
             {planItem.button}
         </BoxButton>
     </div>

@@ -9,9 +9,22 @@ import { Structure, Sidebar, sidebarItemClass, MainView, Container, Listing } fr
 import { Button } from "./AdminQuizView";
 import { Search } from "./AdminContentView";
 
-import CreateClass from "./modals/CreateClass";
-import CreateSubject from "./modals/CreateSubject";
-import CreateChapter from "./modals/CreateChapter";
+import CreateClass from "./modals/create/Class";
+import CreateSubject from "./modals/create/Subject";
+import CreateChapter from "./modals/create/Chapter";
+
+export const Modal = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+`;
 
 // post to db
 export function postToDb (link, formData, callback) {
@@ -38,21 +51,6 @@ function GetSubjects() {
 
     async function getContent() {
         const response = await axios.get(currentUrl + ":9000/subjects/all");
-        setContent(response.data);
-    }
-
-    useEffect(() => {
-        getContent();
-    }, [])
-
-    return content;
-}
-
-function GetChapters() {
-    const [content, setContent] = useState([]);
-
-    async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/chapters/all");
         setContent(response.data);
     }
 

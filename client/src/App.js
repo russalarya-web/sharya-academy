@@ -9,22 +9,12 @@ import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import React, { useEffect } from "react";
 
+// import pages
 import Home from "./routes/Home";
 import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
 import UserView from "./routes/UserView";
 import AdminView from "./routes/AdminView";
-
-export const subjectCodes = [
-  {id: "sci", name: "Science"}, 
-  {id: "ssc", name: "Social Science"}, 
-  {id: "mat", name: "Mathematics"}, 
-  {id: "hin", name: "Hindi"}, 
-  {id: "eng", name: "English"},
-  {id: "phy", name: "Physics"},
-  {id: "chem", name: "Chemistry"},
-  {id: "bio", name: "Biology"},
-];
 
 // set page title
 export function useTitle(title) {
@@ -106,7 +96,7 @@ function App() {
           onClick={(e) => {
             e.preventDefault();
             window.location.href='/';
-            }}/>
+          }}/>
         <Triangle src={triangle} />
 
         <div className="AppForeground">

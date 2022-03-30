@@ -1,6 +1,6 @@
-import {Container} from '../AdminQuizView';
-import {postToDb} from '../AdminStructureView';
-import { currentUrl } from '../../../currentUrl';
+import {Container} from '../../AdminQuizView';
+import {Modal, postToDb} from '../../AdminStructureView';
+import { currentUrl } from '../../../../currentUrl';
 
 const CreateQuestion = props => {
     if (!props.show) {
@@ -63,7 +63,7 @@ const CreateQuestion = props => {
     }
     
     return (
-        <div className="modal">
+        <Modal>
             <form onSubmit={saveAnswer} className="question-box">
                 <input id="questionId" type="hidden" value={props.questionId} />
                 <textarea id="question" className="input question-input standard-spacing" placeholder="Question"></textarea>
@@ -82,7 +82,7 @@ const CreateQuestion = props => {
                     <button className="input submit-input standard-spacing dark-green white-text">Add question</button>
                 </Container>
             </form>
-        </div>
+        </Modal>
     );
 }
 
