@@ -1,2 +1,2 @@
-// export const currentUrl = "http://sharyaacademy.com";
-export const currentUrl = "http://localhost";
+export const currentUrl = "http://sharyaacademy.com";
+// export const currentUrl = "http://localhost";
