@@ -54,11 +54,11 @@ const CreateChapter = props => {
     return (
         <Modal>
             <form onSubmit={saveAnswer} className="question-box">
-                <input name="classId" className="input standard-spacing" type="hidden" value={props.classId} />
-                <input name="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
-                <input name="chapterId" className="input standard-spacing" type="hidden" value={randomString.generate(7)} />
-                <input name="chapterName" className="input standard-spacing" type="text" placeholder="Enter Chapter Name" />
-                <input name="term" className="input standard-spacing" type="number" placeholder="Enter Term" />
+                <input id="classId" className="input standard-spacing" type="hidden" value={props.classId} />
+                <input id="subjectId" className="input standard-spacing" type="hidden" value={props.subjectId} />
+                <input id="chapterId" className="input standard-spacing" type="hidden" value={randomString.generate(7)} />
+                <input id="chapterName" className="input standard-spacing" type="text" placeholder="Enter Chapter Name" />
+                <input id="term" className="input standard-spacing" type="number" placeholder="Enter Term" />
 
                 <Container>
                     <button onClick={props.onClose} className="input submit-input standard-spacing green white-text">Close</button>
