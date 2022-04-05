@@ -9,7 +9,6 @@ import {currentUrl} from "../currentUrl";
 import { Profile } from "./AdminView";
 
 import Dashboard from "../components/userView/Dashboard";
-import ChapterView from "../components/userView/ChapterView";
 import QuizView from "../components/userView/QuizView";
 
 export const Header = styled.header`

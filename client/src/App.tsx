@@ -101,7 +101,7 @@ function App() {
 				<div className="AppForeground">
 					<Switch>
 						<Route path="/" component={Home} exact />
-						<Route path="/signup" component={SignUp} />
+						<Route path="/sign-up" component={SignUp} />
 						<Route path="/login" component={SignIn} />
 						<Route path="/app" component={UserView} />
 						{/* @ts-ignore */}

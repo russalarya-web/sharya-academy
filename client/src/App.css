@@ -178,6 +178,7 @@ button.white-border {
 /* App Styles */
 .AppForeground {
   z-index: 1;
+  width: 100% !important;
 }
 
 .fullWidth {
