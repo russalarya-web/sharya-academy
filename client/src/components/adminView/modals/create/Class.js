@@ -1,6 +1,8 @@
 import {Container} from '../../AdminQuizView';
-import {Modal, postToDb} from '../../AdminStructureView';
+import {Modal, postToDb, postToFirestore} from '../../AdminStructureView';
 import { currentUrl } from '../../../../currentUrl';
+
+import {db} from "../../../../firebase/config"
 
 const CreateClass = props => {
     if (!props.show) {
@@ -22,9 +24,15 @@ const CreateClass = props => {
         }, {});
 
         if (formData.classId !== '') {
-            postToDb(link, formData, props.onClose);
-            
-            alert("Class " + formData.classId + " created.");
+            postToFirestore("classes", {}, formData.classId)
+            .then(() => {
+                alert("Class " + formData.classId + " created.");
+            })
+            .catch(err => {
+                alert("Something went wrong...")
+                console.log(err)
+            })
+            // postToDb(link, formData, props.onClose);            
         }
 
         else {

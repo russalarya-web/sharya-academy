@@ -105,8 +105,8 @@ const AdminContentView = ({classes, subjects, chapters}) => {
     function classOptions() {
         return classes.map((item) => {
             return (
-            <option value={item._id}>
-                Class {item._id}
+            <option value={item.id}>
+                Class {item.id}
             </option>
             )
         });

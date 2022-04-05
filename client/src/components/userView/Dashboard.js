@@ -6,6 +6,8 @@ import {useTitle, matchFromDbList} from "../../App";
 import {currentUrl} from "../../currentUrl";
 import {Search} from "../adminView/AdminContentView";
 
+import {db} from "../../firebase/config";
+
 export const MainView = styled.div`
     padding: 20px 10px;
     background: rgba(255, 255, 255, 0.9);

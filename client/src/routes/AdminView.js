@@ -79,8 +79,15 @@ function GetClasses() {
     const [content, setContent] = useState([]);
 
     async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/class/all");
-        setContent(response.data);
+        await db.collection('classes').get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                return { 
+                    id: Number(doc.id), ...doc.data() 
+                }
+            })
+
+            setContent(tempDoc);
+        })
     }
 
     useEffect(() => {
@@ -95,8 +102,13 @@ function GetSubjects() {
     const [subjects, setSubjects] = useState([]);
 
     async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/subject/all");
-        setSubjects(response.data);
+        await db.collection('subjects').get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                return {id: doc.id, ...doc.data()}
+            })
+
+            setSubjects(tempDoc);
+        })
     }
 
     useEffect(() => {
@@ -164,7 +176,7 @@ function AdminView() {
     const chapters = GetChapters();
 
     classes.sort((a, b) => {
-        return b._id - a._id;
+        return b.id - a.id;
     });
 
     if (classes) {

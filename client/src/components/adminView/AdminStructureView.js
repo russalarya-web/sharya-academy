@@ -13,6 +13,8 @@ import CreateClass from "./modals/create/Class";
 import CreateSubject from "./modals/create/Subject";
 import CreateChapter from "./modals/create/Chapter";
 
+import {db} from "../../firebase/config";
+
 export const Modal = styled.div`
     position: fixed;
     left: 0;
@@ -46,19 +48,14 @@ export function postToDb (link, formData, callback) {
 	});
 }
 
-function GetSubjects() {
-    const [content, setContent] = useState([]);
-
-    async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/subjects/all");
-        setContent(response.data);
+export async function postToFirestore(collectionName, data, _id) {
+    if (_id) {
+        await db.collection(collectionName).doc(_id).set(data);
+    } else {
+        await db.collection(collectionName).add(data);
     }
 
-    useEffect(() => {
-        getContent();
-    }, [])
-
-    return content;
+    // window.location.reload(false);
 }
 
 const AdminStructureView = ({classes, subjects, chapters}) => {
@@ -90,13 +87,13 @@ const AdminStructureView = ({classes, subjects, chapters}) => {
         return classes.map((item) => {
             return (
             <div 
-                class={sidebarItemClass(item._id, currentClass)} 
+                class={sidebarItemClass(item.id, currentClass)} 
                 onClick={() => {
-                    setCurrentClass(item._id);
+                    setCurrentClass(item.id);
                     setCurrentSubject("");
                 }}
             >
-                Class {item._id}
+                Class {item.id}
             </div>
             )
         });
@@ -122,12 +119,12 @@ const AdminStructureView = ({classes, subjects, chapters}) => {
         var finalSubjects = filterSubjects(classId);
 
         if (finalSubjects.length !== 0) {
-            return filterSubjects(classId).map((item) => {
+            return finalSubjects.map((item) => {
                 return (
                 <div 
-                    class={sidebarItemClass(item._id, currentSubject)} 
+                    class={sidebarItemClass(item.id, currentSubject)} 
                     onClick={() => {
-                        setCurrentSubject(item._id);
+                        setCurrentSubject(item.id);
                     }}
                 >
                     {item.name}
@@ -136,6 +133,8 @@ const AdminStructureView = ({classes, subjects, chapters}) => {
             });
         }
     }
+
+    
 
     if (classes) {
         return (

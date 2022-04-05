@@ -1,7 +1,7 @@
 import randomString from 'randomstring';
 
 import {Container} from '../../AdminQuizView';
-import {Modal, postToDb} from '../../AdminStructureView';
+import {Modal, postToDb, postToFirestore} from '../../AdminStructureView';
 import { currentUrl } from '../../../../currentUrl';
 
 const CreateSubject = props => {
@@ -17,16 +17,26 @@ const CreateSubject = props => {
 
         const formData = elementsArray.reduce((acc, element) => {
             if (element.id) {
-                acc[element.id] = element.value;
+                if (Number(element.value))
+                    acc[element.id] = Number(element.value);
+                else {
+                    acc[element.id] = element.value;
+                }
             }
 
             return acc;
         }, {});
 
-        if (formData.subjectName !== '') {
-            postToDb(link, formData, props.onClose);
-            
-            console.log(formData.subjectName + " being added to subjects for class " + formData.classId + ".");
+        if (formData.name !== '') {
+            postToFirestore("subjects", formData)
+            .then(() => {
+                alert("Subject " + formData.name + " created.");
+                window.location.reload(false);
+            })
+            .catch(err => {
+                alert("Something went wrong...")
+                console.log(err)
+            })
         }
 
         else {
@@ -38,8 +48,8 @@ const CreateSubject = props => {
         <Modal>
             <form onSubmit={saveAnswer} className="question-box">
                 <input id="classId" className="input standard-spacing" type="hidden" value={props.classId} />
-                <input id="subjectId" className="input standard-spacing" type="hidden" value={randomString.generate(5)} />
-                <input id="subjectName" className="input standard-spacing" type="text" placeholder="Enter Subject Name" />
+                {/* <input id="subjectId" className="input standard-spacing" type="hidden" value={randomString.generate(5)} /> */}
+                <input id="name" className="input standard-spacing" type="text" placeholder="Enter Subject Name" />
                 <Container>
                     <button onClick={props.onClose} className="input submit-input standard-spacing green white-text">Close</button>
                     <button className="input submit-input standard-spacing dark-green white-text">Create</button>
