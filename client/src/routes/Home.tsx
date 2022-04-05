@@ -149,7 +149,7 @@ const footerList = [
     {title: "Company", list: Company}
 ]
 
-function createList(list) {
+function createList(list: {label: string, link: string}[]) {
     const listItems = list.map((listObject) =>
         <Link className="footer-text align-left" href={listObject.link}>{listObject.label}</Link>
     )
@@ -164,7 +164,7 @@ const FooterLists = footerList.map((footerList) =>
     </div>
 )
 
-const ClassicElement = ({title, text, color, callToAction, buttons, rightBlock}) => {
+const ClassicElement = ({title, text, color, callToAction, buttons, rightBlock}: {title: string, text: string, color: string, callToAction: string, buttons: any[], rightBlock: any}) => {
     return (
         <div className={"element " + color}>
             <div className="element-inner">
@@ -174,7 +174,7 @@ const ClassicElement = ({title, text, color, callToAction, buttons, rightBlock})
                         <Text>{text}</Text>
                         <Text>{callToAction}</Text>
                         <div className="row-container no-grow no-justify">
-                            {buttons.map((button) => {
+                            {buttons.map((button: { color: string; onClick: React.MouseEventHandler<HTMLButtonElement>; text: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal; }) => {
                                 return <button 
                                     className={button.color + " standard-spacing"}
                                     onClick={button.onClick}>
@@ -223,7 +223,7 @@ function Team() {
             <div className="element-inner">
                 <Title>Our Team</Title>
                 <div className="profile-container">
-                    <TeamMembers />
+                    {TeamMembers()}
                 </div>
             </div>
         </div>
@@ -257,7 +257,7 @@ function PricingDisplay() {
 }
 
 // click event
-function buttonClick(e, link) {
+function buttonClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, link: string) {
     e.preventDefault();
     window.location.href = '/' + link;
 }
@@ -276,14 +276,16 @@ function Home() {
             </Header>
 
             {/* Landing */}
+
+            {/* @ts-ignore */}
             <ClassicElement 
                 title="New Look. Same Affordability" 
                 color="" 
                 callToAction="Plan available for Class 10 board prep"
                 buttons={
                     [
-                        {color: "green white-text", text: "Get started", onClick: (e) => buttonClick(e, "signup")}, 
-                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
+                        {color: "green white-text", text: "Get started", onClick: (e: any) => buttonClick(e, "signup")}, 
+                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e: any) => buttonClick(e, "demo")}
                     ]
                 } 
             />
@@ -291,6 +293,7 @@ function Home() {
             {/* About Platform */}
             {/* <AboutPlatform /> */}
 
+            {/* @ts-ignore */}
             <ClassicElement 
                 title="Online Quizzes" 
                 color="green white-text" 
@@ -298,8 +301,8 @@ function Home() {
                 callToAction="Now available for classes X and XII."
                 buttons={
                     [
-                        {color: "white green-text", text: "Sign up", onClick: (e) => buttonClick(e, "signup")}, 
-                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e) => buttonClick(e, "demo")}
+                        {color: "white green-text", text: "Sign up", onClick: (e: any) => buttonClick(e, "signup")}, 
+                        {color: "dark-green white-text", text: "Book a Demo", onClick: (e: any) => buttonClick(e, "demo")}
                     ]
                 }
             />

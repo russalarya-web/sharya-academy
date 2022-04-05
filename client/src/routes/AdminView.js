@@ -13,6 +13,8 @@ import AdminQuizView from "../components/adminView/AdminQuizView";
 import AdminContentView from "../components/adminView/AdminContentView";
 import AdminStructureView from "../components/adminView/AdminStructureView";
 
+import {db} from "../firebase/config";
+
 export const Header = styled.header`
     position: fixed;
     width: 100%;
@@ -64,30 +66,6 @@ export const Chapter = styled.select`
     z-index: 1;
     min-width: 320px;
 `;
-
-function listMenu(list, disabledValue) {
-    if (list) {
-        return list.map((listObject) =>
-            { if (listObject === "disabled") { 
-                return(<option selected="true" disabled value="default">{disabledValue}</option>)
-            } else {
-                return(<option value={listObject}>{listObject}</option>)
-            }}
-        );
-    }
-}
-
-function listSubjects(list, disabledValue) {
-    if (list) {
-        return list.map((listObject) =>
-            { if (listObject.name === "disabled") { 
-                return(<option selected="true" disabled value="default">{disabledValue}</option>)
-            } else {
-                return(<option value={listObject.id}>{listObject.name}</option>)
-            }}
-        );
-    }
-}
 
 export const Page = styled.div`
     width: 95vw;
@@ -144,7 +122,7 @@ function GetChapters() {
     return chapters;
 }
 
-// API Handling
+// older data
 function DetailsFromAPI(){
     const [details, setDetails] = useState([{}]);
 
@@ -160,6 +138,7 @@ function DetailsFromAPI(){
     return details;
 };
 
+// redundant
 export function ChaptersFromAPI(){
     const [chapters, setChapters] = useState([{}]);
 

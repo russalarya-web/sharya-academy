@@ -138,8 +138,9 @@ function UserView() {
                     </Route>
                     <Route path="/app/quiz/:quizId">
                         <QuizView 
-                        getSubjectName={(subjectId) => matchFromDbList(subjects, subjectId)} 
-                        getChapterName={(chapterId) => matchFromDbList(chapters, chapterId)} />
+                            getSubjectName={(subjectId) => matchFromDbList(subjects, subjectId)} 
+                            getChapterName={(chapterId) => matchFromDbList(chapters, chapterId)} 
+                        />
                     </Route>
                 </Switch>
             </Page>
