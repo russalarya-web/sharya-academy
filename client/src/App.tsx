@@ -18,6 +18,7 @@ import SignUp from "./routes/SignUp";
 import SignIn from "./routes/SignIn";
 import UserView from "./routes/UserView";
 import AdminView from "./routes/AdminView";
+import NoAccess from './routes/NoAccess';
 
 // set page title
 export function useTitle(title: string) {
@@ -103,9 +104,9 @@ function App() {
 						<Route path="/" component={Home} exact />
 						<Route path="/sign-up" component={SignUp} />
 						<Route path="/login" component={SignIn} />
-						<Route path="/app" component={UserView} />
-						{/* @ts-ignore */}
 						<Route path="/admin" component={AdminView} />
+						<Route path="/" component={UserView} />
+						<Route path="/no-access" component={NoAccess} />
 					</Switch>
 				</div>
 

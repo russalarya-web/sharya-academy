@@ -38,7 +38,7 @@ export const Menu = styled.div`
 
 `;
 
-export const Profile = styled.button`
+export const Button = styled.button`
     font-size: calc(10px + 0.8vmin);
     border-radius: 5px;
     z-index: 1;
@@ -173,14 +173,30 @@ function AdminView() {
                 {/* Header */}
                 <Header>
                     <Menu>
-                        <Profile
-                        className="green white-text standard-spacing"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href='/login';
-                        }}>
-                            Hi, {FirstName}!
-                        </Profile>
+                        <Button
+                            className="dark-green white-text standard-spacing"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href='/admin';
+                            }}>
+                            Structure
+                        </Button>
+                        <Button
+                            className="dark-green white-text standard-spacing"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href='/admin/content';
+                            }}>
+                            Content
+                        </Button>
+                        <Button
+                            className="green white-text standard-spacing"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href='/login';
+                            }}>
+                            Admin
+                        </Button>
                     </Menu>
                 </Header>
 
@@ -205,9 +221,10 @@ function AdminView() {
                         </Route>
                     </Switch>
                 </Page>
-
             </>
         );
+    } else {
+        return (<></>)
     }
 }
 

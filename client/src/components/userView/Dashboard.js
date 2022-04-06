@@ -26,6 +26,8 @@ export const Sidebar = styled.div`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    max-height: 70vh;
+    overflow: scroll;
 `;
 
 export const Structure = styled.div`
@@ -115,7 +117,7 @@ const Dashboard = ({subjects, chapters}) => {
                             return <Listing
                             onClick={(e) => {
                                 e.preventDefault();
-                                window.location.href="/app/" + currentItem.id + "/" + contentObject._id;
+                                window.location.href="/" + currentItem.id + "/" + contentObject._id;
                             }}>{contentObject.name}
                             <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
                             <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>

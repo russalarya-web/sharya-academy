@@ -5,7 +5,7 @@ import '../App.css';
 import { Link, useTitle } from "../App";
 import { Title, Form, TextBox, SmallText, Submit } from "./SignUp";
 
-import { db, auth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, createUserWithEmailAndPassword } from "../firebase/config";
+import { auth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "../firebase/config";
 
 export const sendPasswordReset = async (email: string) => {
     await sendPasswordResetEmail(auth, email)
@@ -50,7 +50,7 @@ function SignIn() {
                 // @ts-ignore
                 sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
                 console.log("Log in successful.");
-                window.location.href = '/app/dashboard';
+                window.location.href = '/dashboard';
             })
             .catch((error) => {
                 if (error.message === "Firebase: Error (auth/wrong-password).") {

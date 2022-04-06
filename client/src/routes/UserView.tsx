@@ -6,13 +6,14 @@ import { Route, Switch } from 'react-router-dom';
 import { Link, matchFromDbList } from "../App";
 import {currentUrl} from "../currentUrl";
 
-import { Profile } from "./AdminView";
+import { Button } from "./AdminView";
 
 import Dashboard from "../components/userView/Dashboard";
 import QuizView from "../components/userView/QuizView";
 
 import { db, auth } from "../firebase/config";
 import { logout } from "./SignIn";
+import NoAccess from "./NoAccess";
 
 
 export const Header = styled.header`
@@ -118,7 +119,9 @@ function UserView() {
 
     useEffect(() => {
         getName()
-        .then(data => setFirstName(data))
+        .then(data => setFirstName(data));
+
+        let authToken = sessionStorage.getItem('Auth Token')
     })
 
     if (user) {
@@ -127,16 +130,16 @@ function UserView() {
                 {/* Header */}
                 <Header>
                     <Menu>
-                        <Profile
+                        <Button
                         className="dark-green white-text standard-spacing"
                         onClick={(e) => {
                             e.preventDefault();
                             window.location.href='/login';
                         }}>
                             Hi, {firstName}!
-                        </Profile>
+                        </Button>
 
-                        <Profile
+                        <Button
                         className="green white-text standard-spacing"
                         onClick={(e) => {
                             e.preventDefault();
@@ -144,17 +147,17 @@ function UserView() {
                             window.location.href='/login';
                         }}>
                             Sign out
-                        </Profile>
+                        </Button>
                     </Menu>
                 </Header>
 
                 {/* Page */}
                 <Page>
                     <Switch>
-                        <Route path="/app/dashboard" exact>
+                        <Route path="/dashboard" exact>
                             <Dashboard subjects={subjects} chapters={chapters} />
                         </Route>
-                        <Route path="/app/quiz/:quizId">
+                        <Route path="/quiz/:quizId">
                             <QuizView 
                                 getSubjectName={(subjectId: string) => matchFromDbList(subjects, subjectId)} 
                                 getChapterName={(chapterId: string) => matchFromDbList(chapters, chapterId)} 
@@ -166,19 +169,7 @@ function UserView() {
         );
     } else {
         return (
-            <Page>
-                <h1>You do not have access to this page.</h1>
-                <button 
-                    className="green standard-spacing white-text"
-                    onClick={() =>{window.location.href = "/login"}}>
-                    Sign in
-                </button>
-                <button 
-                    className="dark-green standard-spacing white-text"
-                    onClick={() =>{window.location.href = "/sign-up"}}>
-                    Create an account
-                </button>
-            </Page>
+            <NoAccess />
         )
     }
 }

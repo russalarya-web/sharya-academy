@@ -82,14 +82,17 @@ const AdminContentView = ({classes, subjects, chapters}) => {
                         // filter by subject
                         if (currentSubject === "" || contentObject.subjectId === currentSubject) {
                             if (currentChapter === "" || contentObject.chapterId === currentChapter) {
-                                return <Listing
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.location.href="./" + currentItem.id + "/" + contentObject._id;
-                                }}>{contentObject.name}
-                                <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
-                                <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
-                                </Listing>
+                                return (
+                                    <Listing
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        window.location.href="./" + currentItem.id + "/" + contentObject._id;
+                                    }}>
+                                        {contentObject.name}
+                                        <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
+                                        <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
+                                    </Listing>
+                                )
                             }
                         }
                     }
@@ -191,10 +194,9 @@ const AdminContentView = ({classes, subjects, chapters}) => {
                         Add New
                     </Button>
                 </div>
-
+                <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} classId={currentClass} subjectId={currentSubject} chapterId={currentChapter} show={show}/>
                 {/* Content View */}
                 <Container>
-                    <CreateContent onClose={() => setShow(false)} contentType={currentItem.id} classId={currentClass} subjectId={currentSubject} chapterId={currentChapter} show={show}/>
                     {displayContent(currentItem)}
                 </Container>
             </MainView>
