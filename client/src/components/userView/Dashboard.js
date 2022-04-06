@@ -37,14 +37,14 @@ export const Structure = styled.div`
 `;
 
 export const Listing = styled.div`
-    padding: 10px;
+    padding: 8px;
     margin: 6px 10px;
     border-radius: 10px;
     background: rgba(78, 159, 61, 0.1);
     color: #4E9F3D;
     text-indent: 10px;
     text-align: left;
-    font-size: calc(10px + 0.8vmin);
+    font-size: calc(12px + 0.8vmin);
     cursor: pointer;
 `;
 
@@ -114,14 +114,17 @@ const Dashboard = ({subjects, chapters}) => {
                     if (currentSubject === "" || contentObject.subjectId === currentSubject) {
                         // filter by chapter
                         if (currentChapter === "" || contentObject.chapterId === currentChapter) {
-                            return <Listing
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.location.href="/" + currentItem.id + "/" + contentObject._id;
-                            }}>{contentObject.name}
-                            <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
-                            <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
-                            </Listing>
+                            return (
+                                <Listing
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href="/" + currentItem.id + "/" + contentObject._id;
+                                }}>
+                                    {contentObject.name}
+                                    <span className="label green white-text">{matchFromDbList(chapters, contentObject.chapterId)}</span>
+                                    <span className="label dark-green white-text">{matchFromDbList(subjects, contentObject.subjectId)}</span>
+                                </Listing>
+                            )
                         }
                     }
                 })}

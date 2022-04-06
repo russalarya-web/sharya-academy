@@ -214,13 +214,11 @@ select {
   border-radius: 5px;
 }
 
-
-
 .label {
-  padding: 3px 10px;
+  padding: 5px 12px;
   float: right;
   margin: 0 3px;
-  font-size: calc(6px + 0.8vmin);
+  font-size: calc(8px + 0.8vmin);
   border-radius: 30px;
   text-indent: 0px;
   vertical-align: middle;

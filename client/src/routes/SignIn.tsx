@@ -48,7 +48,8 @@ function SignIn() {
             signInWithEmailAndPassword(auth, formData.email, formData.password)
             .then((response) => {
                 // @ts-ignore
-                sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+                sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
+                sessionStorage.setItem('UID', response.user.uid);
                 console.log("Log in successful.");
                 window.location.href = '/dashboard';
             })

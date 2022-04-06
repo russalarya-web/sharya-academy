@@ -105,8 +105,8 @@ function App() {
 						<Route path="/sign-up" component={SignUp} />
 						<Route path="/login" component={SignIn} />
 						<Route path="/admin" component={AdminView} />
-						<Route path="/" component={UserView} />
 						<Route path="/no-access" component={NoAccess} />
+						<Route path="/" component={UserView} />
 					</Switch>
 				</div>
 

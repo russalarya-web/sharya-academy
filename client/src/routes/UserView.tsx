@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { Link, matchFromDbList } from "../App";
 import {currentUrl} from "../currentUrl";
@@ -13,7 +13,6 @@ import QuizView from "../components/userView/QuizView";
 
 import { db, auth } from "../firebase/config";
 import { logout } from "./SignIn";
-import NoAccess from "./NoAccess";
 
 
 export const Header = styled.header`
@@ -93,85 +92,79 @@ function GetChapters(classId: string | number) {
     return chapters;
 }
 
+const getDetails = async (uid: string) => {
+    return await db.collection("users").doc(uid).get()
+    .then(snapshot => snapshot.data())
+}
+
 // Landing Page
 function UserView() {
-    const user = auth.currentUser;
-    const [firstName, setFirstName] = useState("");
-
-    const getName = async () => {
-        if (user) {
-            return await db.collection("users").doc(user.uid).get()
-            .then(snapshot => {
-                const data = snapshot.data()
-
-                if (data) {
-                    return data.fname;
-                }
-            })
-        }
-        else {
-            return ""
-        }
-    }
+    const [name, setName] = useState("");
+    const [data, setData] = useState({})
 
     const subjects = GetSubjects(10);
     const chapters = GetChapters(10);
 
     useEffect(() => {
-        getName()
-        .then(data => setFirstName(data));
+        let authToken = sessionStorage.getItem('Auth Token');
 
-        let authToken = sessionStorage.getItem('Auth Token')
+        if (!authToken) {
+            window.location.href = "/no-access";
+        }
+
+        let uid = sessionStorage.getItem('UID');
+
+        if (uid) {
+            getDetails(uid)
+            .then(snapshot => {
+                if (snapshot)
+                    setData(snapshot)
+            });
+        }
     })
+    return (
+        <>
+            {/* Header */}
+            <Header>
+                <Menu>
+                    <Button
+                    className="dark-green white-text standard-spacing"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href='/login';
+                    }}>
+                        {/* @ts-ignore */}
+                        {data.fname} {data.lname}
+                    </Button>
 
-    if (user) {
-        return (
-            <>
-                {/* Header */}
-                <Header>
-                    <Menu>
-                        <Button
-                        className="dark-green white-text standard-spacing"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href='/login';
-                        }}>
-                            Hi, {firstName}!
-                        </Button>
+                    <Button
+                    className="green white-text standard-spacing"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        logout();
+                        window.location.href='/login';
+                    }}>
+                        Sign out
+                    </Button>
+                </Menu>
+            </Header>
 
-                        <Button
-                        className="green white-text standard-spacing"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            logout();
-                            window.location.href='/login';
-                        }}>
-                            Sign out
-                        </Button>
-                    </Menu>
-                </Header>
-
-                {/* Page */}
-                <Page>
-                    <Switch>
-                        <Route path="/dashboard" exact>
-                            <Dashboard subjects={subjects} chapters={chapters} />
-                        </Route>
-                        <Route path="/quiz/:quizId">
-                            <QuizView 
-                                getSubjectName={(subjectId: string) => matchFromDbList(subjects, subjectId)} 
-                                getChapterName={(chapterId: string) => matchFromDbList(chapters, chapterId)} 
-                            />
-                        </Route>
-                    </Switch>
-                </Page>
-            </>
-        );
-    } else {
-        return (
-            <NoAccess />
-        )
-    }
+            {/* Page */}
+            <Page>
+                <Switch>
+                    <Route path="/dashboard" exact>
+                        <Dashboard subjects={subjects} chapters={chapters} />
+                    </Route>
+                    <Route path="/quiz/:quizId">
+                        <QuizView 
+                            getSubjectName={(subjectId: string) => matchFromDbList(subjects, subjectId)} 
+                            getChapterName={(chapterId: string) => matchFromDbList(chapters, chapterId)} 
+                        />
+                    </Route>
+                </Switch>
+            </Page>
+        </>
+    );
 }
 
 export default UserView;
