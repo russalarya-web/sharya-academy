@@ -1,15 +1,17 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  sendPasswordResetEmail,
+  signOut 
+} from 'firebase/auth';
 
 import { getAnalytics } from "firebase/analytics";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAeM-RyhAtyS1cibBy71FvYZmbpIFYcPns",
   authDomain: "sharya-academy.firebaseapp.com",
@@ -22,10 +24,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
+
+// Initialise Authentication
 const auth = getAuth(app);
+
+// Initialise Analytics
 const analytics = getAnalytics(app);
 
-// Initialize db
+// Initialize Firestore
 const db = app.firestore();
 
-export {app, analytics, db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword}
+export {app, analytics, db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut}
