@@ -99,7 +99,7 @@ const getDetails = async (uid: string) => {
 
 // Landing Page
 function UserView() {
-    const [name, setName] = useState("");
+    const [name, setName] = useState("")
     const [data, setData] = useState({})
 
     const subjects = GetSubjects(10);
@@ -113,12 +113,19 @@ function UserView() {
         }
 
         let uid = sessionStorage.getItem('UID');
+        let sessionName = sessionStorage.getItem('Name');
 
-        if (uid) {
+        if (sessionName) {
+            setName(sessionName)
+        }
+        else if (uid) {
             getDetails(uid)
             .then(snapshot => {
-                if (snapshot)
-                    setData(snapshot)
+                if (snapshot) {
+                    setData(snapshot);
+                    // setName(snapshot.fname + " " + snapshot.lname)
+                    sessionStorage.setItem('Name', snapshot.fname + " " + snapshot.lname);
+                }
             });
         }
     })
@@ -134,7 +141,7 @@ function UserView() {
                         window.location.href='/login';
                     }}>
                         {/* @ts-ignore */}
-                        {data.fname} {data.lname}
+                        {name}
                     </Button>
 
                     <Button

@@ -20,6 +20,7 @@ export const sendPasswordReset = async (email: string) => {
 
 export const logout = () => {
     signOut(auth);
+    sessionStorage.clear();
     console.log("User signed out...")
 };
 
