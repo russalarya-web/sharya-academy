@@ -77,7 +77,6 @@ export const Submit = styled.button`
     font-size: ${size};
     padding: 0.25em 2%;
     font-family: 'Open Sans' !important;
-
 `;
 
 export const Dropdown = styled.select`
@@ -91,7 +90,6 @@ export const Dropdown = styled.select`
     padding: 0 2.5%;
     font-family: 'Open Sans' !important;
     // text-align: center;
-
 `;
 
 // const classList = [...Array(13).keys()];

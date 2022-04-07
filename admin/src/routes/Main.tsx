@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import {matchFromDbList} from "../App";
-import {currentUrl} from "../currentUrl";
+import {api} from "../url";
 
-import AdminDashboard from "../components/adminView/Dashboard";
-import AdminQuizView from "../components/adminView/AdminQuizView";
-import AdminContentView from "../components/adminView/AdminContentView";
-import AdminStructureView from "../components/adminView/AdminStructureView";
+import QuizView from "../pages/QuizView";
+import ContentView from "../pages/ContentView";
+import StructureView from "../pages/StructureView";
 
 import {db} from "../firebase/config";
+import NoAccess from "./NoAccess";
+
+// match id from given db list
+export function matchFromDbList(list: { _id: string | number; name: string;}[], id: string | number) {
+	var name: any;
+	list.forEach((listObject) => {
+		if (listObject._id === id) {
+			name = listObject.name;
+		}
+	});
+
+	return name;
+}
 
 export const Header = styled.header`
     position: fixed;
@@ -74,10 +85,10 @@ export const Page = styled.div`
 
 // get classes from API
 function GetClasses() {
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState([{_id: 10}]);
 
     async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/class/all");
+        const response = await axios.get(api + "/class/all");
         setContent(response.data);
     }
 
@@ -93,7 +104,7 @@ function GetSubjects() {
     const [subjects, setSubjects] = useState([]);
 
     async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/subject/all");
+        const response = await axios.get(api + "/subject/all");
         setSubjects(response.data);
     }
 
@@ -109,7 +120,7 @@ function GetChapters() {
     const [chapters, setChapters] = useState([]);
 
     async function getContent() {
-        const response = await axios.get(currentUrl + ":9000/chapter/all");
+        const response = await axios.get(api + "/chapter/all");
         setChapters(response.data);
     }
 
@@ -120,43 +131,14 @@ function GetChapters() {
     return chapters;
 }
 
-// older data
-function DetailsFromAPI(){
-    const [details, setDetails] = useState([{}]);
-
-    async function getDetails() {
-        const response = await axios.get(currentUrl + ":9000/details");
-        setDetails(response.data);
-    }
-
-    useEffect(() => {
-        getDetails();
-    }, [])
-
-    return details;
-};
-
-// redundant
-export function ChaptersFromAPI(){
-    const [chapters, setChapters] = useState([{}]);
-
-    async function getChapters() {
-        const response = await axios.get(currentUrl + ":9000/api/chapters");
-        setChapters(response.data);
-    }
-
-    useEffect(() => {
-        getChapters();
-    }, [])
-
-    return chapters;
-};
-
 
 // Landing Page
 function AdminView() {
-    const FirstName = DetailsFromAPI().firstName;
+    let authToken = sessionStorage.getItem('Auth Token')
 
+    if (!authToken) {
+        return <NoAccess />
+    }
     const classes = GetClasses();
     const subjects = GetSubjects();
     const chapters = GetChapters();
@@ -164,6 +146,8 @@ function AdminView() {
     classes.sort((a, b) => {
         return b._id - a._id;
     });
+
+
 
     if (classes) {
         return (
@@ -175,7 +159,7 @@ function AdminView() {
                             className="dark-green white-text standard-spacing"
                             onClick={(e) => {
                                 e.preventDefault();
-                                window.location.href='/admin';
+                                window.location.href='/structure';
                             }}>
                             Structure
                         </Button>
@@ -183,7 +167,7 @@ function AdminView() {
                             className="dark-green white-text standard-spacing"
                             onClick={(e) => {
                                 e.preventDefault();
-                                window.location.href='/admin/content';
+                                window.location.href='/content';
                             }}>
                             Content
                         </Button>
@@ -191,38 +175,31 @@ function AdminView() {
                             className="green white-text standard-spacing"
                             onClick={(e) => {
                                 e.preventDefault();
-                                window.location.href='/login';
+                                window.location.href='/';
                             }}>
-                            Admin
+                            Sign out
                         </Button>
                     </Menu>
                 </Header>
 
                 {/* Page */}
                 <Page>
-                    <Switch>
-                        <Route path="/admin/" exact>
-                            <AdminStructureView classes={classes} subjects={subjects} chapters={chapters} />
-                        </Route>
-                        <Route path="/admin/content" exact>
-                            <AdminContentView classes={classes} subjects={subjects} chapters={chapters} />
-                        </Route>
-                        <Route path="/admin/structure" exact>
-                            <AdminStructureView classes={classes} subjects={subjects} chapters={chapters} />
-                        </Route>
-                        <Route path="/admin/statistics" component={AdminDashboard} exact />
-                        <Route path="/admin/quiz/:quizId" exact>
-                            <AdminQuizView 
-                                getSubjectName={(subjectId) => matchFromDbList(subjects, subjectId)} 
-                                getChapterName={(chapterId) => matchFromDbList(chapters, chapterId)}
-                            />
-                        </Route>
-                    </Switch>
+                    <Routes>
+                        <Route path="/content" element={<ContentView classes={classes} subjects={subjects} chapters={chapters} />}
+                        />
+                        <Route path="/structure" element={<StructureView classes={classes} subjects={subjects} chapters={chapters} />}
+                        />
+                        <Route path="/quiz/:quizId" element={<QuizView 
+                                getSubjectName={(subjectId: string) => matchFromDbList(subjects, subjectId)} 
+                                getChapterName={(chapterId: string) => matchFromDbList(chapters, chapterId)}
+                            />}
+                        />
+                    </Routes>
                 </Page>
             </>
         );
     } else {
-        return (<></>)
+        return (<></>);
     }
 }
 

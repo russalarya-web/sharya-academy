@@ -1,0 +1,427 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #D8E9A8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: #1E5128;
+  overflow: hidden;
+}
+
+.element {
+  width: 100%;
+}
+
+.element-inner {
+  max-width: 900px;
+  padding: 60px;
+  margin: auto;
+  vertical-align: middle;
+}
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* Basic Styles */
+html, body, footer {
+  background-color: #1E5128;
+}
+
+/* Profile Styles */
+.profile-container {
+  display: flex;
+}
+
+.profile-item {
+  padding: 15px;
+  margin: 15px 10px;
+  border-radius: 5px;
+  width: 240px;
+}
+
+.profile-item * {
+  text-align: left !important;
+}
+
+/* Pricing Styles */
+.pricing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricing-box {
+  border-radius: 5px;
+  padding: 1.2em 1em;
+  min-width: 240px;
+  margin: 0px;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.white {
+  background: #fff;
+  border: solid 1px #fff;
+}
+
+.green-text {
+  color:rgb(78, 159, 61) !important;
+}
+
+/* Modal View */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.question-box {
+  background: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.question-box .input {
+  padding: 10px 3%;
+  border: none;
+  width: 92%;
+  margin: 8px 1%;
+}
+
+.question-input {
+  resize: none;
+  height: 100px;
+}
+
+.margin-spacing {
+  margin: 1px 0;
+}
+
+.option-input, .small-input, .big-input {
+  margin: 6px 1% !important;
+}
+
+.option-input{
+  width: 42% !important;
+}
+
+.small-input {
+  width: 28% !important;
+}
+
+.big-input {
+  width: 56% !important;
+}
+
+.submit-input {
+  width: 48% !important;
+}
+
+/* Color Styles */
+.white, .white button {
+  color: #1E5128;
+}
+
+.green {
+  background: #4e9f3d !important;
+  border: solid 1px #4e9f3d !important;
+}
+
+.auto-margin {
+  margin: auto !important;
+}
+
+.dark-green, .dark-click:hover {
+  background: rgba(30, 81, 40, 0.9);
+  border: solid 1px rgba(30, 81, 40, 0.9);
+}
+
+.white-text {
+  color: #fff !important;
+}
+
+button.white-border {
+  border-color: #fff !important;
+}
+
+/* Formatting Styles */
+.half {
+  width: 43% !important;
+  margin: 10px 1% !important;
+}
+
+.right {
+  position: absolute;
+  right: 90px;
+}
+
+/* App Styles */
+.AppForeground {
+  z-index: 1;
+  width: 100% !important;
+}
+
+.fullWidth {
+  width: 100vw;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* Select Styles */
+select {
+  -webkit-appearance: none;
+}
+
+.standard {
+  min-width: 80px;
+}
+
+.semi-long {
+  min-width: 130px;
+}
+
+.long {
+  min-width: 210px;
+}
+
+.standard-spacing {
+  padding: 10px 15px;
+  margin: 5px 6px;
+  font-size: calc(10px + 0.5vmin);
+  border-radius: 5px;
+}
+
+.label {
+  padding: 5px 12px;
+  float: right;
+  margin: 0 3px;
+  font-size: calc(8px + 0.8vmin);
+  border-radius: 30px;
+  text-indent: 0px;
+  vertical-align: middle;
+}
+
+.standard-spacing.bottom {
+  margin: 10px 6px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Sidebar Styles */
+.sidebar:focus {
+  background: rgba(78, 159, 61, 0.8);
+  color: #fff;
+}
+
+.sidebar {
+  background: transparent;
+  padding: 20px 10px;
+  margin: 0px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sidebar:hover {
+  background: rgba(30, 81, 40, 0.2);
+}
+
+.sidebar-current {
+  background: rgba(30, 81, 40, 0.8);
+}
+
+.sidebar-current:hover {
+  background: rgba(30, 81, 40, 0.8);
+}
+
+h3, h5 {
+  font-weight: 300;
+}
+
+/* Box Handling */
+.dashed {
+  border: dashed 1px #000;
+}
+
+.box {
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.round-label {
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin: 5px !important;
+  font-size: calc(8px + 1vmin);
+  flex-grow: 0 !important;
+}
+
+.question-button {
+  border-radius: 5px;
+  margin: 5px !important;
+  padding: 5px 15px;
+  font-size: calc(8px + 1vmin);
+  flex-grow: 0 !important;
+}
+
+.question-button:hover {
+  cursor: pointer;
+}
+
+.text {
+  margin: 10px;
+  font-size: calc(10px + 1.5vmin);
+}
+
+.option {
+  border: solid 1px;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: calc(10px + 1vmin);
+}
+
+/* Align */
+.align-center {
+  text-align: center;
+}
+
+.top-align {
+  justify-content: space-around !important;
+  margin: auto;
+}
+
+.top-align .round-label {
+  margin: auto;
+}
+
+.align-left {
+  text-align: left;
+}
+
+/* Footer */
+footer {
+  color: #fff;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* .row-element {
+
+} */
+.row-container * {
+  flex-grow: 1;
+}
+
+.no-grow {
+  flex-grow: 0 !important;
+}
+
+.no-grow * {
+  flex-grow: 0 !important;
+}
+
+.no-justify {
+  justify-content: left !important;
+}
+
+footer .row-container {
+  margin-bottom: 50px;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+}
+
+.footer-text {
+  font-size: calc(10px + 0.6vmin);
+}
+
+@media screen and (max-width: 920px) {
+  .element-inner {
+    padding: 60px 45px;
+  }
+
+  .pricing {
+    flex-wrap: wrap;
+    margin: 10px;
+  }
+
+  .pricing-box {
+    width: 30%;
+  }
+
+  .outer {
+    margin-bottom: 0;
+  }
+
+  .hide {
+    width: 60%;
+  }
+
+  .footer-list {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .element-inner {
+    padding: 60px 30px;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .element-inner {
+    padding: 60px 15px;
+  }
+
+  .row-container {
+    flex-direction: column;
+  }
+
+  .align-left {
+    text-align: center;
+  }
+
+  .option-input {
+    width: 94% !important;
+  }
+}

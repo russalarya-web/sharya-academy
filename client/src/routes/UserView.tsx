@@ -123,7 +123,6 @@ function UserView() {
             .then(snapshot => {
                 if (snapshot) {
                     setData(snapshot);
-                    // setName(snapshot.fname + " " + snapshot.lname)
                     sessionStorage.setItem('Name', snapshot.fname + " " + snapshot.lname);
                 }
             });
